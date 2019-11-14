@@ -1,6 +1,6 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class CoordinateDTO {
+public class CoordinateDto {
 
 	private Long id;
 
@@ -8,10 +8,10 @@ public class CoordinateDTO {
 
 	private Double y;
 
-	public CoordinateDTO() {
+	public CoordinateDto() {
 	}
 
-	public CoordinateDTO(Double x, Double y) {
+	public CoordinateDto(Double x, Double y) {
 		this.x = x;
 		this.y = y;
 	}

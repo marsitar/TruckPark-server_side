@@ -1,19 +1,19 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class DriverDTO {
+public class DriverDto {
 
 	private Long id;
 
 	private String fullName;
 
-	private CompanyDTO companyDTO;
+	private CompanyDto companyDTO;
 
-	private TruckDriverWayDTO truckDriverWayDTO;
+	private TruckDriverWayDto truckDriverWayDTO;
 
-	public DriverDTO() {
+	public DriverDto() {
 	}
 
-	public DriverDTO(String fullName, CompanyDTO companyDTO, TruckDriverWayDTO truckDriverWayDTO) {
+	public DriverDto(String fullName, CompanyDto companyDTO, TruckDriverWayDto truckDriverWayDTO) {
 		this.fullName = fullName;
 		this.companyDTO = companyDTO;
 		this.truckDriverWayDTO = truckDriverWayDTO;
@@ -35,19 +35,19 @@ public class DriverDTO {
 		this.fullName = fullName;
 	}
 
-	public CompanyDTO getCompanyDTO() {
+	public CompanyDto getCompanyDTO() {
 		return companyDTO;
 	}
 
-	public void setCompanyDTO(CompanyDTO companyDTO) {
+	public void setCompanyDTO(CompanyDto companyDTO) {
 		this.companyDTO = companyDTO;
 	}
 
-	public TruckDriverWayDTO getTruckDriverWayDTO() {
+	public TruckDriverWayDto getTruckDriverWayDTO() {
 		return truckDriverWayDTO;
 	}
 
-	public void setTruckDriverWayDTO(TruckDriverWayDTO truckDriverWayDTO) {
+	public void setTruckDriverWayDTO(TruckDriverWayDto truckDriverWayDTO) {
 		this.truckDriverWayDTO = truckDriverWayDTO;
 	}
 

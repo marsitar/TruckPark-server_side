@@ -1,6 +1,6 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class MopDTO {
+public class MopDto {
 
 	private Long id;
 
@@ -8,7 +8,7 @@ public class MopDTO {
 
 	private String place;
 
-	private CoordinateDTO coordinateDTO;
+	private CoordinateDto coordinateDTO;
 
 	private String roadNumber;
 
@@ -18,12 +18,12 @@ public class MopDTO {
 
 	private String extendedId;
 
-	private ExtendedMopDataDTO extendedMopDataDTO;
+	private ExtendedMopDataDto extendedMopDataDTO;
 
-	public MopDTO() {
+	public MopDto() {
 	}
 
-	public MopDTO(Integer serialNumber, String place, CoordinateDTO coordinateDTO, String roadNumber, Integer truckPlaces, String occupiedTruckPlaces, String extendedId, ExtendedMopDataDTO extendedMopDataDTO) {
+	public MopDto(Integer serialNumber, String place, CoordinateDto coordinateDTO, String roadNumber, Integer truckPlaces, String occupiedTruckPlaces, String extendedId, ExtendedMopDataDto extendedMopDataDTO) {
 		this.serialNumber = serialNumber;
 		this.place = place;
 		this.coordinateDTO = coordinateDTO;
@@ -58,11 +58,11 @@ public class MopDTO {
 		this.place = place;
 	}
 
-	public CoordinateDTO getCoordinateDTO() {
+	public CoordinateDto getCoordinateDTO() {
 		return coordinateDTO;
 	}
 
-	public void setCoordinateDTO(CoordinateDTO coordinateDTO) {
+	public void setCoordinateDTO(CoordinateDto coordinateDTO) {
 		this.coordinateDTO = coordinateDTO;
 	}
 
@@ -98,11 +98,11 @@ public class MopDTO {
 		this.extendedId = extendedId;
 	}
 
-	public ExtendedMopDataDTO getExtendedMopDataDTO() {
+	public ExtendedMopDataDto getExtendedMopDataDTO() {
 		return extendedMopDataDTO;
 	}
 
-	public void setExtendedMopDataDTO(ExtendedMopDataDTO extendedMopDataDTO) {
+	public void setExtendedMopDataDTO(ExtendedMopDataDto extendedMopDataDTO) {
 		this.extendedMopDataDTO = extendedMopDataDTO;
 	}
 

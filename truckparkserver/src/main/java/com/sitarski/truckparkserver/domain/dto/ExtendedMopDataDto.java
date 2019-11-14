@@ -1,6 +1,6 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class ExtendedMopDataDTO {
+public class ExtendedMopDataDto {
 
 	private Long id;
 
@@ -38,12 +38,12 @@ public class ExtendedMopDataDTO {
 
 	private String personInChargeEmail;
 
-	private MopDTO mopDTO;
+	private MopDto mopDTO;
 
-	public ExtendedMopDataDTO() {
+	public ExtendedMopDataDto() {
 	}
 
-	public ExtendedMopDataDTO(String organization, String roadClass, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, String personInCharge, String personInChargePhone, String personInChargeEmail, MopDTO mopDTO) {
+	public ExtendedMopDataDto(String organization, String roadClass, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, String personInCharge, String personInChargePhone, String personInChargeEmail, MopDto mopDTO) {
 		this.organization = organization;
 		this.roadClass = roadClass;
 		this.passengerPlaces = passengerPlaces;
@@ -208,11 +208,11 @@ public class ExtendedMopDataDTO {
 		this.personInChargeEmail = personInChargeEmail;
 	}
 
-	public MopDTO getMopDTO() {
+	public MopDto getMopDTO() {
 		return mopDTO;
 	}
 
-	public void setMopDTO(MopDTO mopDTO) {
+	public void setMopDTO(MopDto mopDTO) {
 		this.mopDTO = mopDTO;
 	}
 
