@@ -1,10 +1,8 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-public class TruckDriverWayDTO {
+public class TruckDriverWayDto {
 
 	private Long id;
 
@@ -14,16 +12,16 @@ public class TruckDriverWayDTO {
 
 	private LocalDateTime dateTime;
 
-	private CoordinateDTO coordinateDTO;
+	private CoordinateDto coordinateDTO;
 
-	private TruckDTO truckDTO;
+	private TruckDto truckDTO;
 
-	private DriverDTO driverDTO;
+	private DriverDto driverDTO;
 
-	public TruckDriverWayDTO() {
+	public TruckDriverWayDto() {
 	}
 
-	public TruckDriverWayDTO(Double fuel, Double distance, LocalDateTime dateTime, CoordinateDTO coordinateDTO, TruckDTO truckDTO, DriverDTO driverDTO) {
+	public TruckDriverWayDto(Double fuel, Double distance, LocalDateTime dateTime, CoordinateDto coordinateDTO, TruckDto truckDTO, DriverDto driverDTO) {
 		this.fuel = fuel;
 		this.distance = distance;
 		this.dateTime = dateTime;
@@ -64,27 +62,27 @@ public class TruckDriverWayDTO {
 		this.dateTime = dateTime;
 	}
 
-	public CoordinateDTO getCoordinateDTO() {
+	public CoordinateDto getCoordinateDTO() {
 		return coordinateDTO;
 	}
 
-	public void setCoordinateDTO(CoordinateDTO coordinateDTO) {
+	public void setCoordinateDTO(CoordinateDto coordinateDTO) {
 		this.coordinateDTO = coordinateDTO;
 	}
 
-	public TruckDTO getTruckDTO() {
+	public TruckDto getTruckDTO() {
 		return truckDTO;
 	}
 
-	public void setTruckDTO(TruckDTO truckDTO) {
+	public void setTruckDTO(TruckDto truckDTO) {
 		this.truckDTO = truckDTO;
 	}
 
-	public DriverDTO getDriverDTO() {
+	public DriverDto getDriverDTO() {
 		return driverDTO;
 	}
 
-	public void setDriverDTO(DriverDTO driverDTO) {
+	public void setDriverDTO(DriverDto driverDTO) {
 		this.driverDTO = driverDTO;
 	}
 

@@ -1,15 +1,15 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class CompanyDTO {
+public class CompanyDto {
 
 	private Long id;
 
 	private String fullName;
 
-	public CompanyDTO() {
+	public CompanyDto() {
 	}
 
-	public CompanyDTO(String fullName) {
+	public CompanyDto(String fullName) {
 		this.fullName = fullName;
 	}
 

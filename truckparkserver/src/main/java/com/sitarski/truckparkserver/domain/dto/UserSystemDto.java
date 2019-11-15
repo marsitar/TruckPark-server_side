@@ -1,6 +1,6 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-public class UserSystemDTO {
+public class UserSystemDto {
 
 	private Long id;
 
@@ -10,10 +10,10 @@ public class UserSystemDTO {
 
 	private String systemRole;
 
-	public UserSystemDTO() {
+	public UserSystemDto() {
 	}
 
-	public UserSystemDTO(String login, String emailAdress, String systemRole) {
+	public UserSystemDto(String login, String emailAdress, String systemRole) {
 		this.login = login;
 		this.emailAdress = emailAdress;
 		this.systemRole = systemRole;

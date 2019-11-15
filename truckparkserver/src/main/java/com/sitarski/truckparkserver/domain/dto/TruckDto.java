@@ -1,8 +1,6 @@
 package com.sitarski.truckparkserver.domain.dto;
 
-import java.time.LocalDate;
-
-public class TruckDTO {
+public class TruckDto {
 
 	private Long id;
 
@@ -14,14 +12,14 @@ public class TruckDTO {
 
 	private Integer carYear;
 
-	private TruckDriverWayDTO truckDriverWayDTO;
+	private TruckDriverWayDto truckDriverWayDTO;
 
-	private CompanyDTO companyDTO;
+	private CompanyDto companyDTO;
 
-	public TruckDTO() {
+	public TruckDto() {
 	}
 
-	public TruckDTO(String registrition, String brand, String model, Integer carYear, TruckDriverWayDTO truckDriverWayDTO, CompanyDTO companyDTO) {
+	public TruckDto(String registrition, String brand, String model, Integer carYear, TruckDriverWayDto truckDriverWayDTO, CompanyDto companyDTO) {
 		this.registrition = registrition;
 		this.brand = brand;
 		this.model = model;
@@ -70,19 +68,19 @@ public class TruckDTO {
 		this.carYear = carYear;
 	}
 
-	public TruckDriverWayDTO getTruckDriverWayDTO() {
+	public TruckDriverWayDto getTruckDriverWayDTO() {
 		return truckDriverWayDTO;
 	}
 
-	public void setTruckDriverWayDTO(TruckDriverWayDTO truckDriverWayDTO) {
+	public void setTruckDriverWayDTO(TruckDriverWayDto truckDriverWayDTO) {
 		this.truckDriverWayDTO = truckDriverWayDTO;
 	}
 
-	public CompanyDTO getCompanyDTO() {
+	public CompanyDto getCompanyDTO() {
 		return companyDTO;
 	}
 
-	public void setCompanyDTO(CompanyDTO companyDTO) {
+	public void setCompanyDTO(CompanyDto companyDTO) {
 		this.companyDTO = companyDTO;
 	}
 
