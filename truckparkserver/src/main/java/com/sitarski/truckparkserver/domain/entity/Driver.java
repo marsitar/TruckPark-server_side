@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="driver")
 public class Driver {
 
 	@Id
@@ -16,10 +18,9 @@ public class Driver {
 	@NotNull
 	private String fullName;
 
-	@Column(name = "company_id")
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="company_id", nullable=false)
 	private Company company;
 
 	@NotNull

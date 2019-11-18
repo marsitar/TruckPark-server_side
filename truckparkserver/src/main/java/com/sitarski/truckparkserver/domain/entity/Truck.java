@@ -30,7 +30,7 @@ public class Truck {
 	@NotNull
 	private Integer carYear;
 
-	@OneToMany(mappedBy="cart")
+	@OneToMany(mappedBy="truck")
 	private List<TruckDriverWay> truckDriverWays = new ArrayList<>();
 
 	@OneToOne
