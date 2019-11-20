@@ -10,7 +10,7 @@ import java.util.List;
 public class Driver {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
@@ -20,7 +20,7 @@ public class Driver {
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name="company_id", nullable=false)
+	@JoinColumn(name="id_company", nullable=false)
 	private Company company;
 
 	@NotNull

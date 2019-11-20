@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class UserSystem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 

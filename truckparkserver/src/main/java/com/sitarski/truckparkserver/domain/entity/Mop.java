@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Mop {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
@@ -36,12 +36,12 @@ public class Mop {
 	@NotNull
 	private String occupiedTruckPlaces;
 
-	@Column(name = "extended_id")
+	@Column(name = "id_extended")
 	@NotNull
 	private String extendedId;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "extended_mop_data_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_extended_mop_data", referencedColumnName = "id")
 	private ExtendedMopData extendedMopData;
 
 	public Mop() {

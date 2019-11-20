@@ -4,6 +4,7 @@ import com.sitarski.truckparkserver.dao.CompanyRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.TruckDto;
 import com.sitarski.truckparkserver.domain.entity.Company;
+import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.service.mapper.TruckMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class TruckService {
         this.truckMapper = truckMapper;
         this.companyRepository = companyRepository;
     }
+
 
     public List<TruckDto> getTrucks() {
 
@@ -65,7 +67,38 @@ public class TruckService {
         return truckDto;
     }
 
-    public void deleteById(Long id){
+    public void addTruck(TruckDto truckDto){
+
+        Truck truckToSave = truckMapper.convertToEntity(truckDto);
+
+        truckRepository.save(truckToSave);
+
+    }
+
+    public void updateTruck(TruckDto truckDto){
+
+        Optional<Truck> optionalTruckToEdit = truckRepository.findById(truckDto.getId());
+
+        if(optionalTruckToEdit.isPresent()){
+
+            Truck truckToSave = optionalTruckToEdit.get();
+
+            truckToSave.setBrand(truckDto.getBrand());
+            truckToSave.setCarYear(truckDto.getCarYear());
+            truckToSave.setModel(truckDto.getModel());
+            truckToSave.setRegistration(truckDto.getRegistration());
+
+            truckRepository.save(truckToSave);
+        }
+    }
+
+    public void deleteTruckById(Long id){
+
         truckRepository.deleteById(id);
+    }
+
+    public void deleteTruckByModel(String model){
+
+        truckRepository.deleteTruckByModel(model);
     }
 }
