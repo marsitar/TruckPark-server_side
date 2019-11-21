@@ -8,10 +8,11 @@ DROP TABLE user_system cascade constraints;
 DROP TABLE coordinate cascade constraints;
 
 CREATE TABLE mop (
-    id NUMBER(10) PRIMARY KEY,
-    serial_number NUMBER(10) NOT NULL,
-    place VARCHAR(250) NOT NULL,
-    road_number VARCHAR(250) NOT NULL,
+	id NUMBER(10) PRIMARY KEY,
+	identification_name VARCHAR(250) NOT NULL,
+	category VARCHAR(250) NOT NULL,
+	place VARCHAR(250) NOT NULL,
+	road_number VARCHAR(250) NOT NULL,
 	truck_places NUMBER(10) DEFAULT ON NULL 0,
 	occupied_truck_places NUMBER(10) DEFAULT ON NULL 0,
 	id_extended VARCHAR(250) NOT NULL,
@@ -20,11 +21,10 @@ CREATE TABLE mop (
 );
 
 CREATE TABLE extended_mop_data (
-    id NUMBER(10) PRIMARY KEY,
+	id NUMBER(10) PRIMARY KEY,
 	organization VARCHAR(250) NOT NULL,
 	road_class VARCHAR(250) NOT NULL,
 	direction VARCHAR(50) NOT NULL,
-	exit_road VARCHAR(50) NOT NULL,
 	passenger_places NUMBER(10) DEFAULT ON NULL 0,
 	coach_places NUMBER(10) DEFAULT ON NULL 0,
 	is_guarded NUMBER(1,0) NOT NULL,
@@ -37,9 +37,11 @@ CREATE TABLE extended_mop_data (
 	is_toilet NUMBER(1,0) NOT NULL,
 	is_carwash NUMBER(1,0) NOT NULL,
 	is_workshop NUMBER(1,0) NOT NULL,
-	person_in_charge VARCHAR(100) NOT NULL,
-	person_in_charge_phone VARCHAR(50) NOT NULL,
-	person_in_charge_email VARCHAR(50) NOT NULL,
+	is_lighting NUMBER(1,0) NOT NULL,
+	is_electric_charger NUMBER(1,0) NOT NULL,
+	organization_in_charge VARCHAR(200) NOT NULL,
+	organization_in_charge_phone VARCHAR(100) NOT NULL,
+	organization_in_charge_email VARCHAR(200) NOT NULL,
 	id_mop NUMBER(10) NOT NULL
 );
 
@@ -83,9 +85,9 @@ CREATE TABLE user_system(
 );
 
 CREATE TABLE coordinate(
-    id NUMBER(10) PRIMARY KEY,
-    x NUMBER NOT NULL,
-    y NUMBER NOT NULL
+	id NUMBER(10) PRIMARY KEY,
+	x NUMBER NOT NULL,
+	y NUMBER NOT NULL
 );
 
 ALTER TABLE mop
@@ -113,12 +115,10 @@ ADD CONSTRAINT FK_TruckDriverWayTruck
 FOREIGN KEY (id_truck)
 REFERENCES truck(id);
 
-
 ALTER TABLE truck_driver_way
 ADD CONSTRAINT FK_TruckDriverWayCoordinate 
 FOREIGN KEY (id_coordinate)
 REFERENCES coordinate(id);
-
 
 ALTER TABLE truck
 ADD CONSTRAINT FK_TruckTruckDriverWay
