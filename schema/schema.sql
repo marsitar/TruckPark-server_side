@@ -5,6 +5,7 @@ DROP TABLE truck cascade constraints;
 DROP TABLE driver cascade constraints;
 DROP TABLE company cascade constraints;
 DROP TABLE user_system cascade constraints;
+DROP TABLE coordinate cascade constraints;
 
 CREATE TABLE mop (
     id NUMBER(10) PRIMARY KEY,
@@ -13,9 +14,9 @@ CREATE TABLE mop (
     road_number VARCHAR(250) NOT NULL,
 	truck_places NUMBER(10) DEFAULT ON NULL 0,
 	occupied_truck_places NUMBER(10) DEFAULT ON NULL 0,
-	extended_id VARCHAR(250) NOT NULL,
-	coordinate_id NUMBER(10) NOT NULL,
-	extended_mop_data_id NUMBER(10) NOT NULL
+	id_extended VARCHAR(250) NOT NULL,
+	id_coordinate NUMBER(10) NOT NULL,
+	id_extended_mop_data NUMBER(10) NOT NULL
 );
 
 CREATE TABLE extended_mop_data (
@@ -47,7 +48,7 @@ CREATE TABLE truck_driver_way (
 	fuel NUMBER,
 	distance NUMBER NOT NULL,
 	result_time TIMESTAMP WITH TIME ZONE NOT NULL,
-	coordinate_id NUMBER(10) NOT NULL,
+	id_coordinate NUMBER(10) NOT NULL,
 	id_truck NUMBER(10) NOT NULL,
 	id_driver NUMBER(10) NOT NULL
 );
@@ -82,13 +83,14 @@ CREATE TABLE user_system(
 );
 
 CREATE TABLE coordinate(
+    id NUMBER(10) PRIMARY KEY,
     x NUMBER NOT NULL,
     y NUMBER NOT NULL
 );
 
 ALTER TABLE mop
 ADD CONSTRAINT FK_MopExtendedMopData 
-FOREIGN KEY (extended_mop_data_id)
+FOREIGN KEY (id_extended_mop_data)
 REFERENCES extended_mop_data(id);
 
 ALTER TABLE mop

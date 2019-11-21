@@ -68,17 +68,25 @@ public class ExtendedMopData {
 	@NotNull
 	private Boolean isWorkshop;
 
+	@Column(name = "isLighting")
+	@NotNull
+	private Boolean isLighting;
+
+	@Column(name = "is_electric_charger")
+	@NotNull
+	private Boolean isElectricCharger;
+
 	@Column(name = "person_in_charge")
 	@NotNull
-	private String personInCharge;
+	private String organizationInCharge;
 
-	@Column(name = "person_in_charge_phone")
+	@Column(name = "organization_in_charge_phone")
 	@NotNull
-	private String personInChargePhone;
+	private String organizationInChargePhone;
 
-	@Column(name = "person_in_charge_email")
+	@Column(name = "organization_in_charge_email")
 	@NotNull
-	private String personInChargeEmail;
+	private String organizationInChargeEmail;
 
 	@OneToOne(mappedBy = "extendedMopData")
 	private Mop mop;
@@ -86,7 +94,7 @@ public class ExtendedMopData {
 	public ExtendedMopData() {
 	}
 
-	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull String personInCharge, @NotNull String personInChargePhone, @NotNull String personInChargeEmail, @NotNull Mop mop) {
+	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull Boolean isLighting, @NotNull Boolean isElectricCharger, @NotNull String organizationInCharge, @NotNull String organizationInChargePhone, @NotNull String organizationInChargeEmail, Mop mop) {
 		this.organization = organization;
 		this.roadClass = roadClass;
 		this.passengerPlaces = passengerPlaces;
@@ -101,9 +109,11 @@ public class ExtendedMopData {
 		this.isToilet = isToilet;
 		this.isCarwash = isCarwash;
 		this.isWorkshop = isWorkshop;
-		this.personInCharge = personInCharge;
-		this.personInChargePhone = personInChargePhone;
-		this.personInChargeEmail = personInChargeEmail;
+		this.isLighting = isLighting;
+		this.isElectricCharger = isElectricCharger;
+		this.organizationInCharge = organizationInCharge;
+		this.organizationInChargePhone = organizationInChargePhone;
+		this.organizationInChargeEmail = organizationInChargeEmail;
 		this.mop = mop;
 	}
 
@@ -227,28 +237,44 @@ public class ExtendedMopData {
 		isWorkshop = workshop;
 	}
 
-	public String getPersonInCharge() {
-		return personInCharge;
+	public Boolean getIsLighting() {
+		return isLighting;
 	}
 
-	public void setPersonInCharge(String personInCharge) {
-		this.personInCharge = personInCharge;
+	public void setIsLighting(Boolean isLighting) {
+		this.isLighting = isLighting;
 	}
 
-	public String getPersonInChargePhone() {
-		return personInChargePhone;
+	public Boolean getElectricCharger() {
+		return isElectricCharger;
 	}
 
-	public void setPersonInChargePhone(String personInChargePhone) {
-		this.personInChargePhone = personInChargePhone;
+	public void setElectricCharger(Boolean electricCharger) {
+		isElectricCharger = electricCharger;
 	}
 
-	public String getPersonInChargeEmail() {
-		return personInChargeEmail;
+	public String getOrganizationInCharge() {
+		return organizationInCharge;
 	}
 
-	public void setPersonInChargeEmail(String personInChargeEmail) {
-		this.personInChargeEmail = personInChargeEmail;
+	public void setOrganizationInCharge(String organizationInCharge) {
+		this.organizationInCharge = organizationInCharge;
+	}
+
+	public String getOrganizationInChargePhone() {
+		return organizationInChargePhone;
+	}
+
+	public void setOrganizationInChargePhone(String organizationInChargePhone) {
+		this.organizationInChargePhone = organizationInChargePhone;
+	}
+
+	public String getOrganizationInChargeEmail() {
+		return organizationInChargeEmail;
+	}
+
+	public void setOrganizationInChargeEmail(String organizationInChargeEmail) {
+		this.organizationInChargeEmail = organizationInChargeEmail;
 	}
 
 	public Mop getMop() {
@@ -277,9 +303,11 @@ public class ExtendedMopData {
 				", isToilet=" + isToilet +
 				", isCarwash=" + isCarwash +
 				", isWorkshop=" + isWorkshop +
-				", personInCharge='" + personInCharge + '\'' +
-				", personInChargePhone='" + personInChargePhone + '\'' +
-				", personInChargeEmail='" + personInChargeEmail + '\'' +
+				", isLighting=" + isLighting +
+				", isElectricCharger=" + isElectricCharger +
+				", organizationInCharge='" + organizationInCharge + '\'' +
+				", organizationInChargePhone='" + organizationInChargePhone + '\'' +
+				", organizationInChargeEmail='" + organizationInChargeEmail + '\'' +
 				", mop=" + mop +
 				'}';
 	}
