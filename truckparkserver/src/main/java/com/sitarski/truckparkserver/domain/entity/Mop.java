@@ -8,13 +8,17 @@ import javax.validation.constraints.NotNull;
 public class Mop {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "serial_number")
+	@Column(name = "identification_name")
 	@NotNull
-	private Integer serialNumber;
+	private String identificationName;
+
+	@Column(name = "category")
+	@NotNull
+	private String category;
 
 	@Column(name = "place")
 	@NotNull
@@ -36,19 +40,20 @@ public class Mop {
 	@NotNull
 	private String occupiedTruckPlaces;
 
-	@Column(name = "extended_id")
+	@Column(name = "id_extended")
 	@NotNull
 	private String extendedId;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "extended_mop_data_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_extended_mop_data", referencedColumnName = "id")
 	private ExtendedMopData extendedMopData;
 
 	public Mop() {
 	}
 
-	public Mop(@NotNull Integer serialNumber, @NotNull String place, Coordinate coordinate, @NotNull String roadNumber, @NotNull Integer truckPlaces, @NotNull String occupiedTruckPlaces, @NotNull String extendedId, ExtendedMopData extendedMopData) {
-		this.serialNumber = serialNumber;
+	public Mop(@NotNull String identificationName, @NotNull String category, @NotNull String place, Coordinate coordinate, @NotNull String roadNumber, @NotNull Integer truckPlaces, @NotNull String occupiedTruckPlaces, @NotNull String extendedId, ExtendedMopData extendedMopData) {
+		this.identificationName = identificationName;
+		this.category = category;
 		this.place = place;
 		this.coordinate = coordinate;
 		this.roadNumber = roadNumber;
@@ -66,12 +71,20 @@ public class Mop {
 		this.id = id;
 	}
 
-	public Integer getSerialNumber() {
-		return serialNumber;
+	public String getIdentificationName() {
+		return identificationName;
 	}
 
-	public void setSerialNumber(Integer serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setIdentificationName(String identificationName) {
+		this.identificationName = identificationName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getPlace() {
@@ -134,7 +147,8 @@ public class Mop {
 	public String toString() {
 		return "Mop{" +
 				"id=" + id +
-				", serialNumber=" + serialNumber +
+				", identificationName='" + identificationName + '\'' +
+				", category='" + category + '\'' +
 				", place='" + place + '\'' +
 				", coordinate=" + coordinate +
 				", roadNumber='" + roadNumber + '\'' +

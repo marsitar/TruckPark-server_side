@@ -10,13 +10,13 @@ import java.util.List;
 public class Truck {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "registrition")
+	@Column(name = "registration")
 	@NotNull
-	private String registrition;
+	private String registration;
 
 	@Column(name = "brand")
 	@NotNull
@@ -30,18 +30,18 @@ public class Truck {
 	@NotNull
 	private Integer carYear;
 
-	@OneToMany(mappedBy="cart")
+	@OneToMany(mappedBy="truck")
 	private List<TruckDriverWay> truckDriverWays = new ArrayList<>();
 
 	@OneToOne
-	@JoinColumn(name = "company_id")
+	@JoinColumn(name = "id_company")
 	private Company company;
 
 	public Truck() {
 	}
 
-	public Truck(@NotNull String registrition, @NotNull String brand, @NotNull String model, @NotNull Integer carYear, List<TruckDriverWay> truckDriverWays, Company company) {
-		this.registrition = registrition;
+	public Truck(@NotNull String registration, @NotNull String brand, @NotNull String model, @NotNull Integer carYear, List<TruckDriverWay> truckDriverWays, Company company) {
+		this.registration = registration;
 		this.brand = brand;
 		this.model = model;
 		this.carYear = carYear;
@@ -57,12 +57,12 @@ public class Truck {
 		this.id = id;
 	}
 
-	public String getRegistrition() {
-		return registrition;
+	public String getRegistration() {
+		return registration;
 	}
 
-	public void setRegistrition(String registrition) {
-		this.registrition = registrition;
+	public void setRegistration(String registration) {
+		this.registration = registration;
 	}
 
 	public String getBrand() {
@@ -109,7 +109,7 @@ public class Truck {
 	public String toString() {
 		return "Truck{" +
 				"id=" + id +
-				", registrition='" + registrition + '\'' +
+				", registrition='" + registration + '\'' +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
 				", carYear=" + carYear +

@@ -4,7 +4,9 @@ public class MopDto {
 
 	private Long id;
 
-	private Integer serialNumber;
+	private String identificationName;
+
+	private String category;
 
 	private String place;
 
@@ -23,8 +25,9 @@ public class MopDto {
 	public MopDto() {
 	}
 
-	public MopDto(Integer serialNumber, String place, CoordinateDto coordinateDTO, String roadNumber, Integer truckPlaces, String occupiedTruckPlaces, String extendedId, ExtendedMopDataDto extendedMopDataDTO) {
-		this.serialNumber = serialNumber;
+	public MopDto(String identificationName, String category, String place, CoordinateDto coordinateDTO, String roadNumber, Integer truckPlaces, String occupiedTruckPlaces, String extendedId, ExtendedMopDataDto extendedMopDataDTO) {
+		this.identificationName = identificationName;
+		this.category = category;
 		this.place = place;
 		this.coordinateDTO = coordinateDTO;
 		this.roadNumber = roadNumber;
@@ -42,12 +45,20 @@ public class MopDto {
 		this.id = id;
 	}
 
-	public Integer getSerialNumber() {
-		return serialNumber;
+	public String getIdentificationName() {
+		return identificationName;
 	}
 
-	public void setSerialNumber(Integer serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setIdentificationName(String identificationName) {
+		this.identificationName = identificationName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getPlace() {
@@ -108,9 +119,10 @@ public class MopDto {
 
 	@Override
 	public String toString() {
-		return "MopDTO{" +
+		return "MopDto{" +
 				"id=" + id +
-				", serialNumber=" + serialNumber +
+				", identificationName='" + identificationName + '\'' +
+				", category='" + category + '\'' +
 				", place='" + place + '\'' +
 				", coordinateDTO=" + coordinateDTO +
 				", roadNumber='" + roadNumber + '\'' +

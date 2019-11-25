@@ -32,18 +32,22 @@ public class ExtendedMopDataDto {
 
 	private Boolean isWorkshop;
 
-	private String personInCharge;
+	private Boolean isLighting;
 
-	private String personInChargePhone;
+	private Boolean isElectricCharger;
 
-	private String personInChargeEmail;
+	private String organizationInCharge;
+
+	private String organizationInChargePhone;
+
+	private String organizationInChargeEmail;
 
 	private MopDto mopDTO;
 
 	public ExtendedMopDataDto() {
 	}
 
-	public ExtendedMopDataDto(String organization, String roadClass, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, String personInCharge, String personInChargePhone, String personInChargeEmail, MopDto mopDTO) {
+	public ExtendedMopDataDto(String organization, String roadClass, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, Boolean isLighting, Boolean isElectricCharger, String organizationInCharge, String organizationInChargePhone, String organizationInChargeEmail, MopDto mopDTO) {
 		this.organization = organization;
 		this.roadClass = roadClass;
 		this.passengerPlaces = passengerPlaces;
@@ -58,9 +62,11 @@ public class ExtendedMopDataDto {
 		this.isToilet = isToilet;
 		this.isCarwash = isCarwash;
 		this.isWorkshop = isWorkshop;
-		this.personInCharge = personInCharge;
-		this.personInChargePhone = personInChargePhone;
-		this.personInChargeEmail = personInChargeEmail;
+		this.isLighting = isLighting;
+		this.isElectricCharger = isElectricCharger;
+		this.organizationInCharge = organizationInCharge;
+		this.organizationInChargePhone = organizationInChargePhone;
+		this.organizationInChargeEmail = organizationInChargeEmail;
 		this.mopDTO = mopDTO;
 	}
 
@@ -184,28 +190,44 @@ public class ExtendedMopDataDto {
 		isWorkshop = workshop;
 	}
 
-	public String getPersonInCharge() {
-		return personInCharge;
+	public Boolean getLighting() {
+		return isLighting;
 	}
 
-	public void setPersonInCharge(String personInCharge) {
-		this.personInCharge = personInCharge;
+	public void setLighting(Boolean lighting) {
+		isLighting = lighting;
 	}
 
-	public String getPersonInChargePhone() {
-		return personInChargePhone;
+	public Boolean getElectricCharger() {
+		return isElectricCharger;
 	}
 
-	public void setPersonInChargePhone(String personInChargePhone) {
-		this.personInChargePhone = personInChargePhone;
+	public void setElectricCharger(Boolean electricCharger) {
+		isElectricCharger = electricCharger;
 	}
 
-	public String getPersonInChargeEmail() {
-		return personInChargeEmail;
+	public String getOrganizationInCharge() {
+		return organizationInCharge;
 	}
 
-	public void setPersonInChargeEmail(String personInChargeEmail) {
-		this.personInChargeEmail = personInChargeEmail;
+	public void setOrganizationInCharge(String organizationInCharge) {
+		this.organizationInCharge = organizationInCharge;
+	}
+
+	public String getOrganizationInChargePhone() {
+		return organizationInChargePhone;
+	}
+
+	public void setOrganizationInChargePhone(String organizationInChargePhone) {
+		this.organizationInChargePhone = organizationInChargePhone;
+	}
+
+	public String getOrganizationInChargeEmail() {
+		return organizationInChargeEmail;
+	}
+
+	public void setOrganizationInChargeEmail(String organizationInChargeEmail) {
+		this.organizationInChargeEmail = organizationInChargeEmail;
 	}
 
 	public MopDto getMopDTO() {
@@ -218,7 +240,7 @@ public class ExtendedMopDataDto {
 
 	@Override
 	public String toString() {
-		return "ExtendedMopDataDTO{" +
+		return "ExtendedMopDataDto{" +
 				"id=" + id +
 				", organization='" + organization + '\'' +
 				", roadClass='" + roadClass + '\'' +
@@ -234,9 +256,11 @@ public class ExtendedMopDataDto {
 				", isToilet=" + isToilet +
 				", isCarwash=" + isCarwash +
 				", isWorkshop=" + isWorkshop +
-				", personInCharge='" + personInCharge + '\'' +
-				", personInChargePhone='" + personInChargePhone + '\'' +
-				", personInChargeEmail='" + personInChargeEmail + '\'' +
+				", isLighting=" + isLighting +
+				", isElectricCharger=" + isElectricCharger +
+				", organizationInCharge='" + organizationInCharge + '\'' +
+				", organizationInChargePhone='" + organizationInChargePhone + '\'' +
+				", organizationInChargeEmail='" + organizationInChargeEmail + '\'' +
 				", mopDTO=" + mopDTO +
 				'}';
 	}

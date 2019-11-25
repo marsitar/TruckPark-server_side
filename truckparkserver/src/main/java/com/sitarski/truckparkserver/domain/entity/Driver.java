@@ -5,10 +5,12 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="driver")
 public class Driver {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
@@ -16,10 +18,9 @@ public class Driver {
 	@NotNull
 	private String fullName;
 
-	@Column(name = "company_id")
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="id_company", nullable=false)
 	private Company company;
 
 	@NotNull

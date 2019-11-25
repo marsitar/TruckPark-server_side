@@ -4,7 +4,7 @@ public class TruckDto {
 
 	private Long id;
 
-	private String registrition;
+	private String registration;
 
 	private String brand;
 
@@ -19,8 +19,8 @@ public class TruckDto {
 	public TruckDto() {
 	}
 
-	public TruckDto(String registrition, String brand, String model, Integer carYear, TruckDriverWayDto truckDriverWayDTO, CompanyDto companyDTO) {
-		this.registrition = registrition;
+	public TruckDto(String registration, String brand, String model, Integer carYear, TruckDriverWayDto truckDriverWayDTO, CompanyDto companyDTO) {
+		this.registration = registration;
 		this.brand = brand;
 		this.model = model;
 		this.carYear = carYear;
@@ -36,12 +36,12 @@ public class TruckDto {
 		this.id = id;
 	}
 
-	public String getRegistrition() {
-		return registrition;
+	public String getRegistration() {
+		return registration;
 	}
 
-	public void setRegistrition(String registrition) {
-		this.registrition = registrition;
+	public void setRegistration(String registration) {
+		this.registration = registration;
 	}
 
 	public String getBrand() {
@@ -86,9 +86,9 @@ public class TruckDto {
 
 	@Override
 	public String toString() {
-		return "TruckDTO{" +
+		return "TruckDto{" +
 				"id=" + id +
-				", registrition='" + registrition + '\'' +
+				", registration='" + registration + '\'' +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
 				", carYear=" + carYear +

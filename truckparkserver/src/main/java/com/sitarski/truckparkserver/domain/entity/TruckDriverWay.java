@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class TruckDriverWay {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
@@ -26,15 +26,15 @@ public class TruckDriverWay {
 	private LocalDateTime dateTime;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "coordinate_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_coordinate", referencedColumnName = "id")
 	private Coordinate coordinate;
 
 	@ManyToOne
-	@JoinColumn(name="truck_id", nullable=false)
+	@JoinColumn(name="id_truck", nullable=false)
 	private Truck truck;
 
 	@ManyToOne
-	@JoinColumn(name="driver_id", nullable=false)
+	@JoinColumn(name="id_driver", nullable=false)
 	private Driver driver;
 
 	public TruckDriverWay() {
