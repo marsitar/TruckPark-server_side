@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -27,27 +24,6 @@ public class TruckController {
         this.truckService = truckService;
     }
 
-    @PostConstruct
-    private void postConstruct() {
-
-        List<TruckDto> trucksToAdd = Arrays.asList(new TruckDto(
-                "BCAD&HEDDC", "Opel", "Mondeo", 1991, null, null
-        ), new TruckDto(
-                "DKO8921F89", "Opel", "Astra", 1989, null, null
-        ), new TruckDto(
-                "PODS78RF64", "Fiat", "Brava", 2001, null, null
-        ));
-
-        trucksToAdd.forEach(truckService::addTruck);
-    }
-
-    @PreDestroy
-    private void preDestroy() {
-
-        truckService.deleteTruckByModel("Brava");
-        truckService.deleteTruckByModel("Mondeo");
-        truckService.deleteTruckByModel("Astra");
-    }
 
     @GetMapping(value = "/a", produces = "application/json")
     public ResponseEntity<List<TruckDto>> getAllTrucks() {
