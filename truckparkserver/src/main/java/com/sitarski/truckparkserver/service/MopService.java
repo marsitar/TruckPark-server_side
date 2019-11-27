@@ -26,7 +26,6 @@ public class MopService {
     }
 
     public List<MopDto> getMops() {
-
         return mopRepository
                 .findAll()
                 .stream()
@@ -35,21 +34,18 @@ public class MopService {
     }
 
     public Optional<MopDto> getMopById(Long id) {
-
         return mopRepository
                 .findById(id)
                 .map(mopMapper::convertToDto);
     }
 
     public Optional<MopDto> getMopByIdentificationName(String identificationName) {
-
         return mopRepository
                 .findMopByIdentificationName(identificationName)
                 .map(mopMapper::convertToDto);
     }
 
     public List<MopDto> getMopsByIdentificationNameIsLike(String identificationNamePattern) {
-
         return mopRepository
                 .findMopsByIdentificationNameIsLike(identificationNamePattern)
                 .stream()
@@ -58,29 +54,19 @@ public class MopService {
     }
 
     public void addMop(MopDto mopDto) {
-
         Mop mopToSave = mopMapper.convertToEntity(mopDto);
-
         mopRepository.save(mopToSave);
     }
 
     public MopDto updateMop(MopDto mopDto) {
-
-        Optional<MopDto> optionalMopToEdit = mopRepository
-                .findById(mopDto.getId())
-                .map(mopMapper::convertToDto);
-
-        Mop mopToSave = optionalMopToEdit
+        Mop mopToSave = Optional.of(mopDto)
                 .map(mopMapper::convertToEntity)
                 .orElse(null);
-
         Mop savedMop = mopRepository.save(mopToSave);
-
         return mopMapper.convertToDto(savedMop);
     }
 
     public void deleteMopById(Long id) {
-
         mopRepository.deleteById(id);
     }
 }
