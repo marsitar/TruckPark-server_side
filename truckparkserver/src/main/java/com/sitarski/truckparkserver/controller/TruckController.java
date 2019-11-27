@@ -24,8 +24,7 @@ public class TruckController {
         this.truckService = truckService;
     }
 
-
-    @GetMapping(value = "/a", produces = "application/json")
+    @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<List<TruckDto>> getAllTrucks() {
 
         List<TruckDto> truckDtoList = truckService.getTrucks();
