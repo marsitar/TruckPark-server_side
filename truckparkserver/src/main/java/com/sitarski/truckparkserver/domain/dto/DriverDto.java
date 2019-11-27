@@ -1,5 +1,8 @@
 package com.sitarski.truckparkserver.domain.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DriverDto {
 
 	private Long id;
@@ -8,15 +11,15 @@ public class DriverDto {
 
 	private CompanyDto companyDTO;
 
-	private TruckDriverWayDto truckDriverWayDTO;
+	private List<TruckDriverWayDto> truckDriverWaysDTO = new ArrayList<>();;
 
 	public DriverDto() {
 	}
 
-	public DriverDto(String fullName, CompanyDto companyDTO, TruckDriverWayDto truckDriverWayDTO) {
+	public DriverDto(String fullName, CompanyDto companyDTO, List<TruckDriverWayDto> truckDriverWaysDTO) {
 		this.fullName = fullName;
 		this.companyDTO = companyDTO;
-		this.truckDriverWayDTO = truckDriverWayDTO;
+		this.truckDriverWaysDTO = truckDriverWaysDTO;
 	}
 
 	public Long getId() {
@@ -43,21 +46,21 @@ public class DriverDto {
 		this.companyDTO = companyDTO;
 	}
 
-	public TruckDriverWayDto getTruckDriverWayDTO() {
-		return truckDriverWayDTO;
+	public List<TruckDriverWayDto> getTruckDriverWaysDTO() {
+		return truckDriverWaysDTO;
 	}
 
-	public void setTruckDriverWayDTO(TruckDriverWayDto truckDriverWayDTO) {
-		this.truckDriverWayDTO = truckDriverWayDTO;
+	public void setTruckDriverWaysDTO(List<TruckDriverWayDto> truckDriverWaysDTO) {
+		this.truckDriverWaysDTO = truckDriverWaysDTO;
 	}
 
 	@Override
 	public String toString() {
-		return "DriverDTO{" +
+		return "DriverDto{" +
 				"id=" + id +
 				", fullName='" + fullName + '\'' +
 				", companyDTO=" + companyDTO +
-				", truckDriverWayDTO=" + truckDriverWayDTO +
+				", truckDriverWaysDTO=" + truckDriverWaysDTO +
 				'}';
 	}
 }

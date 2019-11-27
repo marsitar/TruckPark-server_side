@@ -67,8 +67,7 @@ CREATE TABLE truck (
 CREATE TABLE driver (
 	id NUMBER(10) PRIMARY KEY,
 	full_name VARCHAR(250) NOT NULL, 
-	id_company NUMBER(10) NOT NULL,
-	id_truck_driver_way NUMBER(10) NOT NULL
+	id_company NUMBER(10)
 );
 
 CREATE TABLE company (
