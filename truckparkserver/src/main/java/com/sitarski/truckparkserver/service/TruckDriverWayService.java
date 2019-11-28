@@ -1,12 +1,15 @@
 package com.sitarski.truckparkserver.service;
 
 import com.sitarski.truckparkserver.dao.CompanyRepository;
+import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.dao.TruckDriverWayRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.CompanyDto;
+import com.sitarski.truckparkserver.domain.dto.DriverDto;
 import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDto;
 import com.sitarski.truckparkserver.domain.dto.TruckDto;
 import com.sitarski.truckparkserver.domain.entity.Company;
+import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
 import com.sitarski.truckparkserver.service.mapper.TruckDriverWayMapper;
@@ -33,11 +36,15 @@ public class TruckDriverWayService {
     @Autowired
     private final CompanyRepository companyRepository;
 
-    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository) {
+    @Autowired
+    private final DriverRepository driverRepository;
+
+    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository) {
         this.truckDriverWayRepository = truckDriverWayRepository;
         this.truckDriverWayMapper = truckDriverWayMapper;
         this.truckRepository = truckRepository;
         this.companyRepository = companyRepository;
+        this.driverRepository = driverRepository;
     }
 
     public List<TruckDriverWayDto> getTruckDriverWays() {
@@ -54,9 +61,17 @@ public class TruckDriverWayService {
                 .map(truckDriverWayMapper::convertToDto);
     }
 
-    public List<TruckDriverWayDto> getTruckDriverWaysByDriverFullName(String fullName){
+    public List<TruckDriverWayDto> getTruckDriverWaysByDriver(DriverDto driverDto){
+        Long foundDriverId = Optional.ofNullable(driverDto)
+                .map(DriverDto::getId)
+                .orElse(null);
+
+        Driver foundDriver = driverRepository.findById(foundDriverId)
+                                .orElse(null);
+
+
         return truckDriverWayRepository
-                .findAllByDriver_FullName(fullName)
+                .findAllByDriver(foundDriver)
                 .stream()
                 .map(truckDriverWayMapper::convertToDto)
                 .collect(Collectors.toList());
