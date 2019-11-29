@@ -41,8 +41,7 @@ CREATE TABLE extended_mop_data (
 	is_electric_charger NUMBER(1,0) NOT NULL,
 	organization_in_charge VARCHAR(200) NOT NULL,
 	organization_in_charge_phone VARCHAR(100) NOT NULL,
-	organization_in_charge_email VARCHAR(200) NOT NULL,
-	id_mop NUMBER(10) NOT NULL
+	organization_in_charge_email VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE truck_driver_way (
@@ -68,8 +67,7 @@ CREATE TABLE truck (
 CREATE TABLE driver (
 	id NUMBER(10) PRIMARY KEY,
 	full_name VARCHAR(250) NOT NULL, 
-	id_company NUMBER(10) NOT NULL,
-	id_truck_driver_way NUMBER(10) NOT NULL
+	id_company NUMBER(10)
 );
 
 CREATE TABLE company (

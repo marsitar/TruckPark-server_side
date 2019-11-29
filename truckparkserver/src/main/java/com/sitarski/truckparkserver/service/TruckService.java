@@ -31,7 +31,6 @@ public class TruckService {
         this.companyRepository = companyRepository;
     }
 
-
     public List<TruckDto> getTrucks() {
 
         List<TruckDto> truckDtoList = truckRepository
@@ -58,11 +57,8 @@ public class TruckService {
 
     public Optional<TruckDto> getTruckById(Long id){
 
-        Optional<TruckDto> truckDto = Optional.ofNullable(
-                Optional.ofNullable(truckRepository.findById(id))
-                .get()
-                .map(truckMapper::convertToDto)
-                .orElse(null));
+        Optional<TruckDto> truckDto = truckRepository.findById(id)
+                .map(truckMapper::convertToDto);
 
         return truckDto;
     }
@@ -72,7 +68,6 @@ public class TruckService {
         Truck truckToSave = truckMapper.convertToEntity(truckDto);
 
         truckRepository.save(truckToSave);
-
     }
 
     public void updateTruck(TruckDto truckDto){

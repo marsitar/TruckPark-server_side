@@ -76,7 +76,7 @@ public class ExtendedMopData {
 	@NotNull
 	private Boolean isElectricCharger;
 
-	@Column(name = "person_in_charge")
+	@Column(name = "organization_in_charge")
 	@NotNull
 	private String organizationInCharge;
 
@@ -88,13 +88,10 @@ public class ExtendedMopData {
 	@NotNull
 	private String organizationInChargeEmail;
 
-	@OneToOne(mappedBy = "extendedMopData")
-	private Mop mop;
-
 	public ExtendedMopData() {
 	}
 
-	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull Boolean isLighting, @NotNull Boolean isElectricCharger, @NotNull String organizationInCharge, @NotNull String organizationInChargePhone, @NotNull String organizationInChargeEmail, Mop mop) {
+	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull Boolean isLighting, @NotNull Boolean isElectricCharger, @NotNull String organizationInCharge, @NotNull String organizationInChargePhone, @NotNull String organizationInChargeEmail) {
 		this.organization = organization;
 		this.roadClass = roadClass;
 		this.passengerPlaces = passengerPlaces;
@@ -114,7 +111,6 @@ public class ExtendedMopData {
 		this.organizationInCharge = organizationInCharge;
 		this.organizationInChargePhone = organizationInChargePhone;
 		this.organizationInChargeEmail = organizationInChargeEmail;
-		this.mop = mop;
 	}
 
 	public Long getId() {
@@ -277,14 +273,6 @@ public class ExtendedMopData {
 		this.organizationInChargeEmail = organizationInChargeEmail;
 	}
 
-	public Mop getMop() {
-		return mop;
-	}
-
-	public void setMop(Mop mop) {
-		this.mop = mop;
-	}
-
 	@Override
 	public String toString() {
 		return "ExtendedMopData{" +
@@ -308,7 +296,6 @@ public class ExtendedMopData {
 				", organizationInCharge='" + organizationInCharge + '\'' +
 				", organizationInChargePhone='" + organizationInChargePhone + '\'' +
 				", organizationInChargeEmail='" + organizationInChargeEmail + '\'' +
-				", mop=" + mop +
 				'}';
 	}
 }

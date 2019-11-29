@@ -25,7 +25,7 @@ public class Mop {
 	private String place;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "coordinate_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_coordinate", referencedColumnName = "id")
 	private Coordinate coordinate;
 
 	@Column(name = "road_number")
