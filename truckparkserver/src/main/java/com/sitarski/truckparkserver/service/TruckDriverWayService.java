@@ -12,8 +12,8 @@ import com.sitarski.truckparkserver.domain.entity.Company;
 import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
+import com.sitarski.truckparkserver.service.mapper.Mapper;
 import com.sitarski.truckparkserver.service.mapper.TruckDriverWayMapper;
-import com.sitarski.truckparkserver.service.mapper.TruckMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class TruckDriverWayService {
     private final TruckDriverWayRepository truckDriverWayRepository;
 
     @Autowired
-    private final TruckDriverWayMapper truckDriverWayMapper;
+    private final Mapper<TruckDriverWayDto, TruckDriverWay> truckDriverWayMapper;
 
     @Autowired
     private final TruckRepository truckRepository;
@@ -61,13 +61,13 @@ public class TruckDriverWayService {
                 .map(truckDriverWayMapper::convertToDto);
     }
 
-    public List<TruckDriverWayDto> getTruckDriverWaysByDriver(DriverDto driverDto){
+    public List<TruckDriverWayDto> getTruckDriverWaysByDriver(DriverDto driverDto) {
         Long foundDriverId = Optional.ofNullable(driverDto)
                 .map(DriverDto::getId)
                 .orElse(null);
 
         Driver foundDriver = driverRepository.findById(foundDriverId)
-                                .orElse(null);
+                .orElse(null);
 
 
         return truckDriverWayRepository
@@ -77,14 +77,14 @@ public class TruckDriverWayService {
                 .collect(Collectors.toList());
     }
 
-    public List<TruckDriverWayDto> getTruckDriverWaysByTruck(TruckDto truckDto){
+    public List<TruckDriverWayDto> getTruckDriverWaysByTruck(TruckDto truckDto) {
 
         Long foundTruckId = Optional.ofNullable(truckDto)
-                                .map(TruckDto::getId)
-                                .orElse(null);
+                .map(TruckDto::getId)
+                .orElse(null);
 
         Truck foundTruck = truckRepository.findById(foundTruckId)
-                                .orElse(null);
+                .orElse(null);
 
         return truckDriverWayRepository
                 .findAllByTruck(foundTruck)
@@ -109,7 +109,7 @@ public class TruckDriverWayService {
                 .collect(Collectors.toList());
     }
 
-    public void addTruckDriverWay(TruckDriverWayDto truckDriverWayDto){
+    public void addTruckDriverWay(TruckDriverWayDto truckDriverWayDto) {
         TruckDriverWay truckDriverWayToSave = truckDriverWayMapper.convertToEntity(truckDriverWayDto);
         truckDriverWayRepository.save(truckDriverWayToSave);
     }

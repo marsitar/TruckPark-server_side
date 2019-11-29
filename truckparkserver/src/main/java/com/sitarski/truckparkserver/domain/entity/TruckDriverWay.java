@@ -29,11 +29,11 @@ public class TruckDriverWay {
 	@JoinColumn(name = "id_coordinate", referencedColumnName = "id")
 	private Coordinate coordinate;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_truck", nullable=false)
 	private Truck truck;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_driver", nullable=false)
 	private Driver driver;
 

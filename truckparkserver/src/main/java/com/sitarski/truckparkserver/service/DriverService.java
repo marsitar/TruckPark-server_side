@@ -4,6 +4,7 @@ import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.domain.dto.DriverDto;
 import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.service.mapper.DriverMapper;
+import com.sitarski.truckparkserver.service.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class DriverService {
     private final DriverRepository driverRepository;
 
     @Autowired
-    private final DriverMapper driverMapper;
+    private final Mapper<DriverDto,Driver> driverMapper;
 
     public DriverService(DriverRepository driverRepository, DriverMapper driverMapper) {
         this.driverRepository = driverRepository;
