@@ -60,7 +60,6 @@ CREATE TABLE truck (
 	brand VARCHAR(250) NOT NULL, 
 	model VARCHAR(250) NOT NULL,
 	car_year NUMBER(4) NOT NULL,
-	id_truck_driver_way NUMBER(10) NOT NULL,
 	id_company NUMBER(10) NOT NULL 
 );
 
@@ -117,11 +116,6 @@ ALTER TABLE truck_driver_way
 ADD CONSTRAINT FK_TruckDriverWayCoordinate 
 FOREIGN KEY (id_coordinate)
 REFERENCES coordinate(id);
-
-ALTER TABLE truck
-ADD CONSTRAINT FK_TruckTruckDriverWay
-FOREIGN KEY (id_truck_driver_way)
-REFERENCES truck_driver_way(id);
 
 ALTER TABLE truck
 ADD CONSTRAINT FK_TruckCompany 
