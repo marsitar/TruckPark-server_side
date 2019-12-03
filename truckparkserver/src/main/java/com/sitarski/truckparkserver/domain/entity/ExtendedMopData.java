@@ -20,6 +20,10 @@ public class ExtendedMopData {
 	@NotNull
 	private String roadClass;
 
+	@Column(name = "direction")
+	@NotNull
+	private String direction;
+
 	@Column(name = "passenger_places")
 	@NotNull
 	private Integer passengerPlaces;
@@ -91,9 +95,10 @@ public class ExtendedMopData {
 	public ExtendedMopData() {
 	}
 
-	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull Boolean isLighting, @NotNull Boolean isElectricCharger, @NotNull String organizationInCharge, @NotNull String organizationInChargePhone, @NotNull String organizationInChargeEmail) {
+	public ExtendedMopData(@NotNull String organization, @NotNull String roadClass, @NotNull String direction, @NotNull Integer passengerPlaces, @NotNull Integer coachPlaces, @NotNull Boolean isGuarded, @NotNull Boolean isFenced, @NotNull Boolean isSecurityCamera, @NotNull Boolean isPetroleum, @NotNull Boolean isDangerousCargo, @NotNull Boolean isRestaurant, @NotNull Boolean isPlaceToStay, @NotNull Boolean isToilet, @NotNull Boolean isCarwash, @NotNull Boolean isWorkshop, @NotNull Boolean isLighting, @NotNull Boolean isElectricCharger, @NotNull String organizationInCharge, @NotNull String organizationInChargePhone, @NotNull String organizationInChargeEmail) {
 		this.organization = organization;
 		this.roadClass = roadClass;
+		this.direction = direction;
 		this.passengerPlaces = passengerPlaces;
 		this.coachPlaces = coachPlaces;
 		this.isGuarded = isGuarded;
@@ -135,6 +140,22 @@ public class ExtendedMopData {
 
 	public void setRoadClass(String roadClass) {
 		this.roadClass = roadClass;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public Boolean getLighting() {
+		return isLighting;
+	}
+
+	public void setLighting(Boolean lighting) {
+		isLighting = lighting;
 	}
 
 	public Integer getPassengerPlaces() {
@@ -279,6 +300,7 @@ public class ExtendedMopData {
 				"id=" + id +
 				", organization='" + organization + '\'' +
 				", roadClass='" + roadClass + '\'' +
+				", direction='" + direction + '\'' +
 				", passengerPlaces=" + passengerPlaces +
 				", coachPlaces=" + coachPlaces +
 				", isGuarded=" + isGuarded +
