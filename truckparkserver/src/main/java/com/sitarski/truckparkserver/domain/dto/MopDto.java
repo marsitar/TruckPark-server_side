@@ -16,7 +16,7 @@ public class MopDto {
 
 	private Integer truckPlaces;
 
-	private String occupiedTruckPlaces;
+	private Integer occupiedTruckPlaces;
 
 	private String extendedId;
 
@@ -25,7 +25,7 @@ public class MopDto {
 	public MopDto() {
 	}
 
-	public MopDto(String identificationName, String category, String place, CoordinateDto coordinateDTO, String roadNumber, Integer truckPlaces, String occupiedTruckPlaces, String extendedId, ExtendedMopDataDto extendedMopDataDTO) {
+	public MopDto(String identificationName, String category, String place, CoordinateDto coordinateDTO, String roadNumber, Integer truckPlaces, Integer occupiedTruckPlaces, String extendedId, ExtendedMopDataDto extendedMopDataDTO) {
 		this.identificationName = identificationName;
 		this.category = category;
 		this.place = place;
@@ -93,11 +93,11 @@ public class MopDto {
 		this.truckPlaces = truckPlaces;
 	}
 
-	public String getOccupiedTruckPlaces() {
+	public Integer getOccupiedTruckPlaces() {
 		return occupiedTruckPlaces;
 	}
 
-	public void setOccupiedTruckPlaces(String occupiedTruckPlaces) {
+	public void setOccupiedTruckPlaces(Integer occupiedTruckPlaces) {
 		this.occupiedTruckPlaces = occupiedTruckPlaces;
 	}
 

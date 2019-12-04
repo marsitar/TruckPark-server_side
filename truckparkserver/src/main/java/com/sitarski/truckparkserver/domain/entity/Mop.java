@@ -38,7 +38,7 @@ public class Mop {
 
 	@Column(name = "occupied_truck_places")
 	@NotNull
-	private String occupiedTruckPlaces;
+	private Integer occupiedTruckPlaces;
 
 	@Column(name = "id_extended")
 	@NotNull
@@ -51,7 +51,7 @@ public class Mop {
 	public Mop() {
 	}
 
-	public Mop(@NotNull String identificationName, @NotNull String category, @NotNull String place, Coordinate coordinate, @NotNull String roadNumber, @NotNull Integer truckPlaces, @NotNull String occupiedTruckPlaces, @NotNull String extendedId, ExtendedMopData extendedMopData) {
+	public Mop(@NotNull String identificationName, @NotNull String category, @NotNull String place, Coordinate coordinate, @NotNull String roadNumber, @NotNull Integer truckPlaces, @NotNull Integer occupiedTruckPlaces, @NotNull String extendedId, ExtendedMopData extendedMopData) {
 		this.identificationName = identificationName;
 		this.category = category;
 		this.place = place;
@@ -119,11 +119,11 @@ public class Mop {
 		this.truckPlaces = truckPlaces;
 	}
 
-	public String getOccupiedTruckPlaces() {
+	public Integer getOccupiedTruckPlaces() {
 		return occupiedTruckPlaces;
 	}
 
-	public void setOccupiedTruckPlaces(String occupiedTruckPlaces) {
+	public void setOccupiedTruckPlaces(Integer occupiedTruckPlaces) {
 		this.occupiedTruckPlaces = occupiedTruckPlaces;
 	}
 
