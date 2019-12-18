@@ -1,0 +1,14 @@
+UPDATE driver SET id_company=1 WHERE id=1;
+UPDATE driver SET id_company=1 WHERE id=2;
+UPDATE driver SET id_company=1 WHERE id=3;
+UPDATE driver SET id_company=1 WHERE id=4;
+UPDATE driver SET id_company=2 WHERE id=5;
+UPDATE driver SET id_company=2 WHERE id=6;
+UPDATE driver SET id_company=2 WHERE id=7;
+UPDATE driver SET id_company=2 WHERE id=8;
+UPDATE driver SET id_company=2 WHERE id=9;
+UPDATE driver SET id_company=3 WHERE id=10;
+UPDATE driver SET id_company=3 WHERE id=11;
+UPDATE driver SET id_company=4 WHERE id=12;
+UPDATE driver SET id_company=4 WHERE id=13;
+COMMIT;

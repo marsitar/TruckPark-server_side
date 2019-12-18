@@ -8,7 +8,10 @@ import javax.validation.constraints.NotNull;
 public class Coordinate {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+			generator = "id_seq")
+	@SequenceGenerator(name = "id_seq",
+			sequenceName = "COORDINATE_SEQ",allocationSize=1)
 	@Column(name = "id")
 	private Long id;
 

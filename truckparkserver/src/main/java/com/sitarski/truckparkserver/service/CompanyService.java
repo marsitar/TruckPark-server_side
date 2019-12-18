@@ -4,6 +4,7 @@ import com.sitarski.truckparkserver.dao.CompanyRepository;
 import com.sitarski.truckparkserver.domain.dto.CompanyDto;
 import com.sitarski.truckparkserver.domain.entity.Company;
 import com.sitarski.truckparkserver.service.mapper.CompanyMapper;
+import com.sitarski.truckparkserver.service.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     @Autowired
-    private final CompanyMapper companyMapper;
+    private final Mapper<CompanyDto,Company> companyMapper;
 
     public CompanyService(CompanyRepository companyRepository, CompanyMapper companyMapper) {
         this.companyRepository = companyRepository;

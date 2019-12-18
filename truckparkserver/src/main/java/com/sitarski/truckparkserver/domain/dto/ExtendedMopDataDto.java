@@ -8,6 +8,8 @@ public class ExtendedMopDataDto {
 
     private String roadClass;
 
+    private String direction;
+
     private Integer passengerPlaces;
 
     private Integer coachPlaces;
@@ -45,14 +47,16 @@ public class ExtendedMopDataDto {
     public ExtendedMopDataDto() {
     }
 
-    public ExtendedMopDataDto(String organization, String roadClass, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, Boolean isLighting, Boolean isElectricCharger, String organizationInCharge, String organizationInChargePhone, String organizationInChargeEmail) {
+    public ExtendedMopDataDto(Long id, String organization, String roadClass, String direction, Integer passengerPlaces, Integer coachPlaces, Boolean isGuarded, Boolean isFenced, Boolean isSecurityCamera, Boolean isPetroleum, Boolean isDangerousCargo, Boolean isRestaurant, Boolean isPlaceToStay, Boolean isToilet, Boolean isCarwash, Boolean isWorkshop, Boolean isLighting, Boolean isElectricCharger, String organizationInCharge, String organizationInChargePhone, String organizationInChargeEmail) {
+        this.id = id;
         this.organization = organization;
         this.roadClass = roadClass;
+        this.direction = direction;
         this.passengerPlaces = passengerPlaces;
         this.coachPlaces = coachPlaces;
         this.isGuarded = isGuarded;
         this.isFenced = isFenced;
-		this.isSecurityCamera = isSecurityCamera;
+        this.isSecurityCamera = isSecurityCamera;
         this.isPetroleum = isPetroleum;
         this.isDangerousCargo = isDangerousCargo;
         this.isRestaurant = isRestaurant;
@@ -89,6 +93,14 @@ public class ExtendedMopDataDto {
 
     public void setRoadClass(String roadClass) {
         this.roadClass = roadClass;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     public Integer getPassengerPlaces() {

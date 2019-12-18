@@ -1,0 +1,14 @@
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (1,'99-WX-247','Opel','Blitz',1930,1);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (2,'87-AX-227','Opel','Blitz',1931,1);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (3,'ERA 75TM','Opel','Movano',2016,1);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (4,'ERA 81TL','Volvo','FH380',2014,2);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (5,'32423-AS-27','MAN','TGA',2006,2);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (6,'99-BG-933','Renaut','Kerax',2007,3);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (7,'CG234299','Renaut','Kerax',2006,3);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (8,'CG2313as','Opel','Movano',2018,4);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (9,'WER2132SL','Volvo','FH380',2014,1);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (10,'UI989IO90','MAN','TGA',2006,2);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (11,'JDKSA213','Renaut','Kerax',2007,2);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (12,'POPOWQED2','Renaut','Kerax',2006,2);
+INSERT INTO truck(id,registration,brand,model,car_year,id_company) VALUES (13,'KD23121213','Opel','Movano',2018,4);
+COMMIT;

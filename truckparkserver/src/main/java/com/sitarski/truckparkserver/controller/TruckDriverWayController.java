@@ -1,9 +1,6 @@
 package com.sitarski.truckparkserver.controller;
 
-import com.sitarski.truckparkserver.domain.dto.CompanyDto;
-import com.sitarski.truckparkserver.domain.dto.DriverDto;
-import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDto;
-import com.sitarski.truckparkserver.domain.dto.TruckDto;
+import com.sitarski.truckparkserver.domain.dto.*;
 import com.sitarski.truckparkserver.service.TruckDriverWayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +18,8 @@ public class TruckDriverWayController {
     @Autowired
     private final TruckDriverWayService truckDriverWayService;
 
-    public TruckDriverWayController(TruckDriverWayService truckDriverWayService){
-        this.truckDriverWayService=truckDriverWayService;
+    public TruckDriverWayController(TruckDriverWayService truckDriverWayService) {
+        this.truckDriverWayService = truckDriverWayService;
     }
 
     @GetMapping(value = "/all", produces = "application/json")
@@ -67,15 +64,12 @@ public class TruckDriverWayController {
     }
 
     @PostMapping(value = "/truckdriverway", consumes = "application/json")
-    public ResponseEntity<Object> addTruckDriverWayDto(@Valid @RequestBody TruckDriverWayDto truckDriverWayDto) {
+    public ResponseEntity<Object> addTruckDriverWayDto(@Valid @RequestBody TruckDriverWayDtoCreate truckDriverWayDtoCreate) {
 
-        truckDriverWayService.addTruckDriverWay(truckDriverWayDto);
+        truckDriverWayService.addTruckDriverWay(truckDriverWayDtoCreate);
 
         return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.OK);
     }
-
-
-
 
 
 }
