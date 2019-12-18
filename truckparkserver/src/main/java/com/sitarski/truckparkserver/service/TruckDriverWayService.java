@@ -1,6 +1,9 @@
 package com.sitarski.truckparkserver.service;
 
-import com.sitarski.truckparkserver.dao.*;
+import com.sitarski.truckparkserver.dao.CompanyRepository;
+import com.sitarski.truckparkserver.dao.DriverRepository;
+import com.sitarski.truckparkserver.dao.TruckDriverWayRepository;
+import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.*;
 import com.sitarski.truckparkserver.domain.entity.*;
 import com.sitarski.truckparkserver.service.mapper.CoordinateMapper;
@@ -33,17 +36,13 @@ public class TruckDriverWayService {
     @Autowired
     private final CoordinateMapper coordinateMapper;
 
-    @Autowired
-    private final CoordinateRepository coordinateRepository;
-
-    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper, CoordinateRepository coordinateRepository) {
+    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper) {
         this.truckDriverWayRepository = truckDriverWayRepository;
         this.truckDriverWayMapper = truckDriverWayMapper;
         this.truckRepository = truckRepository;
         this.companyRepository = companyRepository;
         this.driverRepository = driverRepository;
         this.coordinateMapper = coordinateMapper;
-        this.coordinateRepository = coordinateRepository;
     }
 
     public List<TruckDriverWayDto> getTruckDriverWays() {
