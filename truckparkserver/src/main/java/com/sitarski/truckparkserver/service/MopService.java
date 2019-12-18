@@ -8,6 +8,7 @@ import com.sitarski.truckparkserver.service.mapper.MopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class MopService {
                 .findAll()
                 .stream()
                 .map(mopMapper::convertToDto)
+                .sorted(Comparator.comparing(MopDto::getId))
                 .collect(Collectors.toList());
     }
 

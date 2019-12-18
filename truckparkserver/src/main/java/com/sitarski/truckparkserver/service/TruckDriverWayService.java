@@ -1,18 +1,9 @@
 package com.sitarski.truckparkserver.service;
 
-import com.sitarski.truckparkserver.dao.CompanyRepository;
-import com.sitarski.truckparkserver.dao.DriverRepository;
-import com.sitarski.truckparkserver.dao.TruckDriverWayRepository;
-import com.sitarski.truckparkserver.dao.TruckRepository;
-import com.sitarski.truckparkserver.domain.dto.CompanyDto;
-import com.sitarski.truckparkserver.domain.dto.DriverDto;
-import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDto;
-import com.sitarski.truckparkserver.domain.dto.TruckDto;
-import com.sitarski.truckparkserver.domain.entity.Company;
-import com.sitarski.truckparkserver.domain.entity.Driver;
-import com.sitarski.truckparkserver.domain.entity.Truck;
-import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
-import com.sitarski.truckparkserver.service.mapper.Mapper;
+import com.sitarski.truckparkserver.dao.*;
+import com.sitarski.truckparkserver.domain.dto.*;
+import com.sitarski.truckparkserver.domain.entity.*;
+import com.sitarski.truckparkserver.service.mapper.CoordinateMapper;
 import com.sitarski.truckparkserver.service.mapper.TruckDriverWayMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +19,7 @@ public class TruckDriverWayService {
     private final TruckDriverWayRepository truckDriverWayRepository;
 
     @Autowired
-    private final Mapper<TruckDriverWayDto, TruckDriverWay> truckDriverWayMapper;
+    private final TruckDriverWayMapper truckDriverWayMapper;
 
     @Autowired
     private final TruckRepository truckRepository;
@@ -39,12 +30,20 @@ public class TruckDriverWayService {
     @Autowired
     private final DriverRepository driverRepository;
 
-    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository) {
+    @Autowired
+    private final CoordinateMapper coordinateMapper;
+
+    @Autowired
+    private final CoordinateRepository coordinateRepository;
+
+    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper, CoordinateRepository coordinateRepository) {
         this.truckDriverWayRepository = truckDriverWayRepository;
         this.truckDriverWayMapper = truckDriverWayMapper;
         this.truckRepository = truckRepository;
         this.companyRepository = companyRepository;
         this.driverRepository = driverRepository;
+        this.coordinateMapper = coordinateMapper;
+        this.coordinateRepository = coordinateRepository;
     }
 
     public List<TruckDriverWayDto> getTruckDriverWays() {
@@ -109,8 +108,13 @@ public class TruckDriverWayService {
                 .collect(Collectors.toList());
     }
 
-    public void addTruckDriverWay(TruckDriverWayDto truckDriverWayDto) {
-        TruckDriverWay truckDriverWayToSave = truckDriverWayMapper.convertToEntity(truckDriverWayDto);
-        truckDriverWayRepository.save(truckDriverWayToSave);
+    public void addTruckDriverWay(TruckDriverWayDtoCreate truckDriverWayDtoCreate) {
+        TruckDriverWay truckDriverWayToSave = truckDriverWayMapper.convertToEntity(truckDriverWayDtoCreate);
+
+        CoordinateDto coordinateDto = truckDriverWayDtoCreate.getCoordinateDto();
+        Coordinate coordinate = coordinateMapper.convertToEntity(coordinateDto);
+
+        TruckDriverWay savedTruckDriverWay = truckDriverWayRepository.save(truckDriverWayToSave);
+        savedTruckDriverWay.setCoordinate(coordinate);
     }
 }
