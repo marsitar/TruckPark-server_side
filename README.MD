@@ -1,6 +1,6 @@
 # TruckPark - server side
 > The application has been designed and created as a complex solution for truck drivers and truck fleet companies to optimize the time of work and control trucks fleet. Both companies' management and truck divers could take huge benefits by using it due to economizing time and money. The system consists of two components. This Github repository concerns a server component.
-![TruckPark - server side](./docs/system_schema.png) 
+![TruckPark - server side](./doc/system_schema.png) 
 ## Table of contents
 * [General info](#general-info)
 * [Features](#features)
