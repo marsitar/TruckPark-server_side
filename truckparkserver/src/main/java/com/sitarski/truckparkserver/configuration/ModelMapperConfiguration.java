@@ -1,4 +1,4 @@
-package com.sitarski.truckparkserver.service.configuration;
+package com.sitarski.truckparkserver.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

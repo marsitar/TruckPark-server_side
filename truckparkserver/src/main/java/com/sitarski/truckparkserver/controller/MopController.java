@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/mops")
 public class MopController {
 
-    @Autowired
     private final MopService mopService;
 
+    @Autowired
     public MopController(MopService mopService) {
         this.mopService = mopService;
     }

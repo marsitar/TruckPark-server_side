@@ -17,9 +17,9 @@ import java.util.List;
 @RequestMapping("/trucks")
 public class TruckController {
 
-    @Autowired
     private final TruckService truckService;
 
+    @Autowired
     public TruckController(TruckService truckService) {
         this.truckService = truckService;
     }

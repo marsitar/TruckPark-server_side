@@ -1,17 +1,17 @@
-package com.sitarski.truckparkserver.service.mapper;
+package com.sitarski.truckparkserver.mapper;
 
+import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.domain.dto.TruckDto;
 import com.sitarski.truckparkserver.domain.entity.Truck;
-import com.sitarski.truckparkserver.service.configuration.ModelMapperConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TruckMapper implements Mapper<TruckDto, Truck> {
 
-    @Autowired
     private final ModelMapperConfiguration modelMapperConfiguration;
 
+    @Autowired
     public TruckMapper(ModelMapperConfiguration modelMapperConfiguration){
         this.modelMapperConfiguration = modelMapperConfiguration;
     }

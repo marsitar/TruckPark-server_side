@@ -1,5 +1,6 @@
-package com.sitarski.truckparkserver.service.mapper;
+package com.sitarski.truckparkserver.mapper;
 
+import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDto;
@@ -7,7 +8,6 @@ import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDtoCreate;
 import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
-import com.sitarski.truckparkserver.service.configuration.ModelMapperConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TruckDriverWayMapper implements Mapper<TruckDriverWayDto, TruckDriverWay> {
 
-    @Autowired
     private final TruckRepository truckRepository;
-
-    @Autowired
     private final DriverRepository driverRepository;
-
-    @Autowired
     private final ModelMapperConfiguration modelMapperConfiguration;
 
+    @Autowired
     public TruckDriverWayMapper(ModelMapperConfiguration modelMapperConfiguration, TruckRepository truckRepository, DriverRepository driverRepository) {
         this.modelMapperConfiguration = modelMapperConfiguration;
         this.truckRepository = truckRepository;
