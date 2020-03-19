@@ -1,5 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
+import {MapService} from '../service/map.service';
 import * as L from 'leaflet';
+import {Mop} from '../domain/mop';
 
 @Component({
   selector: 'app-map',
@@ -8,17 +10,21 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
   private map;
+  private mops: Mop[];
 
-  constructor() { }
+  constructor(
+    private mapService: MapService
+  ) { }
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.addMarkersToElement();
   }
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      center: [52.095340, 19.486442],
+      zoom: 10
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,6 +33,15 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
+  }
+
+  private addMarkersToElement(){
+    this.mapService.getMops().subscribe( data =>
+      {
+        this.mops = data;
+        console.log(this.mops);
+      }
+    )
   }
 
 }
