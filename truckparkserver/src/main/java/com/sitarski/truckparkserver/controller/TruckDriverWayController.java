@@ -13,11 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/truckdriverways")
+@CrossOrigin("http://localhost:4200")
 public class TruckDriverWayController {
 
-    @Autowired
     private final TruckDriverWayService truckDriverWayService;
 
+    @Autowired
     public TruckDriverWayController(TruckDriverWayService truckDriverWayService) {
         this.truckDriverWayService = truckDriverWayService;
     }

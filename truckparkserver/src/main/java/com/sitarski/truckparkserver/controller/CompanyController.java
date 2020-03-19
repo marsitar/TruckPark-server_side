@@ -2,7 +2,6 @@ package com.sitarski.truckparkserver.controller;
 
 import com.sitarski.truckparkserver.domain.dto.CompanyDto;
 import com.sitarski.truckparkserver.service.CompanyService;
-import com.sitarski.truckparkserver.service.mapper.CompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,17 +13,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
+@CrossOrigin("http://localhost:4200")
 public class CompanyController {
 
-    @Autowired
     private final CompanyService companyService;
 
     @Autowired
-    private final CompanyMapper companyMapper;
-
-    public CompanyController(CompanyService companyService, CompanyMapper companyMapper) {
+    public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
-        this.companyMapper = companyMapper;
     }
 
     @GetMapping(value = "/all", produces = "application/json")

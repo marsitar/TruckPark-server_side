@@ -3,8 +3,8 @@ package com.sitarski.truckparkserver.service;
 import com.sitarski.truckparkserver.dao.MopRepository;
 import com.sitarski.truckparkserver.domain.dto.MopDto;
 import com.sitarski.truckparkserver.domain.entity.Mop;
-import com.sitarski.truckparkserver.service.mapper.Mapper;
-import com.sitarski.truckparkserver.service.mapper.MopMapper;
+import com.sitarski.truckparkserver.mapper.Mapper;
+import com.sitarski.truckparkserver.mapper.MopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,10 @@ import java.util.stream.Collectors;
 @Service
 public class MopService {
 
-    @Autowired
     private final MopRepository mopRepository;
-
-    @Autowired
     private final Mapper<MopDto, Mop> mopMapper;
 
+    @Autowired
     public MopService(MopRepository mopRepository, MopMapper mopMapper) {
         this.mopRepository = mopRepository;
         this.mopMapper = mopMapper;

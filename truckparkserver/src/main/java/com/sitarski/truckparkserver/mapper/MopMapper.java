@@ -1,10 +1,10 @@
-package com.sitarski.truckparkserver.service.mapper;
+package com.sitarski.truckparkserver.mapper;
 
+import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.domain.dto.CoordinateDto;
 import com.sitarski.truckparkserver.domain.dto.ExtendedMopDataDto;
 import com.sitarski.truckparkserver.domain.dto.MopDto;
 import com.sitarski.truckparkserver.domain.entity.Mop;
-import com.sitarski.truckparkserver.service.configuration.ModelMapperConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +13,11 @@ import java.util.Optional;
 @Service
 public class MopMapper implements Mapper<MopDto, Mop> {
 
-    @Autowired
     private final ModelMapperConfiguration modelMapperConfiguration;
-
-    @Autowired
     private final CoordinateMapper coordinateMapper;
-
-    @Autowired
     private final ExtendedMopDataMapper extendedMopDataMapper;
 
+    @Autowired
     public MopMapper(ModelMapperConfiguration modelMapperConfiguration, CoordinateMapper coordinateMapper, ExtendedMopDataMapper extendedMopDataMapper){
         this.modelMapperConfiguration = modelMapperConfiguration;
         this.coordinateMapper = coordinateMapper;

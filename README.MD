@@ -35,6 +35,8 @@
 * Spring Web MVC 5.2.3
 * Spring Data JPA 2.2.3
 * REST API
+* Angular 9.0.6
+* TypeScript 3.7.5
 * Hibernate ORM 5.4.2
 * Hibernate Validator 6.0.17
 * FasterXML/Jackson 2.9.10

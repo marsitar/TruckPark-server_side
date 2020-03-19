@@ -6,8 +6,8 @@ import com.sitarski.truckparkserver.dao.TruckDriverWayRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.*;
 import com.sitarski.truckparkserver.domain.entity.*;
-import com.sitarski.truckparkserver.service.mapper.CoordinateMapper;
-import com.sitarski.truckparkserver.service.mapper.TruckDriverWayMapper;
+import com.sitarski.truckparkserver.mapper.CoordinateMapper;
+import com.sitarski.truckparkserver.mapper.TruckDriverWayMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,24 +18,14 @@ import java.util.stream.Collectors;
 @Service
 public class TruckDriverWayService {
 
-    @Autowired
     private final TruckDriverWayRepository truckDriverWayRepository;
-
-    @Autowired
     private final TruckDriverWayMapper truckDriverWayMapper;
-
-    @Autowired
     private final TruckRepository truckRepository;
-
-    @Autowired
     private final CompanyRepository companyRepository;
-
-    @Autowired
     private final DriverRepository driverRepository;
-
-    @Autowired
     private final CoordinateMapper coordinateMapper;
 
+    @Autowired
     public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper) {
         this.truckDriverWayRepository = truckDriverWayRepository;
         this.truckDriverWayMapper = truckDriverWayMapper;

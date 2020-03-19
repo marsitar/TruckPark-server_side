@@ -1,4 +1,4 @@
-package com.sitarski.truckparkserver.service.mapper;
+package com.sitarski.truckparkserver.mapper;
 
 public interface Mapper<T, U> {
 
