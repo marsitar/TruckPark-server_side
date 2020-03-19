@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mops")
+@CrossOrigin("http://localhost:4200")
 public class MopController {
 
     private final MopService mopService;

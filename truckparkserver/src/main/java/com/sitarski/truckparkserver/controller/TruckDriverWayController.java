@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/truckdriverways")
+@CrossOrigin("http://localhost:4200")
 public class TruckDriverWayController {
 
     private final TruckDriverWayService truckDriverWayService;
