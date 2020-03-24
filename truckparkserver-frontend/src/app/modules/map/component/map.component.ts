@@ -53,20 +53,19 @@ export class MapComponent implements AfterViewInit {
 
     const freeTruckPlacesNumber = mop?.truckPlaces - mop?.occupiedTruckPlaces;
 
-    const mainHeaderPlace = mop?.place;
-    const identificationName = 'Nazwa: '.concat(mop?.identificationName);
-    const category = 'Kategoria: '.concat(mop?.category);
-    const roadNumber = 'Numer drogi: '.concat(mop?.roadNumber);
-    const truckPlaces = 'Liczba miejsc (TIR): '.concat(mop?.truckPlaces?.toString());
-    const freeTruckPlaces = 'Wolne miejsca (TIR): '.concat(freeTruckPlacesNumber?.toString());
+    const mainHeaderPlace = ''.concat('<p class="popup-header">', mop?.place, '</p>');
+    const identificationName = ''.concat('<a class="popup-simple-row-label">', 'Nazwa: ', '</a>', '<span class="popup-simple-row-value">', mop?.identificationName, '</span>');
+    const category = ''.concat('<a class="popup-simple-row-label">', 'Kategoria: ', '</a>', '<span class="popup-simple-row-value">', mop?.category, '</span>');
+    const roadNumber = ''.concat('<a class="popup-simple-row-label">', 'Numer drogi: ', '</a>', '<span class="popup-simple-row-value">', mop?.roadNumber, '</span>');
+    const truckPlaces = ''.concat('<a class="popup-simple-row-label">', 'Liczba miejsc (TIR): ', '</a>', '<span class="popup-simple-row-value">', mop?.truckPlaces?.toString(), '</span>');
+    const freeTruckPlaces = ''.concat('<a class="popup-simple-row-label">', 'Wolne miejsca (TIR): ', '</a>', '<span class="popup-simple-row-value">', freeTruckPlacesNumber?.toString(), '</span>');
 
     return this.buildPopupContent(mainHeaderPlace, identificationName, category, roadNumber, truckPlaces, freeTruckPlaces);
   }
 
   private buildPopupContent(mainHeaderPlace: string, identificationName: string, category: string, roadNumber: string
-                            , truckPlaces: string, freeTruckPlaces: string,): string {
+                            , truckPlaces: string, freeTruckPlaces: string): string {
     return mainHeaderPlace
-      .concat('<br>')
       .concat(identificationName)
       .concat('<br>')
       .concat(category)
