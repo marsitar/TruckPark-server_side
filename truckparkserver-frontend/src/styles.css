@@ -16,3 +16,14 @@
   font-weight: bold;
   font-size: 22px;
 }
+
+footer.ul {
+  display: inline;
+  float: right;
+  font-size: 22px;
+}
+
+footer.ul.li {
+  display: block;
+  font-size: 35px;
+}
