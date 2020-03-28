@@ -2,6 +2,7 @@ import {AfterViewInit, Component} from '@angular/core';
 import {MapService} from '../service/map.service';
 import * as L from 'leaflet';
 import {Mop} from '../domain/mop';
+import 'leaflet/dist/images/marker-shadow.png';
 
 @Component({
   selector: 'app-map',
@@ -44,7 +45,6 @@ export class MapComponent implements AfterViewInit {
           const lat = mop.coordinate?.y;
           const lon = mop.coordinate?.x;
           const marker = L.marker([lon, lat]).addTo(this.map).bindPopup(this.generateHtmlPopup(mop));
-          console.log(marker);
         });
       }
     )

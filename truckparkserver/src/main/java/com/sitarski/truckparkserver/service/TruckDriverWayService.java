@@ -37,7 +37,7 @@ public class TruckDriverWayService {
 
     public List<TruckDriverWayDto> getTruckDriverWays() {
         return truckDriverWayRepository
-                .findAll()
+                .findAllByIdIsLessThanEqual(1000L)
                 .stream()
                 .map(truckDriverWayMapper::convertToDto)
                 .collect(Collectors.toList());

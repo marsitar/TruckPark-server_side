@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, Long> {
 
+    List<TruckDriverWay> findAll();
+
+    List<TruckDriverWay> findAllByIdIsLessThanEqual(Long id);
+
     List<TruckDriverWay> findAllByDriver_FullName(String driverFullName);
 
     List<TruckDriverWay> findAllByDriver(Driver driver);
@@ -17,5 +21,6 @@ public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, 
     List<TruckDriverWay> findAllByTruck(Truck truck);
 
     List<TruckDriverWay> findTruckDriverWaysByDriver_Company(Company company);
+
 
 }

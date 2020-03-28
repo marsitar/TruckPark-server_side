@@ -1,5 +1,8 @@
 import {AfterViewInit, Component} from '@angular/core';
 import * as L from 'leaflet';
+import {TrackDriverService} from '../service/track-driver.service';
+import {TruckDriverWay} from '../domain/truck-driver-way';
+import 'leaflet/dist/images/marker-shadow.png';
 
 @Component({
   selector: 'app-track-driver',
@@ -8,12 +11,15 @@ import * as L from 'leaflet';
 })
 export class TrackDriverComponent implements AfterViewInit {
   private map;
+  private trackDriverWays: TruckDriverWay[] = [];
 
   constructor(
+    private trackDriverService: TrackDriverService,
   ) { }
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.getAllTruckDriverWays();
   }
 
   private initMap(): void {
@@ -30,4 +36,19 @@ export class TrackDriverComponent implements AfterViewInit {
 
     tiles.addTo(this.map);
   }
+
+  private getAllTruckDriverWays() {
+    this.trackDriverService.getTrackDriverService().subscribe(data => {
+      this.trackDriverWays = data;
+      console.log(data);
+      this.trackDriverWays.forEach(trackDriverWay => {
+        const lat = trackDriverWay?.coordinate?.y;
+        const lon = trackDriverWay?.coordinate?.x;
+        const marker = L.marker([lon, lat]).addTo(this.map);
+      })
+
+    });
+  }
+
+
 }

@@ -3,6 +3,7 @@ package com.sitarski.truckparkserver.mapper;
 import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
+import com.sitarski.truckparkserver.domain.dto.CoordinateDto;
 import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDto;
 import com.sitarski.truckparkserver.domain.dto.TruckDriverWayDtoCreate;
 import com.sitarski.truckparkserver.domain.entity.Driver;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class TruckDriverWayMapper implements Mapper<TruckDriverWayDto, TruckDriverWay> {
@@ -19,18 +22,27 @@ public class TruckDriverWayMapper implements Mapper<TruckDriverWayDto, TruckDriv
     private final TruckRepository truckRepository;
     private final DriverRepository driverRepository;
     private final ModelMapperConfiguration modelMapperConfiguration;
+    private final CoordinateMapper coordinateMapper;
 
     @Autowired
-    public TruckDriverWayMapper(ModelMapperConfiguration modelMapperConfiguration, TruckRepository truckRepository, DriverRepository driverRepository) {
+    public TruckDriverWayMapper(ModelMapperConfiguration modelMapperConfiguration, TruckRepository truckRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper) {
         this.modelMapperConfiguration = modelMapperConfiguration;
         this.truckRepository = truckRepository;
         this.driverRepository = driverRepository;
+        this.coordinateMapper = coordinateMapper;
     }
 
     @Override
     public TruckDriverWayDto convertToDto(TruckDriverWay truckDriverWay) {
 
+        CoordinateDto coordinateDto = Optional.of(truckDriverWay)
+            .map(TruckDriverWay::getCoordinate)
+            .map(coordinateMapper::convertToDTO)
+            .orElse(null);
+
         TruckDriverWayDto truckDriverWayDto = modelMapperConfiguration.modelMapper().map(truckDriverWay, TruckDriverWayDto.class);
+
+        truckDriverWayDto.setCoordinateDTO(coordinateDto);
 
         return truckDriverWayDto;
     }

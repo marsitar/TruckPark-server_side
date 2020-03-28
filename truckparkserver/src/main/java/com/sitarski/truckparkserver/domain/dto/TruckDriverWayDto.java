@@ -1,5 +1,7 @@
 package com.sitarski.truckparkserver.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 
 public class TruckDriverWayDto {
@@ -53,6 +55,7 @@ public class TruckDriverWayDto {
         this.resultTime = resultTime;
     }
 
+    @JsonProperty("coordinate")
     public CoordinateDto getCoordinateDTO() {
         return coordinateDTO;
     }
