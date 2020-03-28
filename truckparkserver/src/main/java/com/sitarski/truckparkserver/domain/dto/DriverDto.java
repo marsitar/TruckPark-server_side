@@ -1,5 +1,7 @@
 package com.sitarski.truckparkserver.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,10 @@ public class DriverDto {
 
     private String fullName;
 
+    @JsonIgnore
     private CompanyDto companyDTO;
 
+    @JsonIgnore
 	private List<TruckDriverWayDto> truckDriverWaysDTO = new ArrayList<>();
 
     public DriverDto() {
