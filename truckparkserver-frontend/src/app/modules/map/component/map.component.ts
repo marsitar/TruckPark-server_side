@@ -42,9 +42,9 @@ export class MapComponent implements AfterViewInit {
       {
         this.mops = data;
         this.mops.forEach(mop => {
-          const lat = mop.coordinate?.y;
-          const lon = mop.coordinate?.x;
-          const marker = L.marker([lon, lat]).addTo(this.map).bindPopup(this.generateHtmlPopup(mop));
+          const lat = mop.coordinate?.lat;
+          const lon = mop.coordinate?.lng;
+          const marker = L.marker([lat, lon]).addTo(this.map).bindPopup(this.generateHtmlPopup(mop));
         });
       }
     )

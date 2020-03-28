@@ -42,9 +42,9 @@ export class TrackDriverComponent implements AfterViewInit {
       this.trackDriverWays = data;
       console.log(data);
       this.trackDriverWays.forEach(trackDriverWay => {
-        const lat = trackDriverWay?.coordinate?.y;
-        const lon = trackDriverWay?.coordinate?.x;
-        const marker = L.marker([lon, lat]).addTo(this.map);
+        const lat = trackDriverWay?.coordinate?.lat;
+        const lon = trackDriverWay?.coordinate?.lng;
+        const marker = L.marker([lat, lon]).addTo(this.map);
       })
 
     });
