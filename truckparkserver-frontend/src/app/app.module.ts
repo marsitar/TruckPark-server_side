@@ -11,13 +11,15 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
+import {TrackDriverComponent} from './modules/track-driver/component/track-driver.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    TrackDriverComponent
   ],
   imports: [
     BrowserModule,
