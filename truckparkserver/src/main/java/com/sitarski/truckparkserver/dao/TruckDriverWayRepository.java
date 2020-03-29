@@ -7,6 +7,7 @@ import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, Long> {
 
@@ -22,5 +23,5 @@ public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, 
 
     List<TruckDriverWay> findTruckDriverWaysByDriver_Company(Company company);
 
-
+    Optional<TruckDriverWay> findDistinctFirstByDriverOrderByResultTimeDesc(Driver driver);
 }

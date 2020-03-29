@@ -12,7 +12,7 @@ export class TrackDriverService {
 
   private truckDriverWayBaseUrl = "http://localhost:8080/rest/api/truckdriverways";
   private truckBaseUrl = "http://localhost:8080/rest/api/trucks";
-  private driverBaseUrl = "http://localhost:8080/rest/api/drivers/driver";
+  private driverBaseUrl = "http://localhost:8080/rest/api/drivers";
 
 
   constructor(
@@ -34,8 +34,20 @@ export class TrackDriverService {
 
 
   getDriverById(id: number): Observable<Driver>{
-    const searchUrl = `${this.driverBaseUrl}/${id}`;
+    const searchUrl = `${this.driverBaseUrl}/driver/${id}`;
 
     return this.httpClient.get<Driver>(searchUrl);
+  }
+
+  getAllDrivers(): Observable<Driver[]>{
+    const searchUrl = `${this.driverBaseUrl}/all`;
+
+    return this.httpClient.get<Driver[]>(searchUrl);
+  }
+
+  getLastTruckDriverWayByDriverId(driverId: number): Observable<TruckDriverWay>{
+    const searchUrl = `${this.truckDriverWayBaseUrl}/lasttruckdriverwaybydriverid/${driverId}`;
+
+    return this.httpClient.get<TruckDriverWay>(searchUrl);
   }
 }

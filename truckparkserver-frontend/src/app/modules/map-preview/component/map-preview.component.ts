@@ -16,9 +16,10 @@ import {MapService} from '../service/map.service';
 })
 export class MapPreviewComponent implements AfterViewInit {
   private map;
-  private trackDriverWays: TruckDriverWay[] = [];
   private mops: Mop[] = [];
-  private basemaps: L.tileLayer[] = [];
+  private drivers: Driver[] = [];
+  private basemaps: L.groupLayer[] = [];
+  private overlays = {};
 
   constructor(
     private trackDriverService: TrackDriverService,
@@ -38,59 +39,105 @@ export class MapPreviewComponent implements AfterViewInit {
       zoom: 6.5,
       layers: this.basemaps,
     });
-
-
-    // tiles.addTo(this.map);
   }
 
-  private getAllLayers() {
+  // private getAllLayers2() {
+  //
+  //   let truckDriverWays = L.layerGroup();
+  //   let mops = L.layerGroup();
+  //
+  //   this.trackDriverService.getTrackDriverService().subscribe(data => {
+  //     this.trackDriverWays = data;
+  //     console.log(data);
+  //     this.trackDriverWays?.forEach(truckDriverWay => {
+  //       const lat = truckDriverWay?.coordinate?.lat;
+  //       const lon = truckDriverWay?.coordinate?.lng;
+  //
+  //       this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
+  //         this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
+  //           const marker = L.marker([lat, lon]).addTo(truckDriverWays).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+  //         });
+  //       });
+  //     })
+  //   });
+  //
+  //   this.mapService.getMops().subscribe( data =>
+  //     {
+  //       this.mops = data;
+  //       this.mops?.forEach(mop => {
+  //         const lat = mop.coordinate?.lat;
+  //         const lon = mop.coordinate?.lng;
+  //         const marker = L.marker([lat, lon]).addTo(mops).bindPopup(this.generateHtmlPopupMop(mop));
+  //       });
+  //     }
+  //   );
+  //
+  //   this.map.addLayer(truckDriverWays);
+  //
+  //   let basemaps = {
+  //     'Topograficzna': this.basemaps[1],
+  //     'Drogowa': this.basemaps[2],
+  //     'Standardowa': this.basemaps[0],
+  //   };
+  //
+  //   let overlays = {
+  //     'TruckDriverWays': truckDriverWays,
+  //     "<span style='color: brown'>Mops</span>": mops,
+  //   };
+  //   overlays["PropertyD"] = mops;
+  //
+  //   L.control.layers(basemaps, overlays).addTo(this.map);
+  // }
 
-    let truckDriverWays = L.layerGroup();
-    let mops = L.layerGroup();
+  private getAllLayers(){
 
-    this.trackDriverService.getTrackDriverService().subscribe(data => {
-      this.trackDriverWays = data;
-      console.log(data);
-      this.trackDriverWays?.forEach(truckDriverWay => {
-        const lat = truckDriverWay?.coordinate?.lat;
-        const lon = truckDriverWay?.coordinate?.lng;
+    this.prepareMops();
 
-        // tutaj dodanie tez popupa
-        this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
-          this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
-            const marker = L.marker([lat, lon]).addTo(truckDriverWays).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+    this.trackDriverService.getAllDrivers().subscribe(drivers => {
+      this.drivers = drivers;
+      this.drivers?.forEach( driver => {
+        this.trackDriverService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
+          const lat = truckDriverWay?.coordinate?.lat;
+          const lon = truckDriverWay?.coordinate?.lng;
+          this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
+            this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
+              let tempLayerGroup = L.layerGroup();
+              const marker = L.marker([lat, lon]).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+              this.overlays[driver?.fullName]= tempLayerGroup;
+              this.map.addLayer(tempLayerGroup);
+            });
           });
         });
-      })
+      });
     });
+  }
 
-    this.mapService.getMops().subscribe( data =>
+  private prepareMops() {
+    let mopsLayer = L.layerGroup();
+    this.mapService.getMops().subscribe( mops =>
       {
-        this.mops = data;
+        this.mops = mops;
         this.mops?.forEach(mop => {
           const lat = mop.coordinate?.lat;
           const lon = mop.coordinate?.lng;
-          const marker = L.marker([lat, lon]).addTo(mops).bindPopup(this.generateHtmlPopupMop(mop));
+          const marker = L.marker([lat, lon]).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
         });
+        this.overlays["<span style='color: brown'>Mops</span>"]= mopsLayer;
+        console.log('prepareMops()', mops);
+
+        //placed here to because speed of loading
+        this.addLayersToLayerControl();
       }
     );
-
-    this.map.addLayer(truckDriverWays);
-
+  }
+  addLayersToLayerControl() {
     let basemaps = {
       'Topograficzna': this.basemaps[1],
       'Drogowa': this.basemaps[2],
       'Standardowa': this.basemaps[0],
     };
-
-    let overlays = {
-      'TruckDriverWays': truckDriverWays,
-      "<span style='color: brown'>Mops</span>": mops,
-    };
-    overlays["PropertyD"] = mops;
-    console.log(overlays);
-
-    L.control.layers(basemaps, overlays).addTo(this.map);
+    L.control.layers(basemaps, this.overlays).addTo(this.map);
+    console.log('getAllLayers() overlays', this.overlays);
   }
 
   private generateBaseMapsFromOpenStreet() {
@@ -168,5 +215,12 @@ export class MapPreviewComponent implements AfterViewInit {
       .concat(truckPlaces)
       .concat('<br>')
       .concat(freeTruckPlaces);
+  }
+
+  private getAllDrivers(): void {
+    this.trackDriverService.getAllDrivers().subscribe( drivers => {
+      this.drivers = drivers;
+      console.log('getAllDrivers()', this.drivers);
+    })
   }
 }

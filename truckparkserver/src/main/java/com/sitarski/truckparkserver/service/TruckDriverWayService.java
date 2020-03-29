@@ -97,6 +97,14 @@ public class TruckDriverWayService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<TruckDriverWayDto> getLatestTruckDriverWayByDriver(Long driverId) {
+
+        Driver driver= driverRepository.findById(driverId).orElseThrow();
+
+        return truckDriverWayRepository.findDistinctFirstByDriverOrderByResultTimeDesc(driver)
+                .map(truckDriverWayMapper::convertToDto);
+    }
+
     public void addTruckDriverWay(TruckDriverWayDtoCreate truckDriverWayDtoCreate) {
         TruckDriverWay truckDriverWayToSave = truckDriverWayMapper.convertToEntity(truckDriverWayDtoCreate);
 
