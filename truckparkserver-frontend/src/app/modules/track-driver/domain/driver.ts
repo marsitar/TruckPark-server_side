@@ -1,5 +1,5 @@
 export class Driver {
 
   id: number;
-  fullName: number;
+  fullName: string;
 }

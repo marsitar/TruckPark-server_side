@@ -41,16 +41,16 @@ export class MapComponent implements AfterViewInit {
     this.mapService.getMops().subscribe( data =>
       {
         this.mops = data;
-        this.mops.forEach(mop => {
+        this.mops?.forEach(mop => {
           const lat = mop.coordinate?.lat;
           const lon = mop.coordinate?.lng;
-          const marker = L.marker([lat, lon]).addTo(this.map).bindPopup(this.generateHtmlPopup(mop));
+          const marker = L.marker([lat, lon]).addTo(this.map).bindPopup(this.generateHtmlPopupMop(mop));
         });
       }
     )
   }
 
-  private generateHtmlPopup(mop: Mop): string{
+  private generateHtmlPopupMop(mop: Mop): string{
 
     const freeTruckPlacesNumber = mop?.truckPlaces - mop?.occupiedTruckPlaces;
 
@@ -61,10 +61,10 @@ export class MapComponent implements AfterViewInit {
     const truckPlaces = ''.concat('<a class="popup-simple-row-label">', 'Liczba miejsc (TIR): ', '</a>', '<span class="popup-simple-row-value">', mop?.truckPlaces?.toString(), '</span>');
     const freeTruckPlaces = ''.concat('<a class="popup-simple-row-label">', 'Wolne miejsca (TIR): ', '</a>', '<span class="popup-simple-row-value">', freeTruckPlacesNumber?.toString(), '</span>');
 
-    return this.buildPopupContent(mainHeaderPlace, identificationName, category, roadNumber, truckPlaces, freeTruckPlaces);
+    return this.buildPopupContentMop(mainHeaderPlace, identificationName, category, roadNumber, truckPlaces, freeTruckPlaces);
   }
 
-  private buildPopupContent(mainHeaderPlace: string, identificationName: string, category: string, roadNumber: string
+  private buildPopupContentMop(mainHeaderPlace: string, identificationName: string, category: string, roadNumber: string
                             , truckPlaces: string, freeTruckPlaces: string): string {
     return mainHeaderPlace
       .concat(identificationName)

@@ -7,17 +7,11 @@ import java.time.LocalDateTime;
 public class TruckDriverWayDto {
 
     private Long id;
-
     private Double fuel;
-
     private Double distance;
-
     private LocalDateTime resultTime;
-
     private CoordinateDto coordinateDTO;
-
     private Long truckId;
-
     private Long driverId;
 
     public TruckDriverWayDto() {
