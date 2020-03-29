@@ -1,4 +1,4 @@
-import {Coordinate} from '../../map/domain/coordinate';
+import {Coordinate} from './coordinate';
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export class TruckDriverWay {

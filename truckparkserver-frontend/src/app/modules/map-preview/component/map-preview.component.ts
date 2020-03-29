@@ -3,18 +3,18 @@ import * as L from 'leaflet';
 import {TrackDriverService} from '../service/track-driver.service';
 import {TruckDriverWay} from '../domain/truck-driver-way';
 import 'leaflet/dist/images/marker-shadow.png';
-import {Mop} from '../../map/domain/mop';
+import {Mop} from '../domain/mop';
 import {Driver} from '../domain/driver';
 import {Truck} from '../domain/truck';
 import {DatePipe} from '@angular/common';
-import {MapService} from '../../map/service/map.service';
+import {MapService} from '../service/map.service';
 
 @Component({
-  selector: 'app-track-driver',
-  templateUrl: './track-driver.component.html',
-  styleUrls: ['./track-driver.component.css']
+  selector: 'app-map-preview',
+  templateUrl: './map-preview.component.html',
+  styleUrls: ['./map-preview.component.css']
 })
-export class TrackDriverComponent implements AfterViewInit {
+export class MapPreviewComponent implements AfterViewInit {
   private map;
   private trackDriverWays: TruckDriverWay[] = [];
   private mops: Mop[] = [];
@@ -27,31 +27,12 @@ export class TrackDriverComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
+    this.generateBaseMapsFromOpenStreet();
     this.initMap();
-    this.getAllTruckDriverWays();
+    this.getAllLayers();
   }
 
   private initMap(): void {
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      minZoom: 6,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    const topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-      maxZoom: 17,
-      minZoom: 6,
-      attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-    });
-
-    var roads = L.tileLayer('https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> | Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    this.basemaps = [tiles, topo, roads];
-
     this.map = L.map('map-track-driver', {
       center: [52.095340, 19.486442],
       zoom: 6.5,
@@ -61,26 +42,8 @@ export class TrackDriverComponent implements AfterViewInit {
 
     // tiles.addTo(this.map);
   }
-  //Orginalna wersja
-  // private getAllTruckDriverWays() {
-  //   this.trackDriverService.getTrackDriverService().subscribe(data => {
-  //     this.trackDriverWays = data;
-  //     console.log(data);
-  //     this.trackDriverWays?.forEach(truckDriverWay => {
-  //       const lat = truckDriverWay?.coordinate?.lat;
-  //       const lon = truckDriverWay?.coordinate?.lng;
-  //
-  //       // tutaj dodanie tez popupa
-  //       this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
-  //         this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
-  //           const marker = L.marker([lat, lon]).addTo(this.map).bindPopup(this.generateHtmlPopup(truckDriverWay, driver, truck));
-  //         });
-  //       });
-  //     })
-  //   });
-  // }
 
-  private getAllTruckDriverWays() {
+  private getAllLayers() {
 
     let truckDriverWays = L.layerGroup();
     let mops = L.layerGroup();
@@ -130,6 +93,28 @@ export class TrackDriverComponent implements AfterViewInit {
     L.control.layers(basemaps, overlays).addTo(this.map);
   }
 
+  private generateBaseMapsFromOpenStreet() {
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 6,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    const topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17,
+      minZoom: 6,
+      attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+    });
+
+    var roads = L.tileLayer('https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> | Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+
+    this.basemaps = [tiles, topo, roads];
+  }
+
   private generateHtmlPopupTruckDriver(truckDriverWay: TruckDriverWay, driver: Driver, truck: Truck): string {
 
     const trackDriverName = ''.concat('<p class="popup-header">', driver?.fullName, '</p>');
@@ -172,6 +157,7 @@ export class TrackDriverComponent implements AfterViewInit {
 
   private buildPopupContentMop(mainHeaderPlace: string, identificationName: string, category: string, roadNumber: string
     , truckPlaces: string, freeTruckPlaces: string): string {
+
     return mainHeaderPlace
       .concat(identificationName)
       .concat('<br>')
