@@ -52,6 +52,9 @@ export class MapPreviewComponent implements AfterViewInit {
   }
 
   private prepareMops() {
+
+    var mopIcon = this.generateMopIcon();
+
     let mopsLayer = L.layerGroup();
     this.mopService.getMops().subscribe( mops =>
       {
@@ -59,7 +62,7 @@ export class MapPreviewComponent implements AfterViewInit {
         this.mops?.forEach(mop => {
           const lat = mop.coordinate?.lat;
           const lon = mop.coordinate?.lng;
-          const marker = L.marker([lat, lon]).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
+          const marker = L.marker([lat, lon], mopIcon).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
         });
         this.overlays["<span style='color: brown'>Mops</span>"]= mopsLayer;
         console.log('prepareMops()', mops);
@@ -84,17 +87,20 @@ export class MapPreviewComponent implements AfterViewInit {
   private addTruckDriverWaysMarkerToLayerGroup(truckDriverWay: TruckDriverWay){
     const lat = truckDriverWay?.coordinate?.lat;
     const lon = truckDriverWay?.coordinate?.lng;
+
+    var truckDriverWayIcon= this.generateTruckDriverWayIcon();
+
     this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
         let tempLayerGroup = L.layerGroup();
-        const marker = L.marker([lat, lon]).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+        const marker = L.marker([lat, lon], truckDriverWayIcon).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
         this.overlays[driver?.fullName]= tempLayerGroup;
         this.map.addLayer(tempLayerGroup);
       });
     });
   }
 
-  addLayersToLayerControl() {
+  private addLayersToLayerControl() {
     let basemaps = {
       'Topograficzna': this.basemaps[1],
       'Drogowa': this.basemaps[2],
@@ -179,5 +185,29 @@ export class MapPreviewComponent implements AfterViewInit {
       .concat(truckPlaces)
       .concat('<br>')
       .concat(freeTruckPlaces);
+  }
+
+  private generateMopIcon(): any {
+    var mopIcon = {
+      icon: L.icon({
+        iconSize: [ 20, 20 ],
+        iconAnchor: [ 0, 0 ],
+        iconUrl: 'assets/parking.svg',
+      })
+    };
+
+    return mopIcon;
+  }
+
+  private generateTruckDriverWayIcon(): any {
+    var truckDriverWayIcon = {
+      icon: L.icon({
+        iconSize: [ 30, 30 ],
+        iconAnchor: [ 0, 0 ],
+        iconUrl: 'assets/truck-dark-grey.svg',
+      })
+    };
+
+    return truckDriverWayIcon;
   }
 }
