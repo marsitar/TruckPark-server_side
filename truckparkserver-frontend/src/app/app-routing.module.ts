@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MapPreviewComponent} from './modules/map-preview/component/map-preview.component';
+import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/map-preview' },

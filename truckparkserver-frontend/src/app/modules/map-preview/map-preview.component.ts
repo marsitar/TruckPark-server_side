@@ -1,13 +1,15 @@
 import {AfterViewInit, Component} from '@angular/core';
 import * as L from 'leaflet';
-import {TrackDriverService} from '../service/track-driver.service';
-import {TruckDriverWay} from '../domain/truck-driver-way';
+import {TruckDriverWay} from '../../domain/truck-driver-way';
 import 'leaflet/dist/images/marker-shadow.png';
-import {Mop} from '../domain/mop';
-import {Driver} from '../domain/driver';
-import {Truck} from '../domain/truck';
+import {Mop} from '../../domain/mop';
+import {Driver} from '../../domain/driver';
+import {Truck} from '../../domain/truck';
 import {DatePipe} from '@angular/common';
-import {MapService} from '../service/map.service';
+import {TruckService} from '../../service/truck.service';
+import {DriverService} from '../../service/driver.service';
+import {MopService} from '../../service/mop.service';
+import {TruckDriverWayService} from '../../service/truck-driver-way.service';
 
 @Component({
   selector: 'app-map-preview',
@@ -22,8 +24,10 @@ export class MapPreviewComponent implements AfterViewInit {
   private overlays = {};
 
   constructor(
-    private trackDriverService: TrackDriverService,
-    private mapService: MapService,
+    private truckService: TruckService,
+    private driverService: DriverService,
+    private mopService: MopService,
+    private truckDriverWayService: TruckDriverWayService,
     private datepipe: DatePipe
   ) { }
 
@@ -41,80 +45,15 @@ export class MapPreviewComponent implements AfterViewInit {
     });
   }
 
-  // private getAllLayers2() {
-  //
-  //   let truckDriverWays = L.layerGroup();
-  //   let mops = L.layerGroup();
-  //
-  //   this.trackDriverService.getTrackDriverService().subscribe(data => {
-  //     this.trackDriverWays = data;
-  //     console.log(data);
-  //     this.trackDriverWays?.forEach(truckDriverWay => {
-  //       const lat = truckDriverWay?.coordinate?.lat;
-  //       const lon = truckDriverWay?.coordinate?.lng;
-  //
-  //       this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
-  //         this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
-  //           const marker = L.marker([lat, lon]).addTo(truckDriverWays).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
-  //         });
-  //       });
-  //     })
-  //   });
-  //
-  //   this.mapService.getMops().subscribe( data =>
-  //     {
-  //       this.mops = data;
-  //       this.mops?.forEach(mop => {
-  //         const lat = mop.coordinate?.lat;
-  //         const lon = mop.coordinate?.lng;
-  //         const marker = L.marker([lat, lon]).addTo(mops).bindPopup(this.generateHtmlPopupMop(mop));
-  //       });
-  //     }
-  //   );
-  //
-  //   this.map.addLayer(truckDriverWays);
-  //
-  //   let basemaps = {
-  //     'Topograficzna': this.basemaps[1],
-  //     'Drogowa': this.basemaps[2],
-  //     'Standardowa': this.basemaps[0],
-  //   };
-  //
-  //   let overlays = {
-  //     'TruckDriverWays': truckDriverWays,
-  //     "<span style='color: brown'>Mops</span>": mops,
-  //   };
-  //   overlays["PropertyD"] = mops;
-  //
-  //   L.control.layers(basemaps, overlays).addTo(this.map);
-  // }
-
   private getAllLayers(){
 
     this.prepareMops();
-
-    this.trackDriverService.getAllDrivers().subscribe(drivers => {
-      this.drivers = drivers;
-      this.drivers?.forEach( driver => {
-        this.trackDriverService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
-          const lat = truckDriverWay?.coordinate?.lat;
-          const lon = truckDriverWay?.coordinate?.lng;
-          this.trackDriverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
-            this.trackDriverService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
-              let tempLayerGroup = L.layerGroup();
-              const marker = L.marker([lat, lon]).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
-              this.overlays[driver?.fullName]= tempLayerGroup;
-              this.map.addLayer(tempLayerGroup);
-            });
-          });
-        });
-      });
-    });
+    this.prepareTruckDriverWays();
   }
 
   private prepareMops() {
     let mopsLayer = L.layerGroup();
-    this.mapService.getMops().subscribe( mops =>
+    this.mopService.getMops().subscribe( mops =>
       {
         this.mops = mops;
         this.mops?.forEach(mop => {
@@ -130,6 +69,31 @@ export class MapPreviewComponent implements AfterViewInit {
       }
     );
   }
+
+  private prepareTruckDriverWays(){
+    this.driverService.getAllDrivers().subscribe(drivers => {
+      this.drivers = drivers;
+      this.drivers?.forEach( driver => {
+        this.truckDriverWayService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
+          this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+        });
+      });
+    });
+  }
+
+  private addTruckDriverWaysMarkerToLayerGroup(truckDriverWay: TruckDriverWay){
+    const lat = truckDriverWay?.coordinate?.lat;
+    const lon = truckDriverWay?.coordinate?.lng;
+    this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
+      this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
+        let tempLayerGroup = L.layerGroup();
+        const marker = L.marker([lat, lon]).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+        this.overlays[driver?.fullName]= tempLayerGroup;
+        this.map.addLayer(tempLayerGroup);
+      });
+    });
+  }
+
   addLayersToLayerControl() {
     let basemaps = {
       'Topograficzna': this.basemaps[1],
@@ -215,12 +179,5 @@ export class MapPreviewComponent implements AfterViewInit {
       .concat(truckPlaces)
       .concat('<br>')
       .concat(freeTruckPlaces);
-  }
-
-  private getAllDrivers(): void {
-    this.trackDriverService.getAllDrivers().subscribe( drivers => {
-      this.drivers = drivers;
-      console.log('getAllDrivers()', this.drivers);
-    })
   }
 }

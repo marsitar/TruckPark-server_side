@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
-import {MapPreviewComponent} from './modules/map-preview/component/map-preview.component';
+import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 
 registerLocaleData(en);
 
