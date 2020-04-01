@@ -3,29 +3,22 @@ package com.sitarski.truckparkserver.domain.dto;
 public class TruckDto {
 
 	private Long id;
-
 	private String registration;
-
 	private String brand;
-
 	private String model;
-
 	private Integer carYear;
-
-	private TruckDriverWayDto truckDriverWayDTO;
-
-	private CompanyDto companyDTO;
+	private Long companyId;
 
 	public TruckDto() {
 	}
 
-	public TruckDto(String registration, String brand, String model, Integer carYear, TruckDriverWayDto truckDriverWayDTO, CompanyDto companyDTO) {
+	public TruckDto(Long id, String registration, String brand, String model, Integer carYear, Long companyId) {
+		this.id = id;
 		this.registration = registration;
 		this.brand = brand;
 		this.model = model;
 		this.carYear = carYear;
-		this.truckDriverWayDTO = truckDriverWayDTO;
-		this.companyDTO = companyDTO;
+		this.companyId = companyId;
 	}
 
 	public Long getId() {
@@ -68,20 +61,12 @@ public class TruckDto {
 		this.carYear = carYear;
 	}
 
-	public TruckDriverWayDto getTruckDriverWayDTO() {
-		return truckDriverWayDTO;
+	public Long getCompanyId() {
+		return companyId;
 	}
 
-	public void setTruckDriverWayDTO(TruckDriverWayDto truckDriverWayDTO) {
-		this.truckDriverWayDTO = truckDriverWayDTO;
-	}
-
-	public CompanyDto getCompanyDTO() {
-		return companyDTO;
-	}
-
-	public void setCompanyDTO(CompanyDto companyDTO) {
-		this.companyDTO = companyDTO;
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
 	}
 
 	@Override
@@ -92,8 +77,7 @@ public class TruckDto {
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
 				", carYear=" + carYear +
-				", truckDriverWayDTO=" + truckDriverWayDTO +
-				", companyDTO=" + companyDTO +
+				", companyId=" + companyId +
 				'}';
 	}
 }

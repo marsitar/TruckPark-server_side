@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MapComponent} from './modules/map/component/map.component';
+import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  { path: 'mops', component: MapComponent },
-  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
+  { path: '', pathMatch: 'full', redirectTo: '/map-preview' },
+  { path: 'map-preview', component: MapPreviewComponent },
 ];
 
 @NgModule({

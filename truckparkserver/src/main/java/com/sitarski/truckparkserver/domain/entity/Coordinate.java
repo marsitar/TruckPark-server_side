@@ -15,20 +15,20 @@ public class Coordinate {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "x")
+	@Column(name = "lat")
 	@NotNull
-	private Double x;
+	private Double lat;
 
-	@Column(name = "y")
+	@Column(name = "lng")
 	@NotNull
-	private Double y;
+	private Double lng;
 
 	public Coordinate() {
 	}
 
-	public Coordinate(@NotNull Double x, @NotNull Double y) {
-		this.x = x;
-		this.y = y;
+	public Coordinate(@NotNull Double lat, @NotNull Double lng) {
+		this.lat = lat;
+		this.lng = lng;
 	}
 
 	public Long getId() {
@@ -39,28 +39,28 @@ public class Coordinate {
 		this.id = id;
 	}
 
-	public Double getX() {
-		return x;
+	public Double getLat() {
+		return lat;
 	}
 
-	public void setX(Double x) {
-		this.x = x;
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
 
-	public Double getY() {
-		return y;
+	public Double getLng() {
+		return lng;
 	}
 
-	public void setY(Double y) {
-		this.y = y;
+	public void setLng(Double lng) {
+		this.lng = lng;
 	}
 
 	@Override
 	public String toString() {
 		return "Coordinate{" +
 				"id=" + id +
-				", x=" + x +
-				", y=" + y +
+				", lat=" + lat +
+				", lng=" + lng +
 				'}';
 	}
 }

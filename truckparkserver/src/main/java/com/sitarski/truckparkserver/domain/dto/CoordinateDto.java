@@ -4,16 +4,17 @@ public class CoordinateDto {
 
     private Long id;
 
-    private Double x;
+    private Double lat;
 
-    private Double y;
+    private Double lng;
 
     public CoordinateDto() {
     }
 
-	public CoordinateDto(Double x, Double y) {
-        this.x = x;
-        this.y = y;
+    public CoordinateDto(Long id, Double lat, Double lng) {
+        this.id = id;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public Long getId() {
@@ -24,28 +25,28 @@ public class CoordinateDto {
         this.id = id;
     }
 
-    public Double getX() {
-        return x;
+    public Double getLat() {
+        return lat;
     }
 
-    public void setX(Double x) {
-        this.x = x;
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
-    public Double getY() {
-        return y;
+    public Double getLng() {
+        return lng;
     }
 
-    public void setY(Double y) {
-        this.y = y;
+    public void setLng(Double lng) {
+        this.lng = lng;
     }
 
     @Override
     public String toString() {
-        return "CoordinateDTO{" +
+        return "CoordinateDto{" +
                 "id=" + id +
-                ", x=" + x +
-                ", y=" + y +
+                ", lat=" + lat +
+                ", lng=" + lng +
                 '}';
     }
 }

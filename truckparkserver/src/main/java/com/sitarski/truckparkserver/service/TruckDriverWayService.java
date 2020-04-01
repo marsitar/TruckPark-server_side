@@ -37,7 +37,7 @@ public class TruckDriverWayService {
 
     public List<TruckDriverWayDto> getTruckDriverWays() {
         return truckDriverWayRepository
-                .findAll()
+                .findAllByIdIsLessThanEqual(1000L)
                 .stream()
                 .map(truckDriverWayMapper::convertToDto)
                 .collect(Collectors.toList());
@@ -95,6 +95,14 @@ public class TruckDriverWayService {
                 .stream()
                 .map(truckDriverWayMapper::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<TruckDriverWayDto> getLatestTruckDriverWayByDriver(Long driverId) {
+
+        Driver driver= driverRepository.findById(driverId).orElseThrow();
+
+        return truckDriverWayRepository.findDistinctFirstByDriverOrderByResultTimeDesc(driver)
+                .map(truckDriverWayMapper::convertToDto);
     }
 
     public void addTruckDriverWay(TruckDriverWayDtoCreate truckDriverWayDtoCreate) {

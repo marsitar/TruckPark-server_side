@@ -7,8 +7,13 @@ import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, Long> {
+
+    List<TruckDriverWay> findAll();
+
+    List<TruckDriverWay> findAllByIdIsLessThanEqual(Long id);
 
     List<TruckDriverWay> findAllByDriver_FullName(String driverFullName);
 
@@ -18,4 +23,5 @@ public interface TruckDriverWayRepository extends JpaRepository<TruckDriverWay, 
 
     List<TruckDriverWay> findTruckDriverWaysByDriver_Company(Company company);
 
+    Optional<TruckDriverWay> findDistinctFirstByDriverOrderByResultTimeDesc(Driver driver);
 }

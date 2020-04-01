@@ -1,5 +1,5 @@
 export class Coordinate {
   id: number;
-  x: number;
-  y: number;
+  lat: number;
+  lng: number;
 }

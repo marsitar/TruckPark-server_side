@@ -6,7 +6,7 @@ import {Mop} from '../domain/mop';
 @Injectable({
   providedIn: 'root'
 })
-export class MapService {
+export class MopService {
 
   private mopBaseUrl = "http://localhost:8080/rest/api/mops";
 

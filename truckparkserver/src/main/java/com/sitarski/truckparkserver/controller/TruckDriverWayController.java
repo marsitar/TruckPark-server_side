@@ -64,6 +64,15 @@ public class TruckDriverWayController {
         return new ResponseEntity<>(truckDriverWaysDto, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/lasttruckdriverwaybydriverid/{id}", produces = "application/json")
+    public ResponseEntity<TruckDriverWayDto> getLastTruckDriverWayByDriverId(@PathVariable("id") Long id) {
+
+        TruckDriverWayDto truckDriverWayDto = truckDriverWayService.getLatestTruckDriverWayByDriver(id)
+                .orElse(null);
+
+        return new ResponseEntity<>(truckDriverWayDto, new HttpHeaders(), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/truckdriverway", consumes = "application/json")
     public ResponseEntity<Object> addTruckDriverWayDto(@Valid @RequestBody TruckDriverWayDtoCreate truckDriverWayDtoCreate) {
 

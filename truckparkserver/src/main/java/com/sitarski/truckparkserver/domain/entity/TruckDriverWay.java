@@ -13,16 +13,16 @@ public class TruckDriverWay {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "fuel")
     @NotNull
+    @Column(name = "fuel")
     private Double fuel;
 
-    @Column(name = "distance")
     @NotNull
+    @Column(name = "distance")
     private Double distance;
 
-    @Column(name = "result_time")
     @NotNull
+    @Column(name = "result_time")
     private LocalDateTime resultTime;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,33 +1,20 @@
 package com.sitarski.truckparkserver.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 
 public class TruckDriverWayDto {
 
     private Long id;
-
     private Double fuel;
-
     private Double distance;
-
     private LocalDateTime resultTime;
-
     private CoordinateDto coordinateDTO;
-
-    private TruckDto truckDTO;
-
-    private DriverDto driverDTO;
+    private Long truckId;
+    private Long driverId;
 
     public TruckDriverWayDto() {
-    }
-
-    public TruckDriverWayDto(Double fuel, Double distance, LocalDateTime resultTime, CoordinateDto coordinateDTO, TruckDto truckDTO, DriverDto driverDTO) {
-        this.fuel = fuel;
-        this.distance = distance;
-        this.resultTime = resultTime;
-        this.coordinateDTO = coordinateDTO;
-        this.truckDTO = truckDTO;
-        this.driverDTO = driverDTO;
     }
 
     public Long getId() {
@@ -62,6 +49,7 @@ public class TruckDriverWayDto {
         this.resultTime = resultTime;
     }
 
+    @JsonProperty("coordinate")
     public CoordinateDto getCoordinateDTO() {
         return coordinateDTO;
     }
@@ -70,20 +58,20 @@ public class TruckDriverWayDto {
         this.coordinateDTO = coordinateDTO;
     }
 
-    public TruckDto getTruckDTO() {
-        return truckDTO;
+    public Long getTruckId() {
+        return truckId;
     }
 
-    public void setTruckDTO(TruckDto truckDTO) {
-        this.truckDTO = truckDTO;
+    public void setTruckId(Long truckId) {
+        this.truckId = truckId;
     }
 
-    public DriverDto getDriverDTO() {
-        return driverDTO;
+    public Long getDriverId() {
+        return driverId;
     }
 
-    public void setDriverDTO(DriverDto driverDTO) {
-        this.driverDTO = driverDTO;
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
     }
 
     @Override
@@ -92,10 +80,10 @@ public class TruckDriverWayDto {
                 "id=" + id +
                 ", fuel=" + fuel +
                 ", distance=" + distance +
-				", resultTime=" + resultTime +
+                ", resultTime=" + resultTime +
                 ", coordinateDTO=" + coordinateDTO +
-                ", truckDTO=" + truckDTO +
-                ", driverDTO=" + driverDTO +
+                ", truckId=" + truckId +
+                ", driverId=" + driverId +
                 '}';
     }
 }
