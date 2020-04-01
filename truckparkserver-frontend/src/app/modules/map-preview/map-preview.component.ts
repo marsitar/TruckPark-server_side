@@ -67,28 +67,52 @@ export class MapPreviewComponent implements AfterViewInit {
         this.mops?.forEach(mop => {
           const lat = mop.coordinate?.lat;
           const lon = mop.coordinate?.lng;
-          const marker = L.marker([lat, lon], mopIcon).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
+          const mopMarker = L.marker([lat, lon], mopIcon).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
         });
 
-        if (this.map.hasLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"])) {
-          if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
-            this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
-          }
-          this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
-          this.map.addLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"]);
-        } else {
-          if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
-            this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
-            this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
-          } else {
-            this.overlays["<span style='font-weight: bold'>Mops</span>"] = mopsLayer;
-          }
-        }
+        this.implementProceduresOfAddingAndRefreshingMopsDependOnCurrentState(mopsLayer);
 
-        //placed here to because speed of loading
+        //placed here to because lowest speed of loading
         this.addLayersToLayerControl();
       }
     );
+  }
+
+  private implementProceduresOfAddingAndRefreshingMopsDependOnCurrentState(mopsLayer: L.layerGroup) {
+    if (this.map.hasLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"])) {
+      this.implementProceduresIfMopsIsAlreadyAddedToMap(mopsLayer);
+    } else {
+      this.implementProceduresIfMopsIsNotAlreadyAddedToMap(mopsLayer);
+    }
+  }
+
+  private implementProceduresIfMopsIsAlreadyAddedToMap(mopsLayer: L.layerGroup) {
+    this.implementAdditionalProcedureCheckedIfAddedMopsHadBeenAddedBefore();
+    this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
+    this.map.addLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"]);
+  }
+
+  private implementAdditionalProcedureCheckedIfAddedMopsHadBeenAddedBefore(){
+    if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
+      this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
+    }
+  }
+
+  private implementProceduresIfMopsIsNotAlreadyAddedToMap(mopsLayer: L.layerGroup) {
+    if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
+      this.implementAdditionalProcedureIfNotAddedMopsHadBeenAddedBefore(mopsLayer);
+    } else {
+      this.implementAdditionalProcedureIfNotAddedMopsHadNotBeenAddedBefore(mopsLayer);
+    }
+  }
+
+  private implementAdditionalProcedureIfNotAddedMopsHadBeenAddedBefore(mopsLayer: L.layerGroup){
+    this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
+    this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
+  }
+
+  private implementAdditionalProcedureIfNotAddedMopsHadNotBeenAddedBefore(mopsLayer: L.layerGroup){
+    this.overlays["<span style='font-weight: bold'>Mops</span>"] = mopsLayer;
   }
 
   private prepareTruckDriverWays(){
@@ -110,26 +134,51 @@ export class MapPreviewComponent implements AfterViewInit {
 
     this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
-        let tempLayerGroup = L.layerGroup();
-        const marker = L.marker([lat, lon], truckDriverWayIcon).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
+        let tempSingleTruckDriverLayer = L.layerGroup();
+        const truckDriverMarker = L.marker([lat, lon], truckDriverWayIcon).addTo(tempSingleTruckDriverLayer).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
 
-        if (this.map.hasLayer(this.overlays[driver?.fullName])) {
-          if(this.overlays[driver?.fullName]) {
-            this.overlays[driver?.fullName].clearLayers();
-          }
-          this.overlays[driver?.fullName].addLayer(tempLayerGroup);
-          this.map.addLayer(this.overlays[driver?.fullName]);
-        } else {
-          if(this.overlays[driver?.fullName]) {
-            this.overlays[driver?.fullName].clearLayers();
-            this.overlays[driver?.fullName].addLayer(tempLayerGroup);
-          } else {
-            this.overlays[driver?.fullName] = tempLayerGroup;
-            this.map.addLayer(this.overlays[driver?.fullName]);
-          }
-        }
+        this.implementProceduresOfAddingAndRefreshingTruckDriverDependOnCurrentState(tempSingleTruckDriverLayer, driver);
+
       });
     });
+  }
+
+  private implementProceduresOfAddingAndRefreshingTruckDriverDependOnCurrentState(singleTruckDriverLayer: L.layerGroup, driver: Driver) {
+    if (this.map.hasLayer(this.overlays[driver?.fullName])) {
+      this.implementProceduresIfTruckDriverIsAlreadyAddedToMap(singleTruckDriverLayer, driver);
+    } else {
+      this.implementProceduresIfTruckDriverIsNotAlreadyAddedToMap(singleTruckDriverLayer, driver);
+    }
+  }
+
+  private implementProceduresIfTruckDriverIsAlreadyAddedToMap(singleTruckDriverLayer: L.layerGroup, driver: Driver) {
+    this.implementAdditionalProcedureCheckedIfAddedTruckDriverHadBeenAddedBefore(driver);
+    this.overlays[driver?.fullName].addLayer(singleTruckDriverLayer);
+    this.map.addLayer(this.overlays[driver?.fullName]);
+  }
+
+  private implementAdditionalProcedureCheckedIfAddedTruckDriverHadBeenAddedBefore(driver: Driver){
+    if(this.overlays[driver?.fullName]) {
+      this.overlays[driver?.fullName].clearLayers();
+    }
+  }
+
+  private implementProceduresIfTruckDriverIsNotAlreadyAddedToMap(singleTruckDriverLayer: L.layerGroup, driver: Driver) {
+    if(this.overlays[driver?.fullName]) {
+      this.implementAdditionalProcedureIfNotAddedTruckDriverHadBeenAddedBefore(singleTruckDriverLayer, driver);
+    } else {
+      this.implementAdditionalProcedureIfNotAddedTruckDriverHadNotBeenAddedBefore(singleTruckDriverLayer, driver);
+    }
+  }
+
+  private implementAdditionalProcedureIfNotAddedTruckDriverHadBeenAddedBefore(singleTruckDriverLayer: L.layerGroup, driver: Driver){
+    this.overlays[driver?.fullName].clearLayers();
+    this.overlays[driver?.fullName].addLayer(singleTruckDriverLayer);
+  }
+
+  private implementAdditionalProcedureIfNotAddedTruckDriverHadNotBeenAddedBefore(singleTruckDriverLayer: L.layerGroup, driver: Driver){
+    this.overlays[driver?.fullName] = singleTruckDriverLayer;
+    this.map.addLayer(this.overlays[driver?.fullName]);
   }
 
   private addLayersToLayerControl() {
