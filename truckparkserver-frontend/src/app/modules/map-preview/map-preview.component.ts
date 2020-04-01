@@ -10,6 +10,7 @@ import {TruckService} from '../../service/truck.service';
 import {DriverService} from '../../service/driver.service';
 import {MopService} from '../../service/mop.service';
 import {TruckDriverWayService} from '../../service/truck-driver-way.service';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-map-preview',
@@ -22,6 +23,7 @@ export class MapPreviewComponent implements AfterViewInit {
   private drivers: Driver[] = [];
   private basemaps: L.groupLayer[] = [];
   private overlays = {};
+  private layersControl = L.control.layers(null, null);
 
   constructor(
     private truckService: TruckService,
@@ -47,8 +49,11 @@ export class MapPreviewComponent implements AfterViewInit {
 
   private getAllLayers(){
 
-    this.prepareMops();
-    this.prepareTruckDriverWays();
+    const timerMops = timer(0,10000);
+    const timerTruckDriverWays = timer(0,5000);
+
+    timerMops.subscribe(() => this.prepareMops());
+    timerTruckDriverWays.subscribe(() => this.prepareTruckDriverWays());
   }
 
   private prepareMops() {
@@ -64,8 +69,21 @@ export class MapPreviewComponent implements AfterViewInit {
           const lon = mop.coordinate?.lng;
           const marker = L.marker([lat, lon], mopIcon).addTo(mopsLayer).bindPopup(this.generateHtmlPopupMop(mop));
         });
-        this.overlays["<span style='color: brown'>Mops</span>"]= mopsLayer;
-        console.log('prepareMops()', mops);
+
+        if (this.map.hasLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"])) {
+          if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
+            this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
+          }
+          this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
+          this.map.addLayer(this.overlays["<span style='font-weight: bold'>Mops</span>"]);
+        } else {
+          if(this.overlays["<span style='font-weight: bold'>Mops</span>"]) {
+            this.overlays["<span style='font-weight: bold'>Mops</span>"].clearLayers();
+            this.overlays["<span style='font-weight: bold'>Mops</span>"].addLayer(mopsLayer);
+          } else {
+            this.overlays["<span style='font-weight: bold'>Mops</span>"] = mopsLayer;
+          }
+        }
 
         //placed here to because speed of loading
         this.addLayersToLayerControl();
@@ -94,8 +112,22 @@ export class MapPreviewComponent implements AfterViewInit {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
         let tempLayerGroup = L.layerGroup();
         const marker = L.marker([lat, lon], truckDriverWayIcon).addTo(tempLayerGroup).bindPopup(this.generateHtmlPopupTruckDriver(truckDriverWay, driver, truck));
-        this.overlays[driver?.fullName]= tempLayerGroup;
-        this.map.addLayer(tempLayerGroup);
+
+        if (this.map.hasLayer(this.overlays[driver?.fullName])) {
+          if(this.overlays[driver?.fullName]) {
+            this.overlays[driver?.fullName].clearLayers();
+          }
+          this.overlays[driver?.fullName].addLayer(tempLayerGroup);
+          this.map.addLayer(this.overlays[driver?.fullName]);
+        } else {
+          if(this.overlays[driver?.fullName]) {
+            this.overlays[driver?.fullName].clearLayers();
+            this.overlays[driver?.fullName].addLayer(tempLayerGroup);
+          } else {
+            this.overlays[driver?.fullName] = tempLayerGroup;
+            this.map.addLayer(this.overlays[driver?.fullName]);
+          }
+        }
       });
     });
   }
@@ -106,8 +138,9 @@ export class MapPreviewComponent implements AfterViewInit {
       'Drogowa': this.basemaps[2],
       'Standardowa': this.basemaps[0],
     };
-    L.control.layers(basemaps, this.overlays).addTo(this.map);
-    console.log('getAllLayers() overlays', this.overlays);
+    this.layersControl.remove(this.map);
+    this.layersControl = L.control.layers(basemaps, this.overlays);
+    this.layersControl.addTo(this.map);
   }
 
   private generateBaseMapsFromOpenStreet() {
