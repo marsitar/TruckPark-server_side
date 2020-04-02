@@ -11,13 +11,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
 import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
+import {DriverMaintainComponent} from './modules/driver-maintain/driver-maintain.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapPreviewComponent
+    MapPreviewComponent,
+    DriverMaintainComponent
   ],
   imports: [
     BrowserModule,

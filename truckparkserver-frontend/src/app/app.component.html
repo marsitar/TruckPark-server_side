@@ -6,10 +6,8 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="/#">
-        <img src="assets/truck.svg" alt="logo">
-        <h1>Truckpark</h1>
-      </a>
+      <img src="assets/truck.svg" alt="logo">
+      <h1>Truckpark</h1>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Przegląd" nzIcon="dashboard">
@@ -45,7 +43,7 @@
       <li nz-submenu nzOpen nzTitle="Edytuj dane" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/mops4">Dodaj kierowcę</a>
+            <a routerLink="/driver-maintain">Dodaj kierowcę</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/mops5">Dodaj samochód</a>
