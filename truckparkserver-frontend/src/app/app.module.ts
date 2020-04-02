@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {IconsProviderModule} from './icons-provider.module';
 import {en_US, NgZorroAntdModule, NZ_I18N} from 'ng-zorro-antd';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -28,7 +28,8 @@ registerLocaleData(en);
     IconsProviderModule,
     NgZorroAntdModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [DatePipe, { provide: NZ_I18N, useValue: en_US}],
   bootstrap: [AppComponent]
