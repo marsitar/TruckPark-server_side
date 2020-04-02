@@ -12,6 +12,7 @@ import {DatePipe, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
 import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 import {DriverMaintainComponent} from './modules/driver-maintain/driver-maintain.component';
+import {DriverPrevievComponent} from './modules/driver-previev/driver-previev.component';
 
 registerLocaleData(en);
 
@@ -19,7 +20,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     MapPreviewComponent,
-    DriverMaintainComponent
+    DriverMaintainComponent,
+    DriverPrevievComponent
   ],
   imports: [
     BrowserModule,
