@@ -1,0 +1,48 @@
+<nz-row>
+  <h1>Kierowcy</h1>
+</nz-row>
+<nz-row>
+  <nz-table #driversTable [nzData]="drivers">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+    <tr>
+      <th nzShowSort nzSortKey="id">Id</th>
+      <th nzShowSort nzSortKey="fullName">Imię i Nazwisko</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let driver of drivers" [attr.id]="driver.id">
+      <td>{{ driver.id }}</td>
+      <td>{{ driver.fullName }}</td>
+      <td>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                style="margin-right: 10px"
+                (click)="editDriver(driver.id)">
+          <i nz-icon nzType="edit"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+        <button nz-button nzType="default"
+                nzShape="circle"
+                (click)="deleteDriver(driver.id)"
+                >
+          <i nz-icon nzType="delete"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-row>
+<nz-row>
+  <button nz-button nzType="default"
+          nzShape="round"
+          (click)="addDriver()">
+    Dodaj kierowcę
+  </button>
+</nz-row>

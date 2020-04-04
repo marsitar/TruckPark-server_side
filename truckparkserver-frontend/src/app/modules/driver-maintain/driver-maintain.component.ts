@@ -26,19 +26,19 @@ export class DriverMaintainComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  private submitForm(): void {
+  submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
   }
 
-  private updateConfirmValidator(): void {
+  updateConfirmValidator(): void {
     /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 
-  private confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.validateForm.controls.password.value) {
@@ -47,7 +47,7 @@ export class DriverMaintainComponent implements OnInit {
     return {};
   };
 
-  private getCaptcha(e: MouseEvent): void {
+  getCaptcha(e: MouseEvent): void {
     e.preventDefault();
   }
 
