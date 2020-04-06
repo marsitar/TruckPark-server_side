@@ -1,7 +1,11 @@
 package com.sitarski.truckparkserver.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,21 +13,32 @@ public class DriverDto {
 
     private Long id;
 
+    @Length(min = 3, max = 20, message = "Nieprawidlowa liczba znakow")
     private String fullName;
 
-    @JsonIgnore
-    private CompanyDto companyDTO;
+    @Length(min = 3, max = 20, message = "Nieprawidlowa liczba znakow")
+    private String firstName;
+
+    @Length(min = 3, max = 20, message = "Nieprawidlowa liczba znakow")
+    private String surname;
+
+    @Email(message = "Email w nieprawidlowym formacie")
+    private String email;
+
+    @Length(min = 6, max = 12, message = "Nieprawidlowa liczba znakow")
+    private String phoneNumber;
+
+    @NotNull
+    private LocalDate hireDate;
+
+    private Long truckId;
+
+    private Long companyId;
 
     @JsonIgnore
-	private List<TruckDriverWayDto> truckDriverWaysDTO = new ArrayList<>();
+    private List<TruckDriverWayDto> truckDriverWaysDTO = new ArrayList<>();
 
     public DriverDto() {
-    }
-
-    public DriverDto(String fullName, CompanyDto companyDTO, List<TruckDriverWayDto> truckDriverWaysDTO) {
-        this.fullName = fullName;
-        this.companyDTO = companyDTO;
-        this.truckDriverWaysDTO = truckDriverWaysDTO;
     }
 
     public Long getId() {
@@ -42,12 +57,60 @@ public class DriverDto {
         this.fullName = fullName;
     }
 
-    public CompanyDto getCompanyDTO() {
-        return companyDTO;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setCompanyDTO(CompanyDto companyDTO) {
-        this.companyDTO = companyDTO;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public Long getTruckId() {
+        return truckId;
+    }
+
+    public void setTruckId(Long truckId) {
+        this.truckId = truckId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public List<TruckDriverWayDto> getTruckDriverWaysDTO() {
@@ -56,15 +119,5 @@ public class DriverDto {
 
     public void setTruckDriverWaysDTO(List<TruckDriverWayDto> truckDriverWaysDTO) {
         this.truckDriverWaysDTO = truckDriverWaysDTO;
-    }
-
-    @Override
-    public String toString() {
-        return "DriverDto{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", companyDTO=" + companyDTO +
-                ", truckDriverWaysDTO=" + truckDriverWaysDTO +
-                '}';
     }
 }

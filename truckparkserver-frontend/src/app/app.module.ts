@@ -9,12 +9,12 @@ import {en_US, NgZorroAntdModule, NZ_I18N} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe, registerLocaleData} from '@angular/common';
-import en from '@angular/common/locales/en';
+import pl from '@angular/common/locales/pl';
 import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 import {DriverMaintainComponent} from './modules/driver-maintain/driver-maintain.component';
 import {DriverPrevievComponent} from './modules/driver-previev/driver-previev.component';
 
-registerLocaleData(en);
+registerLocaleData(pl);
 
 @NgModule({
   declarations: [

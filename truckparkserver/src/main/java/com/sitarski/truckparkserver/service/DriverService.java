@@ -66,10 +66,12 @@ public class DriverService {
     }
 
     public DriverDto updateDriver(DriverDto driverDto){
-        Driver driverToSave = Optional.of(driverDto)
-                .map(driverMapper::convertToEntity)
+
+        Driver driverToUpdate = Optional.of(driverDto)
+                .map(driverMapper::updateEntity)
                 .orElse(null);
-        Driver savedDriver = driverRepository.save(driverToSave);
+
+        Driver savedDriver = driverRepository.save(driverToUpdate);
         return driverMapper.convertToDto(savedDriver);
     }
 

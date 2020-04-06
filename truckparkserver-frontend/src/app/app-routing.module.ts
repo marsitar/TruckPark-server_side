@@ -5,7 +5,7 @@ import {DriverMaintainComponent} from './modules/driver-maintain/driver-maintain
 import {DriverPrevievComponent} from './modules/driver-previev/driver-previev.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/map-preview' },
+  { path: '', pathMatch: 'full', redirectTo: '/driver-preview' },
   { path: 'map-preview', component: MapPreviewComponent },
   { path: 'driver-maintain', component: DriverMaintainComponent },
   { path: 'driver-preview', component: DriverPrevievComponent },

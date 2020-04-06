@@ -16,13 +16,26 @@ export class DriverService {
 
   getDriverById(id: number): Observable<Driver>{
     const searchUrl = `${this.driverBaseUrl}/driver/${id}`;
-
     return this.httpClient.get<Driver>(searchUrl);
   }
 
   getAllDrivers(): Observable<Driver[]>{
     const searchUrl = `${this.driverBaseUrl}/all`;
-
     return this.httpClient.get<Driver[]>(searchUrl);
+  }
+
+  addDriver(driver: Driver){
+    const searchUrl = `${this.driverBaseUrl}/driver`;
+    return this.httpClient.post(searchUrl, driver);
+  }
+
+  updateDriver(driver: Driver){
+    const searchUrl = `${this.driverBaseUrl}/driver`;
+    return this.httpClient.put<Driver>(searchUrl, driver);
+  }
+
+  deleteDriver(driverId: number){
+    const searchUrl = `${this.driverBaseUrl}/driver/${driverId}`;
+    return this.httpClient.delete(searchUrl);
   }
 }

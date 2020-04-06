@@ -1,7 +1,9 @@
 package com.sitarski.truckparkserver.domain.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +16,37 @@ public class Driver {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "full_name")
-	@NotNull
+	@NotBlank
+	@Column(name = "full_name", unique = true)
 	private String fullName;
+
+	@NotBlank
+	@Column(name = "first_name")
+	private String firstName;
+
+	@NotBlank
+	@Column(name = "surname")
+	private String surname;
+
+	@NotBlank
+	@Column(name = "email")
+	private String email;
+
+	@NotBlank
+	@Column(name = "phone_number")
+	private String phoneNumber;
+
+	@NotNull
+	@Column(name = "hire_date")
+	private LocalDate hireDate;
+
+	@OneToOne()
+	@JoinColumn(name="id_truck", nullable = false)
+	private Truck truck;
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name="id_company", nullable=false)
+	@JoinColumn(name="id_company", nullable = false)
 	private Company company;
 
 	@NotNull
@@ -28,13 +54,6 @@ public class Driver {
 	private List<TruckDriverWay> truckDriverWays = new ArrayList<>();
 
 	public Driver() {
-	}
-
-	public Driver(Long id, @NotNull String fullName, @NotNull Company company, @NotNull List<TruckDriverWay> truckDriverWays) {
-		this.id = id;
-		this.fullName = fullName;
-		this.company = company;
-		this.truckDriverWays = truckDriverWays;
 	}
 
 	public Long getId() {
@@ -53,6 +72,54 @@ public class Driver {
 		this.fullName = fullName;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public LocalDate getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(LocalDate hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public Truck getTruck() {
+		return truck;
+	}
+
+	public void setTruck(Truck truck) {
+		this.truck = truck;
+	}
+
 	public Company getCompany() {
 		return company;
 	}
@@ -67,15 +134,5 @@ public class Driver {
 
 	public void setTruckDriverWays(List<TruckDriverWay> truckDriverWays) {
 		this.truckDriverWays = truckDriverWays;
-	}
-
-	@Override
-	public String toString() {
-		return "Driver{" +
-				"id=" + id +
-				", fullName='" + fullName + '\'' +
-				", company=" + company +
-				", truckDriverWays=" + truckDriverWays +
-				'}';
 	}
 }

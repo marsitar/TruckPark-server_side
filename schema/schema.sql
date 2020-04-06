@@ -65,7 +65,13 @@ CREATE TABLE truck (
 
 CREATE TABLE driver (
 	id NUMBER(10) PRIMARY KEY,
-	full_name VARCHAR(250) NOT NULL, 
+	full_name VARCHAR(250) NOT NULL,
+	first_name VARCHAR(250) NOT NULL, 
+	surname VARCHAR(250) NOT NULL, 
+	email VARCHAR(250) NOT NULL, 
+	phone_number VARCHAR(250) NOT NULL, 
+	hire_date TIMESTAMP WITH TIME ZONE NOT NULL,
+	id_truck VARCHAR(250) NOT NULL, 
 	id_company NUMBER(10)
 );
 
