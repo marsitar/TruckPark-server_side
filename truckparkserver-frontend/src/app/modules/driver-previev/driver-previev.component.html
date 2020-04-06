@@ -1,0 +1,208 @@
+<nz-row>
+  <h1>Kierowcy</h1>
+</nz-row>
+<nz-row>
+  <nz-table #driversTable [nzData]="drivers">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+    <tr>
+      <th nzShowSort nzSortKey="id">Id</th>
+      <th nzShowSort nzSortKey="fullName">Nazwa</th>
+      <th nzShowSort nzSortKey="firstName">Imię</th>
+      <th nzShowSort nzSortKey="surname">Nazwisko</th>
+      <th nzShowSort nzSortKey="phoneNumber">Telefon</th>
+      <th nzShowSort nzSortKey="email">Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let driver of drivers ; let i=index" [attr.id]="driver.id">
+      <td>{{i+1}}</td>
+      <td>{{ driver.fullName }}</td>
+      <td>{{ driver.firstName }}</td>
+      <td>{{ driver.surname }}</td>
+      <td>{{ driver.phoneNumber }}</td>
+      <td>{{ driver.email }}</td>
+      <td>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                style="margin-right: 10px"
+                (click)="driverDetails(driver.id)">
+          <i nz-icon nzType="info"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                style="margin-right: 10px"
+                (click)="editDriver(driver.id)">
+          <i nz-icon nzType="edit"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                nz-popconfirm
+                nzPopconfirmTitle="Czy na pewno chcesz usunąć tego kierowcę?"
+                nzOkText = "Tak"
+                nzCancelText = "Nie"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="handleDeleteDriver(driver.id)"
+                (nzOnCancel)="handleCancel('Anulowano usunięcie kierowcy')"
+                >
+          <i nz-icon nzType="delete"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-row>
+<nz-row>
+  <button nz-button nzType="default"
+          nzShape="round"
+          (click)="addDriver()">
+    Dodaj kierowcę
+  </button>
+</nz-row>
+<nz-modal
+  [(nzVisible)]="isAddEditDriverModalVisible"
+  [nzTitle]="generateModalTitle()"
+  [nzOkLoading]="isAddEditDriverProceeding"
+  nzOkText = "Zapisz"
+  nzCancelText = "Anuluj"
+  (nzOnCancel)="handleAddingDriverCancel('Anulowano dodanie/edycje kierowcy')"
+  (nzOnOk)="handleAddOrEditDriver(f)"
+>
+  <form nz-form
+        #f="ngForm">
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="fullName">
+        Nazwa
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Nazwa nie może być pusta!">
+        <input type="text"
+               nz-input
+               #fullName="ngModel"
+               [(ngModel)]="addEditDriverForm.fullName"
+               name="nameAndSurname"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="firstName">
+        Imię
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Imię nie może być puste!">
+        <input type="text"
+               nz-input
+               #firstName="ngModel"
+               [(ngModel)]="addEditDriverForm.firstName"
+               name="firstName"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="surname">
+        Nazwisko
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Nazwisko nie może być puste!">
+        <input type="text"
+               nz-input
+               #surname="ngModel"
+               [(ngModel)]="addEditDriverForm.surname"
+               name="surname"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="phoneNumber">
+        Telefon
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Numer telefonu nie może być pusty!">
+        <input type="text"
+               nz-input
+               #phoneNumber="ngModel"
+               [(ngModel)]="addEditDriverForm.phoneNumber"
+               name="phoneNumber"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="email">
+        Email
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Email nie może być pusty!">
+        <input type="email"
+               nz-input
+               #email="ngModel"
+               [(ngModel)]="addEditDriverForm.email"
+               name="email"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="hireDate">
+        Data zatrudnienia
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Data zatrudnienia nie może być pusta!">
+        <nz-date-picker
+           #hireDate="ngModel"
+           [nzFormat]="'yyyy-MM-DD'"
+           [nzPlaceHolder]="'Rok-Miesiąc-Dzień'"
+           [(ngModel)]="addEditDriverForm.hireDate"
+           name="hireDate">
+        </nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzFor="hireDate">
+        Samochód
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24">
+        <nz-select
+               #truckId="ngModel"
+               [(ngModel)]="addEditDriverForm.truckId"
+               nzMode="default"
+               nzPlaceHolder="Wybierz samochód"
+               name="hireDate">
+          <nz-option *ngFor="let truck of trucks" [nzValue]="truck.id" [nzLabel]="generateTruckLabel(truck)"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

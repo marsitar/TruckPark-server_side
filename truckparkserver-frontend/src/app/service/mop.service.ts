@@ -16,7 +16,6 @@ export class MopService {
 
   getMops(): Observable<Mop[]> {
     const searchUrl = `${this.mopBaseUrl}/all`;
-
     return this.httpClient.get<Mop[]>(searchUrl);
   }
 }

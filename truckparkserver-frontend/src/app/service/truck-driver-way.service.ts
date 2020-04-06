@@ -16,13 +16,11 @@ export class TruckDriverWayService {
 
   getTrackDriverService(): Observable<TruckDriverWay[]> {
     const searchUrl = `${this.truckDriverWayBaseUrl}/all`;
-
     return this.httpClient.get<TruckDriverWay[]>(searchUrl);
   }
 
   getLastTruckDriverWayByDriverId(driverId: number): Observable<TruckDriverWay>{
     const searchUrl = `${this.truckDriverWayBaseUrl}/lasttruckdriverwaybydriverid/${driverId}`;
-
     return this.httpClient.get<TruckDriverWay>(searchUrl);
   }
 }

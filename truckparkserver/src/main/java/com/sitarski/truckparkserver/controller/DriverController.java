@@ -3,9 +3,7 @@ package com.sitarski.truckparkserver.controller;
 import com.sitarski.truckparkserver.domain.dto.DriverDto;
 import com.sitarski.truckparkserver.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,60 +22,63 @@ public class DriverController {
     }
 
     @GetMapping(value = "/all", produces = "application/json")
-    public ResponseEntity<List<DriverDto>> getAllDrivers() {
+    @ResponseStatus(HttpStatus.OK)
+    public List<DriverDto> getAllDrivers() {
 
         List<DriverDto> driverDtoList = driverService.getDrivers();
 
-        return new ResponseEntity<>(driverDtoList, new HttpHeaders(), HttpStatus.OK);
+        return driverDtoList;
     }
 
     @GetMapping(value = "/driver/{id}", produces = "application/json")
-    public ResponseEntity<DriverDto> getDriverById(@PathVariable("id") Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public DriverDto getDriverById(@PathVariable("id") Long id) {
 
         DriverDto driverDto = driverService.getDriverById(id)
                 .orElse(null);
 
-        return new ResponseEntity<>(driverDto, new HttpHeaders(), HttpStatus.OK);
+        return driverDto;
     }
 
     @GetMapping(value = "/driver", produces = "application/json")
-    public ResponseEntity<DriverDto> getDriverByIdentificationName(@RequestParam String fullName) {
+    @ResponseStatus(HttpStatus.OK)
+    public DriverDto getDriverByIdentificationName(@RequestParam String fullName) {
 
-        DriverDto driverDto = driverService.getDriverByFullName(fullName)
+         DriverDto driverDto = driverService.getDriverByFullName(fullName)
                 .orElse(null);
 
-        return new ResponseEntity<>(driverDto, new HttpHeaders(), HttpStatus.OK);
+        return driverDto;
     }
 
     @GetMapping(value = "/allpatterned", produces = "application/json")
-    public ResponseEntity<List<DriverDto>> getAllDriversByPattern(@RequestParam String fullNamePattern) {
+    @ResponseStatus(HttpStatus.OK)
+    public List<DriverDto> getAllDriversByPattern(@RequestParam String fullNamePattern) {
 
         List<DriverDto> driverDtoList = driverService.getDriversByFullNamePattern(fullNamePattern);
 
-        return new ResponseEntity<>(driverDtoList, new HttpHeaders(), HttpStatus.OK);
+        return driverDtoList;
     }
 
     @PostMapping(value = "/driver", consumes = "application/json")
-    public ResponseEntity<Object> addDriver(@Valid @RequestBody DriverDto driverDto) {
+    @ResponseStatus(HttpStatus.OK)
+    public void addDriver(@Valid @RequestBody DriverDto driverDto) {
 
         driverService.addDriver(driverDto);
-
-        return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/driver", consumes = "application/json" , produces = "application/json")
-    public ResponseEntity<DriverDto> updateDriver(@Valid @RequestBody DriverDto driverDto) {
+    @ResponseStatus(HttpStatus.OK)
+    public @Valid DriverDto updateDriver(@Valid @RequestBody DriverDto driverDto) {
 
         DriverDto updatedDriverDto = driverService.updateDriver(driverDto);
 
-        return new ResponseEntity<>(updatedDriverDto, new HttpHeaders(), HttpStatus.OK);
+        return updatedDriverDto;
     }
 
-    @DeleteMapping(value = "/driver/{id}", consumes = "text/plain")
-    public ResponseEntity<DriverDto> deleteDriver(@PathVariable("id") Long id) {
+    @DeleteMapping(value = "/driver/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteDriver(@PathVariable("id") Long id) {
 
         driverService.deleteDriverById(id);
-
-        return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.OK);
     }
 }
