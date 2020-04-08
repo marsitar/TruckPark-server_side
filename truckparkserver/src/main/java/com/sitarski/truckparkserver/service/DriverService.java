@@ -67,12 +67,11 @@ public class DriverService {
 
     public DriverDto updateDriver(DriverDto driverDto){
 
-        Driver driverToUpdate = Optional.of(driverDto)
+        Driver updatedDriver = Optional.of(driverDto)
                 .map(driverMapper::updateEntity)
                 .orElse(null);
 
-        Driver savedDriver = driverRepository.save(driverToUpdate);
-        return driverMapper.convertToDto(savedDriver);
+        return driverMapper.convertToDto(updatedDriver);
     }
 
     public void deleteDriverById(Long id){

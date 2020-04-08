@@ -67,21 +67,13 @@ public class TruckService {
         truckRepository.save(truckToSave);
     }
 
-    public void updateTruck(TruckDto truckDto){
+    public TruckDto updateTruck(TruckDto truckDto){
 
-        Optional<Truck> optionalTruckToEdit = truckRepository.findById(truckDto.getId());
+        Truck updatedTruck = Optional.of(truckDto)
+                .map(truckMapper::updateEntity)
+                .orElse(null);
 
-        if(optionalTruckToEdit.isPresent()){
-
-            Truck truckToSave = optionalTruckToEdit.get();
-
-            truckToSave.setBrand(truckDto.getBrand());
-            truckToSave.setCarYear(truckDto.getCarYear());
-            truckToSave.setModel(truckDto.getModel());
-            truckToSave.setRegistration(truckDto.getRegistration());
-
-            truckRepository.save(truckToSave);
-        }
+        return truckMapper.convertToDto(updatedTruck);
     }
 
     public void deleteTruckById(Long id){

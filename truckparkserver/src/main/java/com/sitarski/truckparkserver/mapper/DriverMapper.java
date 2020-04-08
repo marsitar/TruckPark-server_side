@@ -74,11 +74,6 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
     @Override
     public Driver updateEntity(DriverDto driverDto) {
 
-        Driver driverToBeUpdated = Optional.of(driverDto)
-                .map(DriverDto::getId)
-                .flatMap(driverRepository::findById)
-                .orElseThrow();
-
         String fullName = Optional.of(driverDto)
                 .map(DriverDto::getFullName)
                 .orElseThrow();
@@ -106,6 +101,12 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
         Truck truck = Optional.of(driverDto)
                 .map(DriverDto::getTruckId)
                 .flatMap(truckRepository::findById)
+                .orElseThrow();
+
+
+        Driver driverToBeUpdated = Optional.of(driverDto)
+                .map(DriverDto::getId)
+                .flatMap(driverRepository::findById)
                 .orElseThrow();
 
         driverToBeUpdated.setFullName(fullName);

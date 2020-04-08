@@ -1,6 +1,8 @@
 package com.sitarski.truckparkserver.domain.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +16,27 @@ public class Truck {
 	@Column(name = "id")
 	private Long id;
 
+	@NotBlank
 	@Column(name = "registration")
-	@NotNull
 	private String registration;
 
+	@NotBlank
 	@Column(name = "brand")
-	@NotNull
 	private String brand;
 
+	@NotBlank
 	@Column(name = "model")
-	@NotNull
 	private String model;
 
-	@Column(name = "car_year")
 	@NotNull
+	@Min(1980)
+	@Column(name = "car_year")
 	private Integer carYear;
 
 	@OneToMany(mappedBy="truck")
 	private List<TruckDriverWay> truckDriverWays = new ArrayList<>();
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_company")
 	private Company company;
 
