@@ -11,12 +11,12 @@
       <th nzShowSort nzSortKey="surname">Nazwisko</th>
       <th nzShowSort nzSortKey="phoneNumber">Telefon</th>
       <th nzShowSort nzSortKey="email">Email</th>
-      <th>Action</th>
+      <th>Akcja</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let driver of drivers ; let i=index" [attr.id]="driver.id">
-      <td>{{i+1}}</td>
+      <td>{{i + 1}}</td>
       <td>{{ driver.fullName }}</td>
       <td>{{ driver.firstName }}</td>
       <td>{{ driver.surname }}</td>
@@ -48,12 +48,12 @@
                 nzShape="circle"
                 nz-popconfirm
                 nzPopconfirmTitle="Czy na pewno chcesz usunąć tego kierowcę?"
-                nzOkText = "Tak"
-                nzCancelText = "Nie"
+                nzOkText="Tak"
+                nzCancelText="Nie"
                 nzPopconfirmPlacement="bottom"
                 (nzOnConfirm)="handleDeleteDriver(driver.id)"
                 (nzOnCancel)="handleCancel('Anulowano usunięcie kierowcy')"
-                >
+        >
           <i nz-icon nzType="delete"
              nzTheme="outline"
              style="padding-bottom: 5px">
@@ -75,8 +75,8 @@
   [(nzVisible)]="isAddEditDriverModalVisible"
   [nzTitle]="generateModalTitle()"
   [nzOkLoading]="isAddEditDriverProceeding"
-  nzOkText = "Zapisz"
-  nzCancelText = "Anuluj"
+  nzOkText="Zapisz"
+  nzCancelText="Anuluj"
   (nzOnCancel)="handleAddingDriverCancel('Anulowano dodanie/edycje kierowcy')"
   (nzOnOk)="handleAddOrEditDriver(f)"
 >
@@ -178,11 +178,11 @@
         [nzSm]="14" [nzXs]="24"
         nzErrorTip="Data zatrudnienia nie może być pusta!">
         <nz-date-picker
-           #hireDate="ngModel"
-           [nzFormat]="'yyyy-MM-DD'"
-           [nzPlaceHolder]="'Rok-Miesiąc-Dzień'"
-           [(ngModel)]="addEditDriverForm.hireDate"
-           name="hireDate">
+            #hireDate="ngModel"
+            [nzFormat]="'yyyy-MM-DD'"
+            [nzPlaceHolder]="'Rok-Miesiąc-Dzień'"
+            [(ngModel)]="addEditDriverForm.hireDate"
+            name="hireDate">
         </nz-date-picker>
       </nz-form-control>
     </nz-form-item>
@@ -195,12 +195,13 @@
       <nz-form-control
         [nzSm]="14" [nzXs]="24">
         <nz-select
-               #truckId="ngModel"
-               [(ngModel)]="addEditDriverForm.truckId"
-               nzMode="default"
-               nzPlaceHolder="Wybierz samochód"
-               name="hireDate">
-          <nz-option *ngFor="let truck of trucks" [nzValue]="truck.id" [nzLabel]="generateTruckLabel(truck)"></nz-option>
+            #truckId="ngModel"
+            [(ngModel)]="addEditDriverForm.truckId"
+            nzMode="default"
+            nzPlaceHolder="Wybierz samochód"
+            name="hireDate">
+          <nz-option *ngFor="let truck of trucks" [nzValue]="truck.id"
+                     [nzLabel]="generateTruckLabel(truck)"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

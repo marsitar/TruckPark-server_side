@@ -11,8 +11,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import pl from '@angular/common/locales/pl';
 import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
-import {DriverMaintainComponent} from './modules/driver-maintain/driver-maintain.component';
 import {DriverPrevievComponent} from './modules/driver-previev/driver-previev.component';
+import {TruckPrevievComponent} from './modules/truck-previev/truck-previev.component';
 
 registerLocaleData(pl);
 
@@ -20,8 +20,8 @@ registerLocaleData(pl);
   declarations: [
     AppComponent,
     MapPreviewComponent,
-    DriverMaintainComponent,
-    DriverPrevievComponent
+    DriverPrevievComponent,
+    TruckPrevievComponent
   ],
   imports: [
     BrowserModule,
