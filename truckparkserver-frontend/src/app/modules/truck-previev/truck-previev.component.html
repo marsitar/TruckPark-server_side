@@ -1,1 +1,153 @@
-<p>truck-previev works!</p>
+<nz-row>
+  <h1>Kierowcy</h1>
+</nz-row>
+<nz-row>
+  <nz-table #trucksTable [nzData]="trucks">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+    <tr>
+      <th nzShowSort nzSortKey="id">Id</th>
+      <th nzShowSort nzSortKey="registration">Numer rejestracyjny</th>
+      <th nzShowSort nzSortKey="brand">Marka</th>
+      <th nzShowSort nzSortKey="model">Model</th>
+      <th nzShowSort nzSortKey="carYear">Rocznik</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let truck of trucks ; let i=index" [attr.id]="truck.id">
+      <td>{{i+1}}</td>
+      <td>{{ truck.registration }}</td>
+      <td>{{ truck.brand }}</td>
+      <td>{{ truck.model }}</td>
+      <td>{{ truck.carYear }}</td>
+      <td>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                style="margin-right: 10px"
+                (click)="truckDetails(truck.id)">
+          <i nz-icon nzType="info"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                style="margin-right: 10px"
+                (click)="editTruck(truck.id)">
+          <i nz-icon nzType="edit"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+        <button nz-button
+                nzType="default"
+                nzShape="circle"
+                nz-popconfirm
+                nzPopconfirmTitle="Czy na pewno chcesz usunąć ten pojazd?"
+                nzOkText = "Tak"
+                nzCancelText = "Nie"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="handleDeleteTruck(truck.id)"
+                (nzOnCancel)="handleCancel('Anulowano usunięcie pojazdu')"
+        >
+          <i nz-icon nzType="delete"
+             nzTheme="outline"
+             style="padding-bottom: 5px">
+          </i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-row>
+<nz-row>
+  <button nz-button nzType="default"
+          nzShape="round"
+          (click)="addTruck()">
+    Dodaj samochód
+  </button>
+</nz-row>
+<nz-modal
+  [(nzVisible)]="isAddEditTruckModalVisible"
+  [nzTitle]="generateModalTitle()"
+  [nzOkLoading]="isAddEditTruckProceeding"
+  nzOkText = "Zapisz"
+  nzCancelText = "Anuluj"
+  (nzOnCancel)="handleAddingTruckCancel('Anulowano dodanie/edycje pojazdu')"
+  (nzOnOk)="handleAddOrEditTruck(f)"
+>
+  <form nz-form
+        #f="ngForm">
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="registration">
+        Numer rejestracyjny
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Numer rejestracyjny nie może być pusty!">
+        <input type="text"
+               nz-input
+               #registration="ngModel"
+               [(ngModel)]="addEditTruckForm.registration"
+               name="registration"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="brand">
+        Marka
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Marka nie może być pusta!">
+        <input type="text"
+               nz-input
+               #brand="ngModel"
+               [(ngModel)]="addEditTruckForm.brand"
+               name="brand"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="model">
+        Model
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Model nie może być pusty!">
+        <input type="text"
+               nz-input
+               #model="ngModel"
+               [(ngModel)]="addEditTruckForm.model"
+               name="surname"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24"
+        nzRequired
+        nzFor="carYear">
+        Rok produkcji
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" [nzXs]="24"
+        nzErrorTip="Rok produkcji nie może być pusty!">
+        <input type="number"
+               nz-input
+               #carYear="ngModel"
+               [(ngModel)]="addEditDriverForm.carYear"
+               name="carYear"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

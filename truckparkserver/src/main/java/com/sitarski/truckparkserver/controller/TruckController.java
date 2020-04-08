@@ -22,6 +22,7 @@ public class TruckController {
         this.truckService = truckService;
     }
 
+    @ResponseStatus
     @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<List<TruckDto>> getAllTrucks() {
 
@@ -38,4 +39,6 @@ public class TruckController {
 
         return new ResponseEntity<>(truckDto, new HttpHeaders(), HttpStatus.OK);
     }
+
+
 }
