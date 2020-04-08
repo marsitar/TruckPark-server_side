@@ -1,9 +1,11 @@
 package com.sitarski.truckparkserver.service;
 
 import com.sitarski.truckparkserver.dao.CompanyRepository;
+import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
 import com.sitarski.truckparkserver.domain.dto.TruckDto;
 import com.sitarski.truckparkserver.domain.entity.Company;
+import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.mapper.Mapper;
 import com.sitarski.truckparkserver.mapper.TruckMapper;
@@ -18,14 +20,16 @@ import java.util.stream.Collectors;
 public class TruckService {
 
     private final TruckRepository truckRepository;
-    private final Mapper<TruckDto,Truck> truckMapper;
+    private final Mapper<TruckDto, Truck> truckMapper;
     private final CompanyRepository companyRepository;
+    private final DriverRepository driverRepository;
 
     @Autowired
-    public TruckService(TruckRepository truckRepository, TruckMapper truckMapper, CompanyRepository companyRepository) {
+    public TruckService(TruckRepository truckRepository, TruckMapper truckMapper, CompanyRepository companyRepository, DriverRepository driverRepository) {
         this.truckRepository = truckRepository;
         this.truckMapper = truckMapper;
         this.companyRepository = companyRepository;
+        this.driverRepository = driverRepository;
     }
 
     public List<TruckDto> getTrucks() {
@@ -39,7 +43,7 @@ public class TruckService {
         return truckDtoList;
     }
 
-    public List<TruckDto> getTrucksByCompany(String companyName){
+    public List<TruckDto> getTrucksByCompany(String companyName) {
 
         Optional<Company> company = companyRepository.findCompanyByFullName(companyName);
 
@@ -52,7 +56,7 @@ public class TruckService {
         return trucks;
     }
 
-    public Optional<TruckDto> getTruckById(Long id){
+    public Optional<TruckDto> getTruckById(Long id) {
 
         Optional<TruckDto> truckDto = truckRepository.findById(id)
                 .map(truckMapper::convertToDto);
@@ -60,29 +64,35 @@ public class TruckService {
         return truckDto;
     }
 
-    public void addTruck(TruckDto truckDto){
+    public void addTruck(TruckDto truckDto) {
 
         Truck truckToSave = truckMapper.convertToEntity(truckDto);
 
         truckRepository.save(truckToSave);
     }
 
-    public TruckDto updateTruck(TruckDto truckDto){
+    public TruckDto updateTruck(TruckDto truckDto) {
 
-        Truck updatedTruck = Optional.of(truckDto)
+        Truck truckToUpdate = Optional.of(truckDto)
                 .map(truckMapper::updateEntity)
                 .orElse(null);
+
+        Truck updatedTruck = truckRepository.save(truckToUpdate);
 
         return truckMapper.convertToDto(updatedTruck);
     }
 
-    public void deleteTruckById(Long id){
+    public void deleteTruckById(Long id) {
 
-        truckRepository.deleteById(id);
+        Truck truckToDelete = truckRepository.findById(id).orElseThrow();
+
+        List<Driver> trucksDrivers = driverRepository.findDriversByTruck(truckToDelete);
+
+        if (trucksDrivers.isEmpty()) {
+            truckRepository.deleteById(id);
+        } else {
+            //TODO add exception handling
+        }
     }
 
-    public void deleteTruckByModel(String model){
-
-        truckRepository.deleteTruckByModel(model);
-    }
 }

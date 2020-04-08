@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class DriverService {
 
     private final DriverRepository driverRepository;
-    private final Mapper<DriverDto,Driver> driverMapper;
+    private final Mapper<DriverDto, Driver> driverMapper;
 
     @Autowired
     public DriverService(DriverRepository driverRepository, DriverMapper driverMapper) {
@@ -38,13 +38,13 @@ public class DriverService {
                 .map(driverMapper::convertToDto);
     }
 
-    public Optional<DriverDto> getDriverByFullName(String fullName){
+    public Optional<DriverDto> getDriverByFullName(String fullName) {
         return driverRepository
                 .findDriverByFullName(fullName)
                 .map(driverMapper::convertToDto);
     }
 
-    public List<DriverDto> getDriversByFullNamePattern(String fullNamePattern){
+    public List<DriverDto> getDriversByFullNamePattern(String fullNamePattern) {
         return driverRepository
                 .findDriversByFullNameIsLike(fullNamePattern)
                 .stream()
@@ -52,7 +52,7 @@ public class DriverService {
                 .collect(Collectors.toList());
     }
 
-    public List<DriverDto> getDriversByCompanyName(String companyName){
+    public List<DriverDto> getDriversByCompanyName(String companyName) {
         return driverRepository
                 .findDriversByCompany_FullName(companyName)
                 .stream()
@@ -60,21 +60,23 @@ public class DriverService {
                 .collect(Collectors.toList());
     }
 
-    public void addDriver(DriverDto driverDto){
+    public void addDriver(DriverDto driverDto) {
         Driver driverToSave = driverMapper.convertToEntity(driverDto);
         driverRepository.save(driverToSave);
     }
 
-    public DriverDto updateDriver(DriverDto driverDto){
+    public DriverDto updateDriver(DriverDto driverDto) {
 
-        Driver updatedDriver = Optional.of(driverDto)
+        Driver driverToUpdate = Optional.of(driverDto)
                 .map(driverMapper::updateEntity)
                 .orElse(null);
+
+        Driver updatedDriver = driverRepository.save(driverToUpdate);
 
         return driverMapper.convertToDto(updatedDriver);
     }
 
-    public void deleteDriverById(Long id){
+    public void deleteDriverById(Long id) {
         driverRepository.deleteById(id);
     }
 }

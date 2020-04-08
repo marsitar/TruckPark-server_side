@@ -40,14 +40,14 @@ public class TruckController {
         return truckDto;
     }
 
-    @PostMapping(value = "/driver", consumes = "application/json")
+    @PostMapping(value = "/truck", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void addTruck(@Valid @RequestBody TruckDto truckDto) {
 
         truckService.addTruck(truckDto);
     }
 
-    @PutMapping(value = "/driver", consumes = "application/json" , produces = "application/json")
+    @PutMapping(value = "/truck", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public @Valid TruckDto updateTruck(@Valid @RequestBody TruckDto truckDto) {
 
@@ -56,7 +56,7 @@ public class TruckController {
         return updatedTruckDto;
     }
 
-    @DeleteMapping(value = "/driver/{id}")
+    @DeleteMapping(value = "/truck/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteTruck(@PathVariable("id") Long id) {
 

@@ -1,5 +1,5 @@
 <nz-row>
-  <h1>Kierowcy</h1>
+  <h1>Pojazdy</h1>
 </nz-row>
 <nz-row>
   <nz-table #trucksTable [nzData]="trucks">
@@ -10,12 +10,12 @@
       <th nzShowSort nzSortKey="brand">Marka</th>
       <th nzShowSort nzSortKey="model">Model</th>
       <th nzShowSort nzSortKey="carYear">Rocznik</th>
-      <th>Action</th>
+      <th>Akcja</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let truck of trucks ; let i=index" [attr.id]="truck.id">
-      <td>{{i+1}}</td>
+      <td>{{i + 1}}</td>
       <td>{{ truck.registration }}</td>
       <td>{{ truck.brand }}</td>
       <td>{{ truck.model }}</td>
@@ -46,8 +46,8 @@
                 nzShape="circle"
                 nz-popconfirm
                 nzPopconfirmTitle="Czy na pewno chcesz usunąć ten pojazd?"
-                nzOkText = "Tak"
-                nzCancelText = "Nie"
+                nzOkText="Tak"
+                nzCancelText="Nie"
                 nzPopconfirmPlacement="bottom"
                 (nzOnConfirm)="handleDeleteTruck(truck.id)"
                 (nzOnCancel)="handleCancel('Anulowano usunięcie pojazdu')"
@@ -73,8 +73,8 @@
   [(nzVisible)]="isAddEditTruckModalVisible"
   [nzTitle]="generateModalTitle()"
   [nzOkLoading]="isAddEditTruckProceeding"
-  nzOkText = "Zapisz"
-  nzCancelText = "Anuluj"
+  nzOkText="Zapisz"
+  nzCancelText="Anuluj"
   (nzOnCancel)="handleAddingTruckCancel('Anulowano dodanie/edycje pojazdu')"
   (nzOnOk)="handleAddOrEditTruck(f)"
 >
@@ -144,7 +144,7 @@
         <input type="number"
                nz-input
                #carYear="ngModel"
-               [(ngModel)]="addEditDriverForm.carYear"
+               [(ngModel)]="addEditTruckForm.carYear"
                name="carYear"/>
       </nz-form-control>
     </nz-form-item>
