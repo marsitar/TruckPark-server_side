@@ -18,10 +18,13 @@
 >Under Deployment.
 ### Users managment
 >Under Deployment.
+### Drivers managment
+> Typical crud-management feature which let the user creating, read, update and delete drivers belonging to a user's company. Data inputted during adding and editing are validated both on the frontend and backend side. All accessible drivers are presented in a table while adding and editing are proceeding in a user-friendly modal view. Additionally, the deleting driver requires to confirm in a small popconfirm window. The driver is in relation with a truck.
 ### Truck drivers managment
->Under Deployment.
+> Another crud-management feature which let the user creating, read, update and delete trucks belonging to a user's company. Data inputted during adding and editing are validated both on the frontend and backend side. All accessible trucks are presented in a table while adding and editing are proceeding in a user-friendly modal view. Additionally, the deleting truck requires to confirm in a small popconfirm window and it is only possible if there is no drivers in relation with the truck. 
 ### Fleet managment and control
->Under Deployment.
+> It is realization of one of the most important demand of this project - truck's fleet control and managment in real time.
+After open a dedicated tab user can see default basemap and resting places custom layer.    
 ### Truck driver searching based on many parameters
 >Under Deployment.
 ### Keeping connection beetween database and mobile application
@@ -40,6 +43,8 @@
 * Hibernate ORM 5.4.2
 * Hibernate Validator 6.0.17
 * FasterXML/Jackson 2.9.10
+* Leaflet 1.6.0
+* AntDesign 4.1.1
 
 ## Status
 Project is: _in_progress_.

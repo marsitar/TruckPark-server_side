@@ -1,6 +1,7 @@
 package com.sitarski.truckparkserver.domain.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -12,84 +13,84 @@ public class ExtendedMopData {
 	@Column(name = "id")
 	private Long id;
 
+	@NotBlank
 	@Column(name = "organization")
-	@NotNull
 	private String organization;
 
+	@NotBlank
 	@Column(name = "road_class")
-	@NotNull
 	private String roadClass;
 
+	@NotBlank
 	@Column(name = "direction")
-	@NotNull
 	private String direction;
 
-	@Column(name = "passenger_places")
 	@NotNull
+	@Column(name = "passenger_places")
 	private Integer passengerPlaces;
 
-	@Column(name = "coach_places")
 	@NotNull
+	@Column(name = "coach_places")
 	private Integer coachPlaces;
 
-	@Column(name = "is_guarded")
 	@NotNull
+	@Column(name = "is_guarded")
 	private Boolean isGuarded;
 
-	@Column(name = "is_fenced")
 	@NotNull
+	@Column(name = "is_fenced")
 	private Boolean isFenced;
 
-	@Column(name = "is_security_camera")
 	@NotNull
+	@Column(name = "is_security_camera")
 	private Boolean isSecurityCamera;
 
-	@Column(name = "is_petroleum")
 	@NotNull
+	@Column(name = "is_petroleum")
 	private Boolean isPetroleum;
 
-	@Column(name = "is_dangerous_cargo")
 	@NotNull
+	@Column(name = "is_dangerous_cargo")
 	private Boolean isDangerousCargo;
 
-	@Column(name = "is_restaurant")
 	@NotNull
+	@Column(name = "is_restaurant")
 	private Boolean isRestaurant;
 
-	@Column(name = "is_place_to_stay")
 	@NotNull
+	@Column(name = "is_place_to_stay")
 	private Boolean isPlaceToStay;
 
-	@Column(name = "is_toilet")
 	@NotNull
+	@Column(name = "is_toilet")
 	private Boolean isToilet;
 
-	@Column(name = "is_carwash")
 	@NotNull
+	@Column(name = "is_carwash")
 	private Boolean isCarwash;
 
-	@Column(name = "is_workshop")
 	@NotNull
+	@Column(name = "is_workshop")
 	private Boolean isWorkshop;
 
-	@Column(name = "isLighting")
 	@NotNull
+	@Column(name = "is_lighting")
 	private Boolean isLighting;
 
-	@Column(name = "is_electric_charger")
 	@NotNull
+	@Column(name = "is_electric_charger")
 	private Boolean isElectricCharger;
 
+	@NotBlank
 	@Column(name = "organization_in_charge")
-	@NotNull
 	private String organizationInCharge;
 
+	@NotBlank
 	@Column(name = "organization_in_charge_phone")
-	@NotNull
 	private String organizationInChargePhone;
 
+	@NotBlank
 	@Column(name = "organization_in_charge_email")
-	@NotNull
 	private String organizationInChargeEmail;
 
 	public ExtendedMopData() {
@@ -252,14 +253,6 @@ public class ExtendedMopData {
 
 	public void setWorkshop(Boolean workshop) {
 		isWorkshop = workshop;
-	}
-
-	public Boolean getIsLighting() {
-		return isLighting;
-	}
-
-	public void setIsLighting(Boolean isLighting) {
-		this.isLighting = isLighting;
 	}
 
 	public Boolean getElectricCharger() {

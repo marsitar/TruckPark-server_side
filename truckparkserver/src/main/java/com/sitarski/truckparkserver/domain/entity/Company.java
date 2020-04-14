@@ -1,7 +1,7 @@
 package com.sitarski.truckparkserver.domain.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="company")
@@ -12,8 +12,8 @@ public class Company {
 	@Column(name = "id")
 	private Long id;
 
+	@NotBlank
 	@Column(name = "full_name")
-	@NotNull
 	private String fullName;
 
 	public Long getId() {

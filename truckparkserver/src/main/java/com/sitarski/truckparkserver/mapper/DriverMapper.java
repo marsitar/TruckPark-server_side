@@ -1,6 +1,5 @@
 package com.sitarski.truckparkserver.mapper;
 
-import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.dao.CompanyRepository;
 import com.sitarski.truckparkserver.dao.DriverRepository;
 import com.sitarski.truckparkserver.dao.TruckRepository;
@@ -17,14 +16,12 @@ import java.util.Optional;
 @Service
 public class DriverMapper implements Mapper<DriverDto, Driver> {
 
-    private final ModelMapperConfiguration modelMapperConfiguration;
     private final CompanyRepository companyRepository;
     private final DriverRepository driverRepository;
     private final TruckRepository truckRepository;
 
     @Autowired
-    public DriverMapper(ModelMapperConfiguration modelMapperConfiguration, CompanyRepository companyRepository, DriverRepository driverRepository, TruckRepository truckRepository){
-        this.modelMapperConfiguration = modelMapperConfiguration;
+    public DriverMapper(CompanyRepository companyRepository, DriverRepository driverRepository, TruckRepository truckRepository) {
         this.companyRepository = companyRepository;
         this.driverRepository = driverRepository;
         this.truckRepository = truckRepository;
@@ -33,8 +30,32 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
     @Override
     public DriverDto convertToDto(Driver driver) {
 
-        Long companyId = Optional.of(driver)
+        Long id = Optional.of(driver)
                 .map(Driver::getId)
+                .orElseThrow();
+
+        String fullName = Optional.of(driver)
+                .map(Driver::getFullName)
+                .orElseThrow();
+
+        String firstName = Optional.of(driver)
+                .map(Driver::getFirstName)
+                .orElseThrow();
+
+        String surname = Optional.of(driver)
+                .map(Driver::getSurname)
+                .orElseThrow();
+
+        String email = Optional.of(driver)
+                .map(Driver::getEmail)
+                .orElseThrow();
+
+        String phoneNumber = Optional.of(driver)
+                .map(Driver::getPhoneNumber)
+                .orElseThrow();
+
+        LocalDate hireDate = Optional.of(driver)
+                .map(Driver::getHireDate)
                 .orElseThrow();
 
         Long truckId = Optional.of(driver)
@@ -42,8 +63,19 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
                 .map(Truck::getId)
                 .orElse(null);
 
-        DriverDto driverDTO = modelMapperConfiguration.modelMapper().map(driver, DriverDto.class);
+        Long companyId = Optional.of(driver)
+                .map(Driver::getId)
+                .orElseThrow();
 
+        DriverDto driverDTO = new DriverDto();
+
+        driverDTO.setId(id);
+        driverDTO.setFullName(fullName);
+        driverDTO.setFirstName(firstName);
+        driverDTO.setSurname(surname);
+        driverDTO.setEmail(email);
+        driverDTO.setPhoneNumber(phoneNumber);
+        driverDTO.setHireDate(hireDate);
         driverDTO.setCompanyId(companyId);
         driverDTO.setTruckId(truckId);
 
@@ -52,6 +84,30 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
 
     @Override
     public Driver convertToEntity(DriverDto driverDto) {
+
+        String fullName = Optional.of(driverDto)
+                .map(DriverDto::getFullName)
+                .orElseThrow();
+
+        String firstName = Optional.of(driverDto)
+                .map(DriverDto::getFirstName)
+                .orElseThrow();
+
+        String surname = Optional.of(driverDto)
+                .map(DriverDto::getSurname)
+                .orElseThrow();
+
+        String email = Optional.of(driverDto)
+                .map(DriverDto::getEmail)
+                .orElseThrow();
+
+        String phoneNumber = Optional.of(driverDto)
+                .map(DriverDto::getPhoneNumber)
+                .orElseThrow();
+
+        LocalDate hireDate = Optional.of(driverDto)
+                .map(DriverDto::getHireDate)
+                .orElseThrow();
 
         Company company = Optional.of(driverDto)
                 .map(DriverDto::getCompanyId)
@@ -63,8 +119,14 @@ public class DriverMapper implements Mapper<DriverDto, Driver> {
                 .flatMap(truckRepository::findById)
                 .orElse(null);
 
-        Driver driver = modelMapperConfiguration.modelMapper().map(driverDto, Driver.class);
+        Driver driver = new Driver();
 
+        driver.setFullName(fullName);
+        driver.setFirstName(firstName);
+        driver.setSurname(surname);
+        driver.setEmail(email);
+        driver.setPhoneNumber(phoneNumber);
+        driver.setHireDate(hireDate);
         driver.setCompany(company);
         driver.setTruck(truck);
 

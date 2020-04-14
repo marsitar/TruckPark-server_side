@@ -57,14 +57,18 @@ public class TruckDriverWayMapper implements Mapper<TruckDriverWayDto, TruckDriv
 
     public TruckDriverWay convertToEntity(TruckDriverWayDtoCreate truckDriverWayDtoCreate) {
 
-        TruckDriverWay truckDriverWay = modelMapperConfiguration.modelMapper().map(truckDriverWayDtoCreate, TruckDriverWay.class);
-
         Long truckId = truckDriverWayDtoCreate.getTruckId();
         Truck truck = truckRepository.findById(truckId).orElse(null);
 
         Long driverId = truckDriverWayDtoCreate.getDriverId();
         Driver driver = driverRepository.findById(driverId).orElse(null);
 
+        TruckDriverWay truckDriverWay = new TruckDriverWay();
+
+        truckDriverWay.setDistance(truckDriverWayDtoCreate.getDistance());
+        truckDriverWay.setCoordinate(coordinateMapper.convertToEntity(truckDriverWayDtoCreate.getCoordinateDto()));
+        truckDriverWay.setResultTime(truckDriverWayDtoCreate.getResultTime());
+        truckDriverWay.setFuel(truckDriverWayDtoCreate.getFuel());
         truckDriverWay.setTruck(truck);
         truckDriverWay.setDriver(driver);
 

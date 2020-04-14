@@ -4,8 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="truck")
@@ -33,9 +31,6 @@ public class Truck {
 	@Column(name = "car_year")
 	private Integer carYear;
 
-	@OneToMany(mappedBy="truck")
-	private List<TruckDriverWay> truckDriverWays = new ArrayList<>();
-
 	@ManyToOne
 	@JoinColumn(name = "id_company")
 	private Company company;
@@ -43,12 +38,11 @@ public class Truck {
 	public Truck() {
 	}
 
-	public Truck(@NotNull String registration, @NotNull String brand, @NotNull String model, @NotNull Integer carYear, List<TruckDriverWay> truckDriverWays, Company company) {
+	public Truck(@NotNull String registration, @NotNull String brand, @NotNull String model, @NotNull Integer carYear, Company company) {
 		this.registration = registration;
 		this.brand = brand;
 		this.model = model;
 		this.carYear = carYear;
-		this.truckDriverWays = truckDriverWays;
 		this.company = company;
 	}
 
@@ -92,14 +86,6 @@ public class Truck {
 		this.carYear = carYear;
 	}
 
-	public List<TruckDriverWay> getTruckDriverWays() {
-		return truckDriverWays;
-	}
-
-	public void setTruckDriverWays(List<TruckDriverWay> truckDriverWays) {
-		this.truckDriverWays = truckDriverWays;
-	}
-
 	public Company getCompany() {
 		return company;
 	}
@@ -116,7 +102,6 @@ public class Truck {
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
 				", carYear=" + carYear +
-				", truckDriverWays=" + truckDriverWays +
 				", company=" + company +
 				'}';
 	}

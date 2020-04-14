@@ -1,33 +1,48 @@
 package com.sitarski.truckparkserver.mapper;
 
-import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.domain.dto.CompanyDto;
 import com.sitarski.truckparkserver.domain.entity.Company;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CompanyMapper implements Mapper<CompanyDto, Company> {
 
-    private final ModelMapperConfiguration modelMapperConfiguration;
-
-    @Autowired
-    public CompanyMapper(ModelMapperConfiguration modelMapperConfiguration){
-        this.modelMapperConfiguration = modelMapperConfiguration;
-    }
-
     @Override
-    public CompanyDto convertToDto(Company company){
+    public CompanyDto convertToDto(Company company) {
 
-        CompanyDto companyDto = modelMapperConfiguration.modelMapper().map(company, CompanyDto.class);
+        Long id = Optional.of(company)
+                .map(Company::getId)
+                .orElseThrow();
+
+        String fullName = Optional.of(company)
+                .map(Company::getFullName)
+                .orElseThrow();
+
+        CompanyDto companyDto = new CompanyDto();
+
+        companyDto.setId(id);
+        companyDto.setFullName(fullName);
 
         return companyDto;
     }
 
     @Override
-    public Company convertToEntity(CompanyDto companyDto){
+    public Company convertToEntity(CompanyDto companyDto) {
 
-        Company company = modelMapperConfiguration.modelMapper().map(companyDto , Company.class);
+        Long id = Optional.of(companyDto)
+                .map(CompanyDto::getId)
+                .orElseThrow();
+
+        String fullName = Optional.of(companyDto)
+                .map(CompanyDto::getFullName)
+                .orElseThrow();
+
+        Company company = new Company();
+
+        company.setId(id);
+        company.setFullName(fullName);
 
         return company;
     }
