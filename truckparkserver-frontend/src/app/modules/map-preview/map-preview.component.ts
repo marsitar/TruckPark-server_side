@@ -136,7 +136,7 @@ export class MapPreviewComponent implements AfterViewInit {
     const lat = truckDriverWay?.coordinate?.lat;
     const lon = truckDriverWay?.coordinate?.lng;
 
-    var truckDriverWayIcon= this.generateTruckDriverWayIcon();
+    const truckDriverWayIcon= this.generateTruckDriverWayIcon();
     console.log(truckDriverWay?.driverId);
     this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
