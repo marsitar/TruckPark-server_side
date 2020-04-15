@@ -72,7 +72,7 @@ public class TruckDriverWayController {
     public TruckDriverWayDto getLastTruckDriverWayByDriverId(@PathVariable("id") Long id) {
 
         TruckDriverWayDto truckDriverWayDto = truckDriverWayService.getLatestTruckDriverWayByDriver(id)
-                .orElseThrow();
+                .orElse(null);
 
         return truckDriverWayDto;
     }

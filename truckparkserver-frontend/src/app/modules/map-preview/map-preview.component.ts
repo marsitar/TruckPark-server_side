@@ -120,9 +120,13 @@ export class MapPreviewComponent implements AfterViewInit {
       this.drivers = drivers;
       this.drivers?.forEach( driver => {
         this.truckDriverWayService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
-          this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+          if(truckDriverWay) {
+            this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+          } else {
+            console.log('There is no truckDriverWayd for driver ' ,driver?.fullName);
+          }
         }, error => {
-          console.log('Driver ' ,driver?.fullName,'dont have any truck driver way point');
+          console.log('There is an error to get truckDriverWay for driver ' ,driver?.fullName);
         });
       });
     });
