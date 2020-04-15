@@ -121,6 +121,8 @@ export class MapPreviewComponent implements AfterViewInit {
       this.drivers?.forEach( driver => {
         this.truckDriverWayService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
           this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+        }, error => {
+          console.log('Driver ' ,driver?.fullName,'dont have any truck driver way point');
         });
       });
     });
@@ -131,7 +133,7 @@ export class MapPreviewComponent implements AfterViewInit {
     const lon = truckDriverWay?.coordinate?.lng;
 
     var truckDriverWayIcon= this.generateTruckDriverWayIcon();
-
+    console.log(truckDriverWay?.driverId);
     this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
         let tempSingleTruckDriverLayer = L.layerGroup();

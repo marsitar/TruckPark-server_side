@@ -4,29 +4,14 @@ import java.time.LocalDateTime;
 
 public class TruckDriverWayDtoCreate {
 
-    private Long id;
-
     private Double fuel;
-
     private Double distance;
-
     private LocalDateTime resultTime;
-
     private CoordinateDto coordinateDto;
-
     private Long truckId;
-
     private Long driverId;
 
     public TruckDriverWayDtoCreate() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Double getFuel() {
@@ -80,8 +65,7 @@ public class TruckDriverWayDtoCreate {
     @Override
     public String toString() {
         return "TruckDriverWayDtoCreate{" +
-                "id=" + id +
-                ", fuel=" + fuel +
+                "fuel=" + fuel +
                 ", distance=" + distance +
                 ", resultTime=" + resultTime +
                 ", coordinateDto=" + coordinateDto +

@@ -68,7 +68,7 @@ public class TruckDriverWayController {
     public ResponseEntity<TruckDriverWayDto> getLastTruckDriverWayByDriverId(@PathVariable("id") Long id) {
 
         TruckDriverWayDto truckDriverWayDto = truckDriverWayService.getLatestTruckDriverWayByDriver(id)
-                .orElse(null);
+                .orElseThrow();
 
         return new ResponseEntity<>(truckDriverWayDto, new HttpHeaders(), HttpStatus.OK);
     }

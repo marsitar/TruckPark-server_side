@@ -5,23 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MopDto {
 
     private Long id;
-
     private String identificationName;
-
     private String category;
-
     private String place;
-
     private CoordinateDto coordinateDTO;
-
     private String roadNumber;
-
     private Integer truckPlaces;
-
     private Integer occupiedTruckPlaces;
-
     private String extendedId;
-
     private ExtendedMopDataDto extendedMopDataDTO;
 
     public MopDto() {
