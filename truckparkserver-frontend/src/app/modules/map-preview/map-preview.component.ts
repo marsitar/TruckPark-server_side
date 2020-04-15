@@ -123,7 +123,7 @@ export class MapPreviewComponent implements AfterViewInit {
           if(truckDriverWay) {
             this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
           } else {
-            console.log('There is no truckDriverWayd for driver ' ,driver?.fullName);
+            console.log('There is no truckDriverWay for driver ' ,driver?.fullName);
           }
         }, error => {
           console.log('There is an error to get truckDriverWay for driver ' ,driver?.fullName);
