@@ -120,7 +120,13 @@ export class MapPreviewComponent implements AfterViewInit {
       this.drivers = drivers;
       this.drivers?.forEach( driver => {
         this.truckDriverWayService.getLastTruckDriverWayByDriverId(driver?.id).subscribe(truckDriverWay => {
-          this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+          if(truckDriverWay) {
+            this.addTruckDriverWaysMarkerToLayerGroup(truckDriverWay);
+          } else {
+            console.log('There is no truckDriverWay for driver ' ,driver?.fullName);
+          }
+        }, error => {
+          console.log('There is an error to get truckDriverWay for driver ' ,driver?.fullName);
         });
       });
     });
@@ -130,8 +136,8 @@ export class MapPreviewComponent implements AfterViewInit {
     const lat = truckDriverWay?.coordinate?.lat;
     const lon = truckDriverWay?.coordinate?.lng;
 
-    var truckDriverWayIcon= this.generateTruckDriverWayIcon();
-
+    const truckDriverWayIcon= this.generateTruckDriverWayIcon();
+    console.log(truckDriverWay?.driverId);
     this.driverService.getDriverById(truckDriverWay?.driverId).toPromise().then((driver) => {
       this.truckService.getTruckById(truckDriverWay?.truckId).toPromise().then((truck) => {
         let tempSingleTruckDriverLayer = L.layerGroup();

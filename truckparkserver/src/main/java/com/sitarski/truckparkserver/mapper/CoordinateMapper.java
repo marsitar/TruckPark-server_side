@@ -1,31 +1,56 @@
 package com.sitarski.truckparkserver.mapper;
 
-import com.sitarski.truckparkserver.configuration.ModelMapperConfiguration;
 import com.sitarski.truckparkserver.domain.dto.CoordinateDto;
 import com.sitarski.truckparkserver.domain.entity.Coordinate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CoordinateMapper {
 
-    private final ModelMapperConfiguration modelMapperConfiguration;
-
-    @Autowired
-    public CoordinateMapper(ModelMapperConfiguration modelMapperConfiguration) {
-        this.modelMapperConfiguration = modelMapperConfiguration;
-    }
-
     public CoordinateDto convertToDTO(Coordinate coordinate) {
 
-        CoordinateDto coordinateDTO = modelMapperConfiguration.modelMapper().map(coordinate, CoordinateDto.class);
+        Long id = Optional.of(coordinate)
+                .map(Coordinate::getId)
+                .orElse(null);
+
+        Double lat = Optional.of(coordinate)
+                .map(Coordinate::getLat)
+                .orElse(null);
+
+        Double lng = Optional.of(coordinate)
+                .map(Coordinate::getLng)
+                .orElse(null);
+
+        CoordinateDto coordinateDTO = new CoordinateDto();
+
+        coordinateDTO.setId(id);
+        coordinateDTO.setLat(lat);
+        coordinateDTO.setLng(lng);
 
         return coordinateDTO;
     }
 
     public Coordinate convertToEntity(CoordinateDto coordinateDTO) {
 
-        Coordinate coordinate = modelMapperConfiguration.modelMapper().map(coordinateDTO, Coordinate.class);
+        Long id = Optional.of(coordinateDTO)
+                .map(CoordinateDto::getId)
+                .orElse(null);
+
+        Double lat = Optional.of(coordinateDTO)
+                .map(CoordinateDto::getLat)
+                .orElseThrow();
+
+        Double lng = Optional.of(coordinateDTO)
+                .map(CoordinateDto::getLng)
+                .orElseThrow();
+
+        Coordinate coordinate = new Coordinate();
+
+        coordinate.setId(id);
+        coordinate.setLat(lat);
+        coordinate.setLng(lng);
 
         return coordinate;
     }
