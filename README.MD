@@ -21,13 +21,18 @@
 ### Drivers managment
 > Typical crud-management feature which let the user creating, read, update and delete drivers belonging to a user's company. Data inputted during adding and editing are validated both on the frontend and backend side. All accessible drivers are presented in a table while adding and editing are proceeding in a user-friendly modal view. Additionally, the deleting driver requires to confirm in a small popconfirm window. The driver is in relation with a truck.
 
-![Drivers managment](./doc/drivers_management_preview_table_1.png) 
+![Drivers managment](./doc/drivers_management_preview_table.png) 
 
-![Drivers managment](./doc/drivers_management_preview_table_2.png) 
-### Truck drivers managment
+### Trucks managment
 > Typical crud-management feature which let the user creating, read, update and delete trucks belonging to a user's company. Data inputted during adding and editing are validated both on the frontend and backend side. All accessible trucks are presented in a table while adding and editing are proceeding in a user-friendly modal view. Additionally, the deleting truck requires to confirm in a small popconfirm window and it is only possible if there is no drivers in relation with the truck. 
+
+![Trucks managment](./doc/trucks_management_preview_table.png)
+
 ### Fleet managment and control
 > It is the realization of one of the most important demands of this project - a truck's fleet control and management in real-time. After opening a dedicated tab, the user can see the default base map (default one, there are two other radio possibilities - road and topo map) and custom layer with current positions of drivers (positions and pieces of information are updated every minute). Every driver has a dedicated layer so it is possible to track only chosen drivers. Currently, there is a possibility to add custom resting places points as well. Informations are updated every 5 minutes. Every point (trucks and pois) on the map have user-friendly pop-up windows to check information easily.     
+
+![Fleet managment and control](./doc/fleet_managment_and_control.png)
+
 ### Truck driver searching based on many parameters
 >Under Deployment.
 ### Keeping connection beetween database and mobile application
