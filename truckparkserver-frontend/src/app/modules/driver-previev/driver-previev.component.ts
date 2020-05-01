@@ -5,11 +5,13 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NgForm} from '@angular/forms';
 import {TruckService} from '../../service/truck.service';
 import {Truck} from '../../domain/truck';
+import {Router} from '@angular/router';
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-driver-previev',
   templateUrl: './driver-previev.component.html',
-  styleUrls: ['./driver-previev.component.css']
+  styleUrls: ['./driver-previev.component.css'],
 })
 export class DriverPrevievComponent implements OnInit {
 
@@ -26,6 +28,8 @@ export class DriverPrevievComponent implements OnInit {
     private driverService: DriverService,
     private truckService: TruckService,
     private message: NzMessageService,
+    protected router: Router,
+    protected keycloakAngular: KeycloakService,
   ) {
     this.addEditDriverForm = new Driver();
     this.isAddEditDriverModalVisible = false;
