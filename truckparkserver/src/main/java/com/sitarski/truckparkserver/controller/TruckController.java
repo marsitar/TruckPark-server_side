@@ -4,6 +4,7 @@ import com.sitarski.truckparkserver.domain.dto.TruckDto;
 import com.sitarski.truckparkserver.service.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ public class TruckController {
         this.truckService = truckService;
     }
 
+    @PreAuthorize("hasRole('user')")
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<TruckDto> getAllTrucks() {
