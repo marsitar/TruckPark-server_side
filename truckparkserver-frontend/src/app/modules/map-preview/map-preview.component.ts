@@ -306,6 +306,7 @@ export class MapPreviewComponent implements AfterViewInit {
 
   canAccess(role: TruckParkSystemRoles) {
     let roles: string[] = this.keycloakService.getUserRoles(true);
+    this.keycloakService.addTokenToHeader()
     if(roles.includes(role)) {
       return true;
     } else {
