@@ -45,7 +45,9 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         super.configure(httpSecurity);
-        httpSecurity.authorizeRequests()
+        httpSecurity
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/**")
                 .hasRole(KeyCloakRoles.USER.value)
                 .anyRequest()

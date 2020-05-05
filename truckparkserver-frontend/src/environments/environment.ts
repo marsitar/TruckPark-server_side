@@ -5,7 +5,7 @@
 import {KeycloakConfig} from 'keycloak-angular';
 
 let keycloakConfig: KeycloakConfig = {
-  url: 'http://localhost:8091/auth',
+  url: 'http://192.168.0.20:8091/auth',
   realm: 'truckpark',
   clientId: 'truckparkclientfrontend',
 };
