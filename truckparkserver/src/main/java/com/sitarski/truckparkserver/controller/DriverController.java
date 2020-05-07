@@ -40,25 +40,6 @@ public class DriverController {
         return driverDto;
     }
 
-    @GetMapping(value = "/driver", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public DriverDto getDriverByIdentificationName(@RequestParam String fullName) {
-
-         DriverDto driverDto = driverService.getDriverByFullName(fullName)
-                .orElse(null);
-
-        return driverDto;
-    }
-
-    @GetMapping(value = "/allpatterned", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public List<DriverDto> getAllDriversByPattern(@RequestParam String fullNamePattern) {
-
-        List<DriverDto> driverDtoList = driverService.getDriversByFullNamePattern(fullNamePattern);
-
-        return driverDtoList;
-    }
-
     @PostMapping(value = "/driver", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void addDriver(@Valid @RequestBody DriverDto driverDto) {
