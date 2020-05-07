@@ -40,23 +40,6 @@ public class MopController {
         return new ResponseEntity<>(mopDto, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/mop", produces = "application/json")
-    public ResponseEntity<MopDto> getMopByIdentificationName(@RequestParam String identificationName) {
-
-        MopDto mopDto = mopService.getMopByIdentificationName(identificationName)
-                .orElse(null);
-
-        return new ResponseEntity<>(mopDto, new HttpHeaders(), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/allbypattern", produces = "application/json")
-    public ResponseEntity<List<MopDto>> getMopsByIdentificationNameIsLike(@RequestParam String identificationNamePattern) {
-
-        List<MopDto> mopDtoList = mopService.getMopsByIdentificationNameIsLike(identificationNamePattern);
-
-        return new ResponseEntity<>(mopDtoList, new HttpHeaders(), HttpStatus.OK);
-    }
-
     @PostMapping(value = "/mop", consumes = "application/json")
     public ResponseEntity<Object> addMop(@Valid @RequestBody MopDto mopDto) {
 
