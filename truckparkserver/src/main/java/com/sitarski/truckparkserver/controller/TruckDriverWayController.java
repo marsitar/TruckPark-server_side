@@ -40,7 +40,7 @@ public class TruckDriverWayController {
         return truckDriverWayDto;
     }
 
-    @GetMapping(value = "/truckdriverwaybydriver", produces = "application/json")
+    @GetMapping(value = "/truckdriverway/driver", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<TruckDriverWayDto> getTruckDriverWaysByDriver(@RequestParam DriverDto driverDto) {
 
@@ -49,7 +49,7 @@ public class TruckDriverWayController {
         return truckDriverWaysDto;
     }
 
-    @GetMapping(value = "/truckdriverwaybytruck", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/truckdriverway/truck", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<TruckDriverWayDto> getTruckDriverWaysByTruck(@Valid @RequestBody TruckDto truckDto) {
 
@@ -58,7 +58,7 @@ public class TruckDriverWayController {
         return truckDriverWaysDto;
     }
 
-    @GetMapping(value = "/truckdriverwaybycompany", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/truckdriverway/company", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<TruckDriverWayDto> getTruckDriverWaysByDriversCompany(@Valid @RequestBody CompanyDto companyDto) {
 
@@ -67,7 +67,7 @@ public class TruckDriverWayController {
         return truckDriverWaysDto;
     }
 
-    @GetMapping(value = "/lasttruckdriverwaybydriverid/{id}", produces = "application/json")
+    @GetMapping(value = "/truckdriverway/last/driver/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public TruckDriverWayDto getLastTruckDriverWayByDriverId(@PathVariable("id") Long id) {
 
