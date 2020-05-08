@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -48,9 +49,23 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**")
-                .hasRole(KeyCloakRoles.USER.value)
-                .anyRequest()
+                .antMatchers(HttpMethod.GET, "/drivers/**").hasRole(KeyCloakRoles.DRIVER_READ)
+                .antMatchers(HttpMethod.POST, "/drivers/driver").hasRole(KeyCloakRoles.DRIVER_CREATE)
+                .antMatchers(HttpMethod.PUT, "/drivers/driver").hasRole(KeyCloakRoles.DRIVER_UPDATE)
+                .antMatchers(HttpMethod.DELETE, "/drivers/driver/*").hasRole(KeyCloakRoles.DRIVER_DELETE)
+                .antMatchers(HttpMethod.GET, "/mops/**").hasRole(KeyCloakRoles.MOP_READ)
+                .antMatchers(HttpMethod.POST, "/mops/mop").hasRole(KeyCloakRoles.MOP_CREATE)
+                .antMatchers(HttpMethod.PUT, "/mops/mop").hasRole(KeyCloakRoles.MOP_UPDATE)
+                .antMatchers(HttpMethod.DELETE, "/mops/mop/*").hasRole(KeyCloakRoles.MOP_DELETE)
+                .antMatchers(HttpMethod.GET, "/trucks/**").hasRole(KeyCloakRoles.TRUCK_READ)
+                .antMatchers(HttpMethod.POST, "/trucks/truck").hasRole(KeyCloakRoles.TRUCK_CREATE)
+                .antMatchers(HttpMethod.PUT, "/trucks/truck").hasRole(KeyCloakRoles.TRUCK_UPDATE)
+                .antMatchers(HttpMethod.DELETE, "/trucks/truck/*").hasRole(KeyCloakRoles.TRUCK_DELETE)
+                .antMatchers(HttpMethod.GET, "/truckdriverways/**").hasRole(KeyCloakRoles.TDW_READ)
+                .antMatchers(HttpMethod.POST, "/truckdriverways/truckdriverway").hasRole(KeyCloakRoles.TDW_CREATE)
+                .antMatchers(HttpMethod.PUT, "/truckdriverways/truckdriverway").hasRole(KeyCloakRoles.TDW_UPDATE)
+                .antMatchers(HttpMethod.DELETE, "/truckdriverways/truckdriverway/*").hasRole(KeyCloakRoles.TDW_DELETE)
+                .antMatchers("/", "/**")
                 .permitAll();
     }
 }
