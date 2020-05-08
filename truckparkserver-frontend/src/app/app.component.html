@@ -10,19 +10,19 @@
       <h1>Truckpark</h1>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Przegląd" nzIcon="dashboard">
+      <li *ngIf="isCallerInRole(roles.TRUCK_READ)" nz-submenu nzOpen nzTitle="Przegląd" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/driver-preview">Kierowcy</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
+            <li *ngIf="isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ)" nz-menu-item nzMatchRouter>
+              <a routerLink="/driver-preview">Kierowcy</a>
+            </li>
+          <li *ngIf="isCallerInRole(roles.TRUCK_READ)" nz-menu-item nzMatchRouter>
             <a routerLink="/truck-preview">Samochody</a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Mapy" nzIcon="global">
+      <li *ngIf="isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ, roles.MOP_READ, roles.TDW_READ)" nz-submenu nzOpen nzTitle="Mapy" nzIcon="global">
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li *ngIf="isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ, roles.MOP_READ, roles.TDW_READ)" nz-menu-item nzMatchRouter>
             <a routerLink="/map-preview">Podgląd</a>
           </li>
         </ul>
