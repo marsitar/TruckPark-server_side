@@ -2,7 +2,7 @@
   <h1>Pojazdy</h1>
 </nz-row>
 <nz-row>
-  <nz-table #trucksTable [nzData]="trucks">
+  <nz-table *ngIf="securityService.isCallerInRole(roles.TRUCK_READ)" #trucksTable [nzData]="trucks">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
     <tr>
       <th nzShowSort nzSortKey="id">Id</th>
@@ -25,6 +25,7 @@
                 nzType="default"
                 nzShape="circle"
                 style="margin-right: 10px"
+                [disabled]="!securityService.isCallerInRole(roles.TRUCK_READ)"
                 (click)="truckDetails(truck.id)">
           <i nz-icon nzType="info"
              nzTheme="outline"
@@ -35,6 +36,7 @@
                 nzType="default"
                 nzShape="circle"
                 style="margin-right: 10px"
+                [disabled]="!securityService.isCallerInRole(roles.TRUCK_UPDATE)"
                 (click)="editTruck(truck.id)">
           <i nz-icon nzType="edit"
              nzTheme="outline"
@@ -49,6 +51,7 @@
                 nzOkText="Tak"
                 nzCancelText="Nie"
                 nzPopconfirmPlacement="bottom"
+                [disabled]="!securityService.isCallerInRole(roles.TRUCK_DELETE)"
                 (nzOnConfirm)="handleDeleteTruck(truck.id)"
                 (nzOnCancel)="handleCancel('Anulowano usunięcie pojazdu')"
         >
@@ -70,6 +73,7 @@
   </button>
 </nz-row>
 <nz-modal
+  *ngIf="securityService.isCallerInRole(roles.TRUCK_CREATE) || securityService.isCallerInRole(roles.TRUCK_UPDATE)"
   [(nzVisible)]="isAddEditTruckModalVisible"
   [nzTitle]="generateModalTitle()"
   [nzOkLoading]="isAddEditTruckProceeding"

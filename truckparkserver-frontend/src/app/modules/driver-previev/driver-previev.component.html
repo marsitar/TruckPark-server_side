@@ -76,7 +76,7 @@
   </button>
 </nz-row>
 <nz-modal
-  *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ) || securityService.isCallerInRoles(roles.DRIVER_UPDATE, roles.TRUCK_READ)"
+  *ngIf="securityService.isCallerInRoles(roles.DRIVER_CREATE, roles.TRUCK_READ) || securityService.isCallerInRoles(roles.DRIVER_UPDATE, roles.TRUCK_READ)"
   [(nzVisible)]="isAddEditDriverModalVisible"
   [nzTitle]="generateModalTitle()"
   [nzOkLoading]="isAddEditDriverProceeding"
