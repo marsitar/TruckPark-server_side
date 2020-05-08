@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from 'keycloak-js';
 import {KeycloakService} from 'keycloak-angular';
 import {TruckParkSystemRoles} from './core/truck-park-system-roles';
+import {SecurityService} from './core/security.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
   roles = TruckParkSystemRoles;
   userDetails: KeycloakProfile;
 
-  constructor(private keycloakService: KeycloakService) {}
+  constructor(private keycloakService: KeycloakService,
+              protected securityService: SecurityService) {}
 
   async ngOnInit() {
     if (await this.keycloakService.isLoggedIn()) {
@@ -23,20 +25,6 @@ export class AppComponent implements OnInit {
 
   async doLogout() {
     await this.keycloakService.logout();
-  }
-
-  isCallerInRole(truckParkSystemRole: TruckParkSystemRoles): boolean {
-    return this.keycloakService.isUserInRole(truckParkSystemRole);
-  }
-
-  isCallerInRoles(...roles): boolean {
-    roles.forEach( role => {
-        if (!this.keycloakService.isUserInRole(role)) {
-            return false;
-        }
-      }
-    );
-    return true;
   }
 }
 
