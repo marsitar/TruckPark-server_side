@@ -33,7 +33,7 @@ export class DriverPrevievComponent implements OnInit {
     private message: NzMessageService,
     protected router: Router,
     protected keycloakAngular: KeycloakService,
-    protected securityService: SecurityService
+    public securityService: SecurityService
   ) {
     this.addEditDriverForm = new Driver();
     this.isAddEditDriverModalVisible = false;

@@ -29,7 +29,7 @@ export class TruckPrevievComponent implements OnInit {
     private message: NzMessageService,
     protected router: Router,
     protected keycloakService: KeycloakService,
-    protected securityService: SecurityService
+    public securityService: SecurityService
   ) {
     this.addEditTruckForm = new Truck();
     this.isAddEditTruckModalVisible = false;

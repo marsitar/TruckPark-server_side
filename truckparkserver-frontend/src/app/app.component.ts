@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   userDetails: KeycloakProfile;
 
   constructor(private keycloakService: KeycloakService,
-              protected securityService: SecurityService) {}
+              public securityService: SecurityService) {}
 
   async ngOnInit() {
     if (await this.keycloakService.isLoggedIn()) {
