@@ -7,10 +7,10 @@ import {AppAuthGuard} from './app.authguard';
 import {TruckParkSystemRoles} from './core/truck-park-system-roles';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/driver-preview', canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.USER] } },
-  { path: 'map-preview', component: MapPreviewComponent, canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.USER] } },
-  { path: 'driver-preview', component: DriverPrevievComponent, canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.USER] } },
-  { path: 'truck-preview', component: TruckPrevievComponent, canActivate: [AppAuthGuard] },
+  { path: '', pathMatch: 'full', redirectTo: '/driver-preview', canActivate: [AppAuthGuard] },
+  { path: 'map-preview', component: MapPreviewComponent, canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.DRIVER_READ, TruckParkSystemRoles.TRUCK_READ, TruckParkSystemRoles.MOP_READ, TruckParkSystemRoles.TDW_READ] } },
+  { path: 'driver-preview', component: DriverPrevievComponent, canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.DRIVER_READ, TruckParkSystemRoles.TRUCK_READ] } },
+  { path: 'truck-preview', component: TruckPrevievComponent, canActivate: [AppAuthGuard], data: { roles: [TruckParkSystemRoles.TRUCK_READ] } },
 ];
 
 @NgModule({
