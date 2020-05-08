@@ -20,7 +20,7 @@ export class TruckDriverWayService {
   }
 
   getLastTruckDriverWayByDriverId(driverId: number): Observable<TruckDriverWay>{
-    const searchUrl = `${this.truckDriverWayBaseUrl}/lasttruckdriverwaybydriverid/${driverId}`;
+    const searchUrl = `${this.truckDriverWayBaseUrl}/truckdriverway/last/driver/${driverId}`;
     return this.httpClient.get<TruckDriverWay>(searchUrl);
   }
 }
