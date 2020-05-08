@@ -2,7 +2,7 @@
   <h1>Kierowcy</h1>
 </nz-row>
 <nz-row>
-  <nz-table #driversTable [nzData]="drivers">
+  <nz-table *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ)" #driversTable [nzData]="drivers">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
     <tr>
       <th nzShowSort nzSortKey="id">Id</th>
@@ -27,6 +27,7 @@
                 nzType="default"
                 nzShape="circle"
                 style="margin-right: 10px"
+                [disabled]="!securityService.isCallerInRole(roles.DRIVER_READ)"
                 (click)="driverDetails(driver.id)">
           <i nz-icon nzType="info"
              nzTheme="outline"
@@ -37,6 +38,7 @@
                 nzType="default"
                 nzShape="circle"
                 style="margin-right: 10px"
+                [disabled]="!securityService.isCallerInRole(roles.DRIVER_UPDATE)"
                 (click)="editDriver(driver.id)">
           <i nz-icon nzType="edit"
              nzTheme="outline"
@@ -51,6 +53,7 @@
                 nzOkText="Tak"
                 nzCancelText="Nie"
                 nzPopconfirmPlacement="bottom"
+                [disabled]="!securityService.isCallerInRole(roles.DRIVER_DELETE)"
                 (nzOnConfirm)="handleDeleteDriver(driver.id)"
                 (nzOnCancel)="handleCancel('Anulowano usunięcie kierowcy')"
         >
@@ -67,11 +70,13 @@
 <nz-row>
   <button nz-button nzType="default"
           nzShape="round"
+          [disabled]="!securityService.isCallerInRole(roles.DRIVER_CREATE)"
           (click)="addDriver()">
     Dodaj kierowcę
   </button>
 </nz-row>
 <nz-modal
+  *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ) || securityService.isCallerInRoles(roles.DRIVER_UPDATE, roles.TRUCK_READ)"
   [(nzVisible)]="isAddEditDriverModalVisible"
   [nzTitle]="generateModalTitle()"
   [nzOkLoading]="isAddEditDriverProceeding"

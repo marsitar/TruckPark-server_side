@@ -7,6 +7,8 @@ import {TruckService} from '../../service/truck.service';
 import {Truck} from '../../domain/truck';
 import {Router} from '@angular/router';
 import {KeycloakService} from 'keycloak-angular';
+import {SecurityService} from '../../core/security.service';
+import {TruckParkSystemRoles} from '../../core/truck-park-system-roles';
 
 @Component({
   selector: 'app-driver-previev',
@@ -17,6 +19,7 @@ export class DriverPrevievComponent implements OnInit {
 
   drivers: Driver[] = [];
   trucks: Truck[] = [];
+  roles = TruckParkSystemRoles;
   isAddEditDriverModalVisible: boolean;
   isAddEditDriverProceeding: boolean;
   addEditDriverForm: Driver;
@@ -30,6 +33,7 @@ export class DriverPrevievComponent implements OnInit {
     private message: NzMessageService,
     protected router: Router,
     protected keycloakAngular: KeycloakService,
+    protected securityService: SecurityService
   ) {
     this.addEditDriverForm = new Driver();
     this.isAddEditDriverModalVisible = false;
