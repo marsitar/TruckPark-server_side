@@ -68,6 +68,7 @@
 <nz-row>
   <button nz-button nzType="default"
           nzShape="round"
+          [disabled]="!securityService.isCallerInRole(roles.TRUCK_CREATE)"
           (click)="addTruck()">
     Dodaj samochód
   </button>
