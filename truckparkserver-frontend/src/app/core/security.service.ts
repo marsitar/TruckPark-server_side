@@ -21,4 +21,8 @@ export class SecurityService {
     );
     return true;
   }
+
+  getUsername(){
+    return this.keycloakService.getUsername();
+  }
 }
