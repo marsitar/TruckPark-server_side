@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     if (await this.keycloakService.isLoggedIn()) {
       this.userDetails = await this.keycloakService.loadUserProfile();
     }
+    this.securityService.refreshToken();
   }
 
   async doLogout() {
