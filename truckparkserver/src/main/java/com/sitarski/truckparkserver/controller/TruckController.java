@@ -30,7 +30,7 @@ public class TruckController {
         return truckDtoList;
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/truck/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public TruckDto getTruckById(@PathVariable("id") Long id) {
 

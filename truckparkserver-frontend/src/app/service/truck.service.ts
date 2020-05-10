@@ -16,7 +16,7 @@ export class TruckService {
   ) { }
 
   getTruckById(id: number): Observable<Truck>{
-    const searchUrl = `${this.truckBaseUrl}/${id}`;
+    const searchUrl = `${this.truckBaseUrl}/truck/${id}`;
     return this.httpClient.get<Truck>(searchUrl);
   }
 

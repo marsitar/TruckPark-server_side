@@ -11,11 +11,14 @@ import {DriverService} from '../../service/driver.service';
 import {MopService} from '../../service/mop.service';
 import {TruckDriverWayService} from '../../service/truck-driver-way.service';
 import {timer} from 'rxjs';
+import {KeycloakService} from 'keycloak-angular';
+import {Router} from '@angular/router';
+import {TruckParkSystemRoles} from '../../core/truck-park-system-roles';
 
 @Component({
   selector: 'app-map-preview',
   templateUrl: './map-preview.component.html',
-  styleUrls: ['./map-preview.component.css']
+  styleUrls: ['./map-preview.component.css'],
 })
 export class MapPreviewComponent implements AfterViewInit {
   private map;
@@ -30,7 +33,9 @@ export class MapPreviewComponent implements AfterViewInit {
     private driverService: DriverService,
     private mopService: MopService,
     private truckDriverWayService: TruckDriverWayService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    protected router: Router,
+    protected keycloakService: KeycloakService,
   ) { }
 
   ngAfterViewInit(): void {
@@ -297,5 +302,15 @@ export class MapPreviewComponent implements AfterViewInit {
     };
 
     return truckDriverWayIcon;
+  }
+
+  canAccess(role: TruckParkSystemRoles) {
+    let roles: string[] = this.keycloakService.getUserRoles(true);
+    this.keycloakService.addTokenToHeader()
+    if(roles.includes(role)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

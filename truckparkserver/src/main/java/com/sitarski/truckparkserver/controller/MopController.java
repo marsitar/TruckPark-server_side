@@ -24,6 +24,7 @@ public class MopController {
     }
 
     @GetMapping(value = "/all", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<MopDto>> getAllMops() {
 
         List<MopDto> mopDtoList = mopService.getMops();
@@ -32,6 +33,7 @@ public class MopController {
     }
 
     @GetMapping(value = "/mop/{id}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MopDto> getMopById(@PathVariable("id") Long id) {
 
         MopDto mopDto = mopService.getMopById(id)
@@ -40,24 +42,8 @@ public class MopController {
         return new ResponseEntity<>(mopDto, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/mop", produces = "application/json")
-    public ResponseEntity<MopDto> getMopByIdentificationName(@RequestParam String identificationName) {
-
-        MopDto mopDto = mopService.getMopByIdentificationName(identificationName)
-                .orElse(null);
-
-        return new ResponseEntity<>(mopDto, new HttpHeaders(), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/allbypattern", produces = "application/json")
-    public ResponseEntity<List<MopDto>> getMopsByIdentificationNameIsLike(@RequestParam String identificationNamePattern) {
-
-        List<MopDto> mopDtoList = mopService.getMopsByIdentificationNameIsLike(identificationNamePattern);
-
-        return new ResponseEntity<>(mopDtoList, new HttpHeaders(), HttpStatus.OK);
-    }
-
     @PostMapping(value = "/mop", consumes = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> addMop(@Valid @RequestBody MopDto mopDto) {
 
         mopService.addMop(mopDto);
@@ -66,6 +52,7 @@ public class MopController {
     }
 
     @PutMapping(value = "/mop", consumes = "application/json" , produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MopDto> updateMop(@Valid @RequestBody MopDto mopDto) {
 
         MopDto updatedMopDto = mopService.updateMop(mopDto);
@@ -74,6 +61,7 @@ public class MopController {
     }
 
     @DeleteMapping(value = "/mop/{id}", consumes = "text/plain")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MopDto> deleteMop(@PathVariable("id") Long id) {
 
         mopService.deleteMopById(id);

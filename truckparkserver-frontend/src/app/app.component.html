@@ -10,19 +10,19 @@
       <h1>Truckpark</h1>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Przegląd" nzIcon="dashboard">
+      <li *ngIf="securityService.isCallerInRole(roles.TRUCK_READ)" nz-submenu nzOpen nzTitle="Przegląd" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/driver-preview">Kierowcy</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
+            <li *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ)" nz-menu-item nzMatchRouter>
+              <a routerLink="/driver-preview">Kierowcy</a>
+            </li>
+          <li *ngIf="securityService.isCallerInRole(roles.TRUCK_READ)" nz-menu-item nzMatchRouter>
             <a routerLink="/truck-preview">Samochody</a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Mapy" nzIcon="global">
+      <li *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ, roles.MOP_READ, roles.TDW_READ)" nz-submenu nzOpen nzTitle="Mapy" nzIcon="global">
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li *ngIf="securityService.isCallerInRoles(roles.DRIVER_READ, roles.TRUCK_READ, roles.MOP_READ, roles.TDW_READ)" nz-menu-item nzMatchRouter>
             <a routerLink="/map-preview">Podgląd</a>
           </li>
         </ul>
@@ -42,12 +42,28 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+        <span class="header-trigger"
+              (click)="isCollapsed = !isCollapsed">
             <i class="trigger"
                nz-icon
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <div style="float: right">
+          <nz-tag style="margin-top: 1%; margin-right: 10px; font-size: medium">
+              {{securityService.getUsername()}}
+          </nz-tag>
+          <button nz-button
+                  nzType="default"
+                  nzShape="circle"
+                  nzSize="large"
+                  style="align-self: end; margin-top: 1%; margin-right: 10px"
+                  (click)="doLogout()">
+                  <i nz-icon nzType="logout"
+                     nzTheme="outline"
+                     style="padding-bottom: 7px"></i>
+          </button>
+        </div>
       </div>
     </nz-header>
     <nz-content>

@@ -15,7 +15,17 @@
 ## Features
 
 ### User authentication and authorization
->Under Deployment.
+> Identity and access management concepts are provided by Keycloak solution. System is accesible only for users added to Keycloak realm. Currently, there are three main groupping roles, which contains dedicated roles:
+* TRUCKPARK_DRIVER - {MOP_READ, DRIVER_READ, TRUCK_READ, TDW_CREATE}
+* TRUCKPARK_USER_SPECTATOR - {MOP_READ, DRIVER_READ, TRUCK_READ, TDW_READ, COMPANY_READ}
+* TRUCKPARK_USER_EDITOR - {MOP_READ, DRIVER_CREATE, DRIVER_READ, DRIVER_UPDATE, DRIVER_DELETE, TRUCK_CREATE, TRUCK_READ, TRUCK_UPDATE, TRUCK_DELETE, TDW_READ, COMPANY_READ } 
+Because of that, TRUCKPARK_USER_SPECTATOR has a previlage only for view data, while user with TRUCKPARK_DRIVER role can
+also send it's positiion and data(TDW_CREATE). Access to features based on authorization processes is implemented 
+both on frontend part (disable buttons, modify DOM based on singular roles) and backend part (Spring Security configuration which
+guards rest endpoints and methods depend on singular roles).
+
+![User authentication and authorization](./doc/authentication.png) 
+
 ### Users managment
 >Under Deployment.
 ### Drivers managment

@@ -1,0 +1,28 @@
+package com.sitarski.truckparkserver.configuration;
+
+public interface KeyCloakRoles {
+
+    String COMPANY_CREATE = "COMPANY_CREATE";
+    String COMPANY_DELETE = "COMPANY_DELETE";
+    String COMPANY_READ = "COMPANY_READ";
+    String COMPANY_UPDATE = "COMPANY_UPDATE";
+    String DRIVER_CREATE = "DRIVER_CREATE";
+    String DRIVER_DELETE = "DRIVER_DELETE";
+    String DRIVER_READ = "DRIVER_READ";
+    String DRIVER_UPDATE = "DRIVER_UPDATE";
+    String MOP_CREATE = "MOP_CREATE";
+    String MOP_DELETE = "MOP_DELETE";
+    String MOP_READ = "MOP_READ";
+    String MOP_UPDATE = "MOP_UPDATE";
+    String TDW_CREATE = "TDW_CREATE";
+    String TDW_DELETE = "TDW_DELETE";
+    String TDW_READ = "TDW_READ";
+    String TDW_UPDATE = "TDW_UPDATE";
+    String TRUCK_CREATE = "TRUCK_CREATE";
+    String TRUCK_DELETE = "TRUCK_DELETE";
+    String TRUCK_READ = "TRUCK_READ";
+    String TRUCK_UPDATE = "TRUCK_UPDATE";
+    String TRUCKPARK_DRIVER = "TRUCKPARK_DRIVER";
+    String TRUCKPARK_USER_EDITOR = "TRUCKPARK_USER_EDITOR";
+    String TRUCKPARK_USER_SPECTATOR = "TRUCKPARK_USER_SPECTATOR";
+}

@@ -5,16 +5,21 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NgForm} from '@angular/forms';
 import {TruckService} from '../../service/truck.service';
 import {Truck} from '../../domain/truck';
+import {Router} from '@angular/router';
+import {KeycloakService} from 'keycloak-angular';
+import {SecurityService} from '../../core/security.service';
+import {TruckParkSystemRoles} from '../../core/truck-park-system-roles';
 
 @Component({
   selector: 'app-driver-previev',
   templateUrl: './driver-previev.component.html',
-  styleUrls: ['./driver-previev.component.css']
+  styleUrls: ['./driver-previev.component.css'],
 })
 export class DriverPrevievComponent implements OnInit {
 
   drivers: Driver[] = [];
   trucks: Truck[] = [];
+  roles = TruckParkSystemRoles;
   isAddEditDriverModalVisible: boolean;
   isAddEditDriverProceeding: boolean;
   addEditDriverForm: Driver;
@@ -26,6 +31,9 @@ export class DriverPrevievComponent implements OnInit {
     private driverService: DriverService,
     private truckService: TruckService,
     private message: NzMessageService,
+    protected router: Router,
+    protected keycloakAngular: KeycloakService,
+    public securityService: SecurityService
   ) {
     this.addEditDriverForm = new Driver();
     this.isAddEditDriverModalVisible = false;

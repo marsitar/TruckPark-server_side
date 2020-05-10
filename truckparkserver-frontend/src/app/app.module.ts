@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
@@ -13,6 +13,8 @@ import pl from '@angular/common/locales/pl';
 import {MapPreviewComponent} from './modules/map-preview/map-preview.component';
 import {DriverPrevievComponent} from './modules/driver-previev/driver-previev.component';
 import {TruckPrevievComponent} from './modules/truck-previev/truck-previev.component';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {initializer} from './utils/app-init';
 
 registerLocaleData(pl);
 
@@ -31,9 +33,17 @@ registerLocaleData(pl);
     NgZorroAntdModule,
     FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    KeycloakAngularModule
   ],
-  providers: [DatePipe, { provide: NZ_I18N, useValue: en_US}],
+  providers: [DatePipe, { provide: NZ_I18N, useValue: en_US},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

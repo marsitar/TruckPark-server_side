@@ -10,6 +10,9 @@ import com.sitarski.truckparkserver.domain.entity.Driver;
 import com.sitarski.truckparkserver.domain.entity.Truck;
 import com.sitarski.truckparkserver.domain.entity.TruckDriverWay;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -144,14 +147,15 @@ public class TruckDriverWayMapper implements Mapper<TruckDriverWayDto, TruckDriv
                 .map(coordinateMapper::convertToEntity)
                 .orElse(null);
 
-        Truck truck = Optional.of(truckDriverWayDtoCreate)
-                .map(TruckDriverWayDtoCreate::getTruckId)
-                .flatMap(truckRepository::findById)
+        Driver driver = Optional.of(SecurityContextHolder.getContext())
+                .map(SecurityContext::getAuthentication)
+                .map(Authentication::getPrincipal)
+                .map(Object::toString)
+                .flatMap(driverRepository::findDriverByFullName)
                 .orElseThrow();
 
-        Driver driver = Optional.of(truckDriverWayDtoCreate)
-                .map(TruckDriverWayDtoCreate::getDriverId)
-                .flatMap(driverRepository::findById)
+        Truck truck = Optional.of(driver)
+                .map(Driver::getTruck)
                 .orElseThrow();
 
         TruckDriverWay truckDriverWay = new TruckDriverWay();
