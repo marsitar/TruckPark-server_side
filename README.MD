@@ -15,14 +15,11 @@
 ## Features
 
 ### User authentication and authorization
-> Identity and access management concepts are provided by Keycloak solution. System is accesible only for users added to Keycloak realm. Currently, there are three main groupping roles, which contains dedicated roles:
+> Identity and access management concepts are provided by the Keycloak solution. The system is accessible only for users added to the Keycloak realm. Currently, there are three main grouping roles, which contains dedicated roles:
 * TRUCKPARK_DRIVER - {MOP_READ, DRIVER_READ, TRUCK_READ, TDW_CREATE}
 * TRUCKPARK_USER_SPECTATOR - {MOP_READ, DRIVER_READ, TRUCK_READ, TDW_READ, COMPANY_READ}
 * TRUCKPARK_USER_EDITOR - {MOP_READ, DRIVER_CREATE, DRIVER_READ, DRIVER_UPDATE, DRIVER_DELETE, TRUCK_CREATE, TRUCK_READ, TRUCK_UPDATE, TRUCK_DELETE, TDW_READ, COMPANY_READ } 
-Because of that, TRUCKPARK_USER_SPECTATOR has a previlage only for view data, while user with TRUCKPARK_DRIVER role can
-also send it's positiion and data(TDW_CREATE). Access to features based on authorization processes is implemented 
-both on frontend part (disable buttons, modify DOM based on singular roles) and backend part (Spring Security configuration which
-guards rest endpoints and methods depend on singular roles).
+> Because of that, TRUCKPARK_USER_SPECTATOR has a privilege only for view data, while a user with TRUCKPARK_DRIVER role can also send its position and data(TDW_CREATE). Access to features based on authorization processes is implemented both on the frontend part (disable buttons, modify DOM based on singular roles) and backend part (Spring Security configuration which guards rest endpoints and methods depend on singular roles).
 
 ![User authentication and authorization](./doc/authentication.png) 
 
@@ -51,10 +48,11 @@ guards rest endpoints and methods depend on singular roles).
 >Under Deployment.
 
 ## Technologies
-* Java SE 11
+* Java SE 13
 * Spring Boot 2.2.2
 * Spring Web MVC 5.2.3
-* Spring Data JPA 2.2.3
+* Spring Boot Data JPA 2.2.2
+* Spring Boot Security 2.2.6
 * REST API
 * Angular 9.0.6
 * TypeScript 3.7.5
@@ -63,6 +61,8 @@ guards rest endpoints and methods depend on singular roles).
 * FasterXML/Jackson 2.9.10
 * Leaflet 1.6.0
 * AntDesign 4.1.1
+* Keycloak 10.0.0
+* Docker 19.03.8
 
 ## Status
 Project is: _in_progress_.
