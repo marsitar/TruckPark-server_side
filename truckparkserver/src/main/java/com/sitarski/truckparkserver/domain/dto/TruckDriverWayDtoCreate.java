@@ -8,8 +8,6 @@ public class TruckDriverWayDtoCreate {
     private Double distance;
     private LocalDateTime resultTime;
     private CoordinateDto coordinateDto;
-    private Long truckId;
-    private Long driverId;
 
     public TruckDriverWayDtoCreate() {
     }
@@ -46,22 +44,6 @@ public class TruckDriverWayDtoCreate {
         this.coordinateDto = coordinateDto;
     }
 
-    public Long getTruckId() {
-        return truckId;
-    }
-
-    public void setTruckId(Long truckId) {
-        this.truckId = truckId;
-    }
-
-    public Long getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(Long driverId) {
-        this.driverId = driverId;
-    }
-
     @Override
     public String toString() {
         return "TruckDriverWayDtoCreate{" +
@@ -69,8 +51,6 @@ public class TruckDriverWayDtoCreate {
                 ", distance=" + distance +
                 ", resultTime=" + resultTime +
                 ", coordinateDto=" + coordinateDto +
-                ", truckId=" + truckId +
-                ", driverId=" + driverId +
                 '}';
     }
 }

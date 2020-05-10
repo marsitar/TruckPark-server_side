@@ -26,7 +26,12 @@ public class TruckDriverWayService {
     private final CoordinateMapper coordinateMapper;
 
     @Autowired
-    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository, TruckDriverWayMapper truckDriverWayMapper, TruckRepository truckRepository, CompanyRepository companyRepository, DriverRepository driverRepository, CoordinateMapper coordinateMapper) {
+    public TruckDriverWayService(TruckDriverWayRepository truckDriverWayRepository,
+                                 TruckDriverWayMapper truckDriverWayMapper,
+                                 TruckRepository truckRepository,
+                                 CompanyRepository companyRepository,
+                                 DriverRepository driverRepository,
+                                 CoordinateMapper coordinateMapper) {
         this.truckDriverWayRepository = truckDriverWayRepository;
         this.truckDriverWayMapper = truckDriverWayMapper;
         this.truckRepository = truckRepository;
